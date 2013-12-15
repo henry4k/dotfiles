@@ -3,6 +3,7 @@
 set -e
 
 $(dirname $0)/uninstall.sh
+$(dirname $0)/init.sh
 
 Dotfiles="$PWD/$(dirname $0)"
 
