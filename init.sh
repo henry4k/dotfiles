@@ -10,4 +10,5 @@ if [ -e vundle ]; then
 else
     git clone 'https://github.com/gmarik/vundle.git'
 fi
+vim +BundleInstall +qall
 popd

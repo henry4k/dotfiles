@@ -20,7 +20,6 @@ set nocompatible
     Bundle 'Wombat'
     Bundle 'rdark'
     Bundle 'peaksea'
-    Bundle 'jelera/vim-gummybears-colorscheme'
     Bundle 'wgibbs/vim-irblack'
     Bundle 'shinzui/vim-idleFingers'
     Bundle 'rainux/vim-desert-warm-256'
@@ -33,6 +32,7 @@ set nocompatible
     Bundle 'zeis/vim-kolor'
     Bundle 'morhetz/gruvbox'
     Bundle 'sjl/badwolf'
+    "Bundle 'halbtuerke/madeofcode.vim'
 
 
     " Libs {{{2
@@ -64,6 +64,25 @@ set nocompatible
     "Bundle 'Valloric/YouCompleteMe'
     Bundle 'Tabular'
     Bundle 'Gundo'
+    Bundle 'mhinz/vim-signify'
+    Bundle 'kana/vim-textobj-user'
+
+    " az/iz:
+    Bundle 'kana/vim-textobj-fold'
+    " ai/ii:
+    Bundle 'kana/vim-textobj-indent'
+    " af/if:
+    Bundle 'kana/vim-textobj-function'
+    " ac/ic:
+    Bundle 'glts/vim-textobj-comment'
+    " av/iv:
+    Bundle 'Julian/vim-textobj-variable-segment'
+    " aS/iS:
+    Bundle 'saihoooooooo/vim-textobj-space'
+    " ih:
+    Bundle 'killphi/vim-textobj-signify-hunk'
+    " a,/i,:
+    Bundle 'sgur/vim-textobj-parameter'
 
     filetype plugin indent on
 
@@ -105,9 +124,17 @@ set nocompatible
     map <C-t><left>  :tabp<cr>
     map <C-t><right> :tabn<cr>
     map <C-t><t>     :tabn<cr>
-    nnoremap <silent> <C-I> :TagbarToggle<CR>
-    nnoremap <C-U> :TagbarTogglePause<CR>
-    nnoremap <silent> <C-O> :NERDTreeToggle<CR>
+
+    " Tagbar {{{2
+        nnoremap <silent> <C-I> :TagbarToggle<CR>
+        nnoremap <C-U> :TagbarTogglePause<CR>
+
+    " Nerd Tree {{{2
+        nnoremap <silent> <C-O> :NERDTreeToggle<CR>
+
+    " Signify {{{2
+        nmap <leader>gh <plug>(signify-next-hunk)
+        nmap <leader>gH <plug>(signify-prev-hunk)
 
 " Clipboard {{{1
     if has('unnamedplus')
@@ -135,7 +162,7 @@ set nocompatible
     set linebreak
     set scrolloff=3
     set wildmenu
-    set wildignore+=*.o
+    set wildignore+=*.o,*.swp,*.bak,*.pyc
     set wildmode=list:longest,full
     set winminheight=0
     set noequalalways
@@ -150,12 +177,16 @@ set nocompatible
         set guioptions=cip
         set guicursor+=a:blinkon0
         set cursorline
-        colorscheme badwolf
+        colorscheme badwolf4k
+        "highlight clear DiffDelete
+        "highlight DiffDelete guibg=#2c2424 ctermbg=52
+        "highlight DiffAdd    guibg=#272b18 ctermbg=22
+        "highlight DiffCahnge guibg=#2b241b ctermbg=94
         if has('gui_macvim')
             set fuoptions=maxvert,maxhorz,background:Normal
         endif
     else
-        colorscheme slate
+        colorscheme ubaryd
     endif
 
     " C syntax {{{2
@@ -182,6 +213,18 @@ set nocompatible
         " Set working directory to file tree root
         let g:NERDTreeChDirMode=2
         let g:NERDTreeWinPos='right'
+
+    " Signify {{{2
+        let g:signify_vcs_list = ['git']
+        let g:signify_sign_overwrite = 1
+        let g:signify_sign_change = '~'
+        let g:signify_difftool = '/usr/bin/diff'
+        highlight link SignifySignAdd    diffAdded
+        highlight link SignifySignChange diffSubname
+        highlight link SignifySignDelete diffRemoved
+        if has('gui_running')
+            let g:signify_line_highlight = 1
+        endif
 
 " Spell Check {{{1
     let &spellfile=printf('%s/spell.en.utf-8.add', s:vimDir)
@@ -210,7 +253,6 @@ set nocompatible
     set endofline
     set history=1000
     set undolevels=1000
-    set wildignore=*.swp,*.bak,*.pyc
     set encoding=utf-8
     set timeoutlen=1000
     set ttimeoutlen=0
@@ -222,7 +264,8 @@ set nocompatible
     set nostartofline
 
 
-" --- Tipps ---
+" Tipps {{{1
+"
 "  :args *.c
 "  :tab all
 "
