@@ -9,19 +9,27 @@ Dotfiles="$PWD/$(dirname $0)"
 
 cat >> "$HOME/.profile" << EOF
 # DOTFILES BEGIN
-source '$Dotfiles/profile'
+source '$Dotfiles/profile.sh'
+# DOTFILES END
+EOF
+
+cat >> "$HOME/.zprofile" << EOF
+# DOTFILES BEGIN
+emulate sh
+source \$HOME/.profile
+emulate zsh
 # DOTFILES END
 EOF
 
 cat >> "$HOME/.zshrc" << EOF
 # DOTFILES BEGIN
-source '$Dotfiles/zshrc'
+source '$Dotfiles/zsh/main.zsh'
 # DOTFILES END
 EOF
 
 cat >> "$HOME/.vimrc" << EOF
 " DOTFILES BEGIN
-source $Dotfiles/vimrc
+source $Dotfiles/vim/main.vim
 " DOTFILES END
 EOF
 
