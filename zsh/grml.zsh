@@ -2300,17 +2300,17 @@ if [[ "$TERM" != dumb ]]; then
     #a1# List all files, with colors (\kbd{ls -la \ldots})
     alias la='ls -la '${ls_options:+"${ls_options[*]}"}
     #a1# List files with long colored list, without dotfiles (\kbd{ls -l \ldots})
-    alias ll='ls -l '${ls_options:+"${ls_options[*]}"}
+    alias ll='ls -lh '${ls_options:+"${ls_options[*]}"}
     #a1# List files with long colored list, human readable sizes (\kbd{ls -hAl \ldots})
     alias lh='ls -hAl '${ls_options:+"${ls_options[*]}"}
     #a1# List files with long colored list, append qualifier to filenames (\kbd{ls -lF \ldots})\\&\quad(\kbd{/} for directories, \kbd{@} for symlinks ...)
-    alias l='ls -lF '${ls_options:+"${ls_options[*]}"}
+    alias l='ls -F '${ls_options:+"${ls_options[*]}"}
 else
     alias ls='ls -b -CF'
     alias la='ls -la'
-    alias ll='ls -l'
+    alias ll='ls -lh'
     alias lh='ls -hAl'
-    alias l='ls -lF'
+    alias l='ls -F'
 fi
 
 alias mdstat='cat /proc/mdstat'

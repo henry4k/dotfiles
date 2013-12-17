@@ -5,7 +5,7 @@ set nocompatible
 " Bundle management {{{1
     filetype off
 
-    let s:vimDir=expand('<sfile>:p:h').'/vim'
+    let s:vimDir=expand('<sfile>:p:h')
     let &g:runtimepath=printf('%s,%s,%s/bundle/vundle', &g:runtimepath, s:vimDir, s:vimDir)
     call vundle#rc(s:vimDir.'/bundle')
 
@@ -13,24 +13,24 @@ set nocompatible
     Bundle 'gmarik/vundle'
 
     " Color schemes {{{2
-    Bundle 'Zenburn'
+    "Bundle 'Zenburn'
     Bundle 'molokai'
-    Bundle 'moria'
-    Bundle 'tesla'
-    Bundle 'Wombat'
-    Bundle 'rdark'
-    Bundle 'peaksea'
-    Bundle 'wgibbs/vim-irblack'
-    Bundle 'shinzui/vim-idleFingers'
-    Bundle 'rainux/vim-desert-warm-256'
-    Bundle 'Lokaltog/vim-distinguished'
-    Bundle 'nanotech/jellybeans.vim'
-    Bundle 'tetragrammaton'
-    Bundle 'Guardian'
-    Bundle 'Distinguished'
+    "Bundle 'moria'
+    "Bundle 'tesla'
+    "Bundle 'Wombat'
+    "Bundle 'rdark'
+    "Bundle 'peaksea'
+    "Bundle 'wgibbs/vim-irblack'
+    "Bundle 'shinzui/vim-idleFingers'
+    "Bundle 'rainux/vim-desert-warm-256'
+    "Bundle 'Lokaltog/vim-distinguished'
+    "Bundle 'nanotech/jellybeans.vim'
+    "Bundle 'tetragrammaton'
+    "Bundle 'Guardian'
+    "Bundle 'Distinguished'
     Bundle 'github-theme'
-    Bundle 'zeis/vim-kolor'
-    Bundle 'morhetz/gruvbox'
+    "Bundle 'zeis/vim-kolor'
+    "Bundle 'morhetz/gruvbox'
     Bundle 'sjl/badwolf'
     "Bundle 'halbtuerke/madeofcode.vim'
 
@@ -43,32 +43,32 @@ set nocompatible
     Bundle 'The-NERD-tree'
     "Bundle 'Lokaltog/vim-powerline'
     "Bundle 'Lokaltog/powerline'
-    Bundle 'Lokaltog/vim-easymotion'
+    "Bundle 'Lokaltog/vim-easymotion'
     "Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-git'
     Bundle 'tpope/vim-fugitive'
-    Bundle 'tpope/vim-obsession'
     Bundle 'majutsushi/tagbar'
-    Bundle 'mivok/vimtodo'
+    "Bundle 'mivok/vimtodo'
     Bundle 'vhdirk/vim-cmake'
     "Bundle 'scrooloose/syntastic'
     "Bundle 'chrisbra/csv.vim'
     "Bundle 'Ack'
     "Bundle 'hlissner/vim-multiedit'
     Bundle 'terryma/vim-multiple-cursors'
-    Bundle 'valgrind.vim'
     "Bundle 'hexman.vim'
+    Bundle 'valgrind.vim'
     Bundle 'cmdline-completion'
     Bundle 'thinca/vim-localrc'
     "Bundle 'scrooloose/syntastic'
     "Bundle 'Valloric/YouCompleteMe'
-    Bundle 'Tabular'
+    "Bundle 'Tabular'
     Bundle 'Gundo'
+    Bundle 'emezeske/manpageview'
     Bundle 'mhinz/vim-signify'
     Bundle 'kana/vim-textobj-user'
 
     " az/iz:
-    Bundle 'kana/vim-textobj-fold'
+    "Bundle 'kana/vim-textobj-fold'
     " ai/ii:
     Bundle 'kana/vim-textobj-indent'
     " af/if:
@@ -78,11 +78,11 @@ set nocompatible
     " av/iv:
     Bundle 'Julian/vim-textobj-variable-segment'
     " aS/iS:
-    Bundle 'saihoooooooo/vim-textobj-space'
+    "Bundle 'saihoooooooo/vim-textobj-space'
     " ih:
     Bundle 'killphi/vim-textobj-signify-hunk'
     " a,/i,:
-    Bundle 'sgur/vim-textobj-parameter'
+    "Bundle 'sgur/vim-textobj-parameter'
 
     filetype plugin indent on
 
@@ -102,6 +102,7 @@ set nocompatible
     endif
 
 " Completion {{{1
+    set complete-=i
     set completeopt=menu,preview,longest
     nnoremap <c-space> <c-p>
 
@@ -146,12 +147,12 @@ set nocompatible
 " Indent {{{1
     set tabstop=4
     set shiftwidth=4
+    set shiftround
     set expandtab
     set autoindent
     set smartindent
     set cindent
     set cinwords=if,else,while,do,for,foreach,switch,class,struct,union,enum,interface,function
-    set shiftround
     "autocmd filetype python set expandtab
 
 " Interface {{{1
@@ -171,6 +172,7 @@ set nocompatible
     set laststatus=2
     set list
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
+    set display+=lastline
 
     syntax on
     if has('gui_running')
@@ -249,12 +251,15 @@ set nocompatible
 
     cmap w!! w !sudo tee % >/dev/null
 
+    set autoread
+    set nrformats-=octal
     set modeline
     set endofline
     set history=1000
     set undolevels=1000
     set encoding=utf-8
     set timeoutlen=1000
+    set ttimeout
     set ttimeoutlen=0
     set backspace=indent,eol,start
     set ttyfast
@@ -262,6 +267,7 @@ set nocompatible
     set nobackup
     set noswapfile
     set nostartofline
+    set shell=bash
 
 
 " Tipps {{{1
