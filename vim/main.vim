@@ -6,7 +6,7 @@ set nocompatible
     filetype off
 
     let s:vimDir=expand('<sfile>:p:h')
-    let &g:runtimepath=printf('%s,%s,%s/bundle/vundle', &g:runtimepath, s:vimDir, s:vimDir)
+    let &g:runtimepath=printf('%s,%s,%s/bundle/vundle,%/manpageview', &g:runtimepath, s:vimDir, s:vimDir)
     call vundle#rc(s:vimDir.'/bundle')
 
 
@@ -39,6 +39,7 @@ set nocompatible
     Bundle 'tlib'
     Bundle 'L9'
 
+
     " Tools {{{2
     Bundle 'The-NERD-tree'
     "Bundle 'Lokaltog/vim-powerline'
@@ -63,8 +64,8 @@ set nocompatible
     "Bundle 'Valloric/YouCompleteMe'
     "Bundle 'Tabular'
     Bundle 'Gundo'
-    Bundle 'emezeske/manpageview'
     Bundle 'mhinz/vim-signify'
+    Bundle 'xieyu/pyclewn'
     Bundle 'kana/vim-textobj-user'
 
     " az/iz:
@@ -80,7 +81,7 @@ set nocompatible
     " aS/iS:
     "Bundle 'saihoooooooo/vim-textobj-space'
     " ih:
-    Bundle 'killphi/vim-textobj-signify-hunk'
+    "Bundle 'killphi/vim-textobj-signify-hunk'
     " a,/i,:
     "Bundle 'sgur/vim-textobj-parameter'
 
@@ -137,6 +138,8 @@ set nocompatible
         nmap <leader>gh <plug>(signify-next-hunk)
         nmap <leader>gH <plug>(signify-prev-hunk)
 
+    " 
+
 " Clipboard {{{1
     if has('unnamedplus')
         set clipboard=unnamedplus,autoselect
@@ -164,7 +167,7 @@ set nocompatible
     set scrolloff=3
     set wildmenu
     set wildignore+=*.o,*.swp,*.bak,*.pyc
-    set wildmode=list:longest,full
+    set wildmode=longest,list:full
     set winminheight=0
     set noequalalways
     set showmatch
@@ -224,9 +227,9 @@ set nocompatible
         highlight link SignifySignAdd    diffAdded
         highlight link SignifySignChange diffSubname
         highlight link SignifySignDelete diffRemoved
-        if has('gui_running')
-            let g:signify_line_highlight = 1
-        endif
+        "if has('gui_running')
+            "let g:signify_line_highlight = 1
+        "endif
 
 " Spell Check {{{1
     let &spellfile=printf('%s/spell.en.utf-8.add', s:vimDir)
