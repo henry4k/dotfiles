@@ -13,9 +13,15 @@ if [[ "$TERM" != 'dumb' ]]; then
     export COLORTERM='yes'
     export CLICOLOR=1
 
-    alias ls='ls -GbF'
-    alias  l='ls -GbF'
-    alias ll='ls -GblFh'
+    if [[ "$(uname)" == 'Linux' ]]; then
+        lsColor='--color=auto'
+    else
+        lsColor='-G'
+    fi
+
+    alias ls="ls -bF $lsColor"
+    alias  l="ls -b $lsColorF"
+    alias ll="ls -blFh $lsColor"
     alias grep='grep --color=auto'
 
     export LESS_TERMCAP_mb=$(printf '\e[1;31m')

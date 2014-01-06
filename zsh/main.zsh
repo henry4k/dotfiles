@@ -3,11 +3,12 @@ zshDir=$(dirname $0)
 #source "$zshDir/grml.zsh"
 
 
-bindkey -v
-bindkey '^W' 'backward-kill-word'
-bindkey '^H' 'backward-delete-char'
-bindkey '^U' 'backward-kill-line'
-bindkey '^?' 'backward-delete-char'
+bindkey -e
+#bindkey -v
+#bindkey '^W' 'backward-kill-word'
+#bindkey '^H' 'backward-delete-char'
+#bindkey '^U' 'backward-kill-line'
+#bindkey '^?' 'backward-delete-char'
 
 
 setopt extendedglob

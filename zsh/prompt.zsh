@@ -27,11 +27,13 @@ function prompt_custom_precmd ()
     local dirColor="$reset%F{white}"
 
 
-    if [[ "$ZKEYMAP" == 'vicmd' ]]; then
-        local end="$reset%F{green}N>"
-    else
-        local end="$reset%F{cyan}I>"
-    fi
+    #if [[ "$ZKEYMAP" == 'vicmd' ]]; then
+    #    local end="$reset%F{green}N>"
+    #else
+    #    local end="$reset%F{cyan}I>"
+    #fi
+
+    local end="$reset%F{green}>"
 
 
     local topDir=$(basename $PWD)
