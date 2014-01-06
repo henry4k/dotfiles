@@ -1,9 +1,10 @@
+" vim: set foldmethod=marker:
 " Vim syntax file
-" Language:	Squirrel
-" Maintainer:	Henry Kielmann <henrykielmann@gmail.com>
-" Last Change:	2013-01-21
+" Language: Squirrel
+" Maintainer:   Henry Kielmann <henrykielmann@gmail.com>
+" Last Change:  2013-12-31
 " File Types:   .nut
-" Version:      1.0
+" Version:      1.5
 
 " Quit when a (custom) syntax file was already loaded
 if exists("b:current_syntax")
@@ -11,123 +12,126 @@ if exists("b:current_syntax")
 endif
 
 " A bunch of useful C keywords
-syn keyword	sqStatement	break continue return new delete this base
-syn keyword	sqLabel		case default
-syn keyword	sqConditional	if else switch
-syn keyword	sqRepeat	for foreach while do
-
-syn keyword	sqTodo		contained TODO FIXME XXX
-
-" cCommentGroup allows adding matches for special things in comments
-syn cluster	sqCommentGroup	contains=sqTodo
-
-" String and Character constants
-" Highlight special characters (those which have a backslash) differently
-syn match	sqSpecial	display contained "\\\(x\x\+\|\o\{1,3}\|.\|$\)"
-syn match	sqSpecial	display contained "\\\(u\x\{4}\|U\x\{8}\)"
-
-syn region	sqString	start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=sqSpecial,@Spell
-" cCppString: same as cString, but ends at end of line
-syn region	sqCppString	start=+L\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=sqSpecial,@Spell
-
-
-syn match	sqCharacter	"L\='[^\\]'"
-syn match	sqCharacter	"L'[^']*'" contains=sqSpecial
-
-syn match	sqSpecialCharacter "L\='\\['\"?\\abfnrtv]'"
-
-syn match	sqSpecialCharacter display "L\='\\\o\{1,3}'"
-syn match	sqSpecialCharacter display "'\\x\x\{1,2}'"
-syn match	sqSpecialCharacter display "L'\\x\x\+'"
-
-
-
-syntax region	sqBlock		start="{" end="}" transparent fold
-
-
-"catch errors caused by wrong parenthesis and brackets
-" also accept <% for {, %> for }, <: for [ and :> for ] (C99)
-" But avoid matching <::.
-syn cluster	sqParenGroup	contains=sqIncluded,sqSpecial,sqCommentSkip,sqCommentString,sqComment2String,@sqCommentGroup,sqUserCont,sqOctalZero,sqFormat,sqNumber,sqFloat,sqOctal,sqNumbersCom
-syn region	sqParen		transparent start='(' end=')' contains=ALLBUT,@sqParenGroup,sqCppParen,sqCppString,@Spell
-" cCppParen: same as cParen but ends at end-of-line; used in cDefine
-syn region	sqCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@sqParenGroup,sqParen,sqString,@Spell
-
-
-"integer number, or floating point number without a dot and with "f".
-syn case ignore
-syn match	sqNumbers	display transparent "\<\d\|\.\d" contains=sqNumber,sqFloat,sqOctal
-" Same, but without octal error (for comments)
-syn match	sqNumbersCom	display contained transparent "\<\d\|\.\d" contains=sqNumber,sqFloat,sqOctal
-syn match	sqNumber	display contained "\d\+\(u\=l\{0,2}\|ll\=u\)\>"
-"hex number
-syn match	sqNumber	display contained "0x\x\+\(u\=l\{0,2}\|ll\=u\)\>"
-" Flag the first zero of an octal number as something special
-syn match	sqOctal		display contained "0\o\+\(u\=l\{0,2}\|ll\=u\)\>" contains=sqOctalZero
-syn match	sqOctalZero	display contained "\<0"
-syn match	sqFloat		display contained "\d\+f"
-"floating point number, with dot, optional exponent
-syn match	sqFloat		display contained "\d\+\.\d*\(e[-+]\=\d\+\)\=[fl]\="
-"floating point number, starting with a dot, optional exponent
-syn match	sqFloat		display contained "\.\d\+\(e[-+]\=\d\+\)\=[fl]\=\>"
-"floating point number, without dot, with exponent
-syn match	sqFloat		display contained "\d\+e[-+]\=\d\+[fl]\=\>"
-
-"hexadecimal floating point number, optional leading digits, with dot, with exponent
-syn match	sqFloat		display contained "0x\x*\.\x\+p[-+]\=\d\+[fl]\=\>"
-
-
 syn case match
 
+syn keyword sqConditional if else switch
+syn keyword sqRepeat while do for foreach in
+syn keyword sqBranch break continue
+syn keyword sqStatement return yield resume
+syn keyword sqIdentifier this base callee vargv
+syn match sqIdentifier display "\V..."
+syn keyword sqLabel case default
+syn keyword sqStructure class enum local
+syn keyword sqFunction function
+syn keyword sqStorageClass static const extends
+syn keyword sqNull null
+syn keyword sqBoolean true false
+syn keyword sqException try catch throw
 
-" Comments
-syn region	sqCommentL	start="//" skip="\\$" end="$" keepend contains=@sqCommentGroup,sqSpaceError,@Spell
-syn region	sqComment	matchgroup=sqCommentStart start="/\*" end="\*/" contains=@sqCommentGroup,@Spell fold extend
+" Operators {{{1
+    syn keyword sqOperator typeof instanceof delete clone
 
-syn keyword	sqOperator	typeof instanceof in
+"    for operator in [
+"            \ "!", "!=",
+"            \ "|", "||",
+"            \ "=",
+"            \ "==",
+"            \ "?", ":",
+"            \ "&", "&&",
+"            \ "<", ">", "<=", "=>", "<=>",
+"            \ "*", "*=",
+"            \ "\/", "\/=",
+"            \ "+", "+=", "++",
+"            \ "-", "\-=", "\--",
+"            \ "%", "\%=",
+"            \ "<<", ">>", "<<<",
+"            \ "<-"
+"            \ ]
+"        let regex = '\v(^|\W)\zs\V' . operator . '\v\ze($|\W)'
+"        execute "syn match sqOperator display '" . regex . "'"
+"    endfor
+
+" Parentheses and Braces {{{1
+    "syntax region sqBlock start="\[" end="\]" transparent fold
+    syntax region sqBlock start="{" end="}" transparent fold
+    "syntax region sqBlock start="\v<" end="\v>" transparent fold
+
+    "catch errors caused by wrong parenthesis and brackets
+    " also accept <% for {, %> for }, <: for [ and :> for ] (C99)
+    " But avoid matching <::.
+    syn cluster sqParenGroup contains=sqEscaped,sqCommentSkip,sqCommentString,sqComment2String,@sqCommentGroup,sqUserCont,sqOctalZero,sqFormat,sqNumber,sqFloat,sqOctal,sqNumbersCom
+    syn region sqParen transparent start='(' end=')' contains=ALLBUT,@sqParenGroup,sqCppParen,sqCppString,@Spell
+    " cCppParen: same as cParen but ends at end-of-line; used in cDefine
+    syn region sqCppParen transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@sqParenGroup,sqParen,sqString,@Spell
+
+" String and Character constants {{{1
+    syn match sqEscaped display contained "\v\\."
+    syn match sqEscaped display contained "\v\\x\x+"
+    syn match sqFormat display contained "\v\%[-+ #0]?(\d+|\*)?(\.\d+)[A-Za-z%]"
+    syn match sqVerbatimQuote display contained "\v\"\""
+
+    " Strings {{{2
+        syn region sqString start=+\v"+ skip=+\v\\\\|\\"+ end=+\v"|$+ contains=sqEscaped,sqFormat,@Spell
+        syn region sqVerbatimString start=+\v\@"+ skip=+\v\\\\|\\"+ end=+\v"|$+ contains=sqFormat,sqVerbatimQuote,@Spell
+        syn region sqVerbatimMultilineString start=+\v\@"( |$)+ skip=+\v\\\\|\\"+ end=+\v(^| )"+ contains=sqFormat,sqVerbatimQuote,@Spell
+
+    " Characters {{{2
+        syn match sqCharacter "\v'[^']*'" display contains=sqEscaped
+
+" Numbers {{{1
+    "syn match sqInteger "\v(^|\W)\zs[+-]?[1-9][0-9]*"
+    syn match sqInteger "\v[+-]?[1-9][0-9]*"
+    syn match sqInteger "\v0[xX][0-9A-Fa-f]+"
+    syn match sqInteger "\v0[0-7]+"
+    syn match sqFloat "\v[+-]?[0-9]+\.([eE][+-]?)?[0-9]+"
+
+" Comments {{{1
+    syn keyword sqCommentTodo contained TODO FIXME XXX
+    syn region sqLineComment start="//" skip="\\$" end="$" keepend contains=sqTodo,@Spell
+    syn region sqLineComment start="#" skip="\\$" end="$" keepend contains=sqTodo,@Spell
+    syn region sqBlockComment start="/\*" end="\*/" contains=sqTodo,@Spell fold extend
+
+    let b:c_minlines = 15
+    exec "syn sync ccomment cComment minlines=" . b:c_minlines
+
+syn match sqConstant display "\v[A-Z_]{3,}"
+syn match sqInternal display "\v_[a-zA-Z][a-zA-Z_]{2,}"
 
 
-syn keyword	sqStructure	class enum local
-syn keyword	sqStorageClass	static const
+" Highlighting {{{1
+    hi def link sqCharacter Character
 
-syn keyword	sqConstant	null true false
+    hi def link sqFormat  SpecialChar
+    hi def link sqEscaped SpecialChar
 
-syn keyword	sqException	try catch throw
+    hi def link sqString                  String
+    hi def link sqVerbatimString          String
+    hi def link sqVerbatimMultilineString String
 
+    hi def link sqCommentTodo  Todo
+    hi def link sqLineComment  Comment
+    hi def link sqBlockComment Comment
 
-let b:c_minlines = 15
-exec "syn sync ccomment cComment minlines=" . b:c_minlines
+    hi def link sqInteger  Number
+    hi def link sqFloat    Float
+    hi def link sqBoolean  Boolean
+    hi def link sqNull     Keyword
+    hi def link sqConstant Constant
+    hi def link sqTypedef  Typedef
 
+    hi def link sqConditional  Conditional
+    hi def link sqBranch       Conditional
+    hi def link sqRepeat       Repeat
+    hi def link sqLabel        Label
+    hi def link sqOperator     Operator
+    hi def link sqException    Exception
+    hi def link sqStatement    Statement
+    hi def link sqFunction     Function
+    hi def link sqIdentifier   Identifier
+    hi def link sqInternal     Identifier
+    hi def link sqStructure    Structure
+    hi def link sqStorageClass StorageClass
 
-" Define the default highlighting.
-" Only used when an item doesn't have highlighting yet
-hi def link sqFormat		sqSpecial
-hi def link sqCppString		sqString
-hi def link sqCommentL		sqComment
-hi def link sqCommentStart	sqComment
-hi def link sqLabel		Label
-hi def link sqConditional	Conditional
-hi def link sqRepeat		Repeat
-hi def link sqCharacter		Character
-hi def link sqSpecialCharacter	sqSpecial
-hi def link sqNumber		Number
-hi def link sqOctal		Number
-hi def link sqOctalZero		PreProc
-hi def link sqFloat		Float
-hi def link sqOperator		Operator
-hi def link sqStructure		Structure
-hi def link sqStorageClass	StorageClass
-hi def link sqInclude		Include
-hi def link sqIncluded		sqString
-hi def link sqError		Error
-hi def link sqStatement		Statement
-hi def link sqConstant		Constant
-hi def link sqCommentString	sqString
-hi def link sqComment2String	sqString
-hi def link sqCommentSkip	sqComment
-hi def link sqString		String
-hi def link sqComment		Comment
-hi def link sqSpecial		SpecialChar
-hi def link sqTodo		Todo
+    hi def link sqError Error
 
 let b:current_syntax = "sq"

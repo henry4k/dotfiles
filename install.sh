@@ -7,20 +7,6 @@ $(dirname $0)/init.sh
 
 Dotfiles="$PWD/$(dirname $0)"
 
-cat >> "$HOME/.profile" << EOF
-# DOTFILES BEGIN
-source '$Dotfiles/profile.sh'
-# DOTFILES END
-EOF
-
-cat >> "$HOME/.zprofile" << EOF
-# DOTFILES BEGIN
-emulate sh
-source \$HOME/.profile
-emulate zsh
-# DOTFILES END
-EOF
-
 cat >> "$HOME/.zshrc" << EOF
 # DOTFILES BEGIN
 source '$Dotfiles/zsh/main.zsh'
