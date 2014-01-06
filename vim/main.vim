@@ -63,9 +63,10 @@ set nocompatible
     "Bundle 'scrooloose/syntastic'
     "Bundle 'Valloric/YouCompleteMe'
     "Bundle 'Tabular'
-    Bundle 'Gundo'
+    Bundle 'sjl/gundo.vim'
+    Bundle 'sjl/splice.vim'
+    Bundle 'sjl/tslime.vim'
     Bundle 'mhinz/vim-signify'
-    Bundle 'xieyu/pyclewn'
     Bundle 'kana/vim-textobj-user'
 
     " az/iz:
@@ -138,14 +139,15 @@ set nocompatible
         nmap <leader>gh <plug>(signify-next-hunk)
         nmap <leader>gH <plug>(signify-prev-hunk)
 
-    " 
-
 " Clipboard {{{1
     if has('unnamedplus')
         set clipboard=unnamedplus,autoselect
     else
         set clipboard=unnamed,autoselect
     endif
+
+    " tslime {{{2
+        let g:tslime_ensure_trailing_newlines = 1
 
 " Indent {{{1
     set tabstop=4

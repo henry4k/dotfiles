@@ -10,20 +10,6 @@ export PAGER='less -isR'
 export MANPAGER="$PAGER"
 export GROFF_NO_SGR=1
 
-<<<<<<< HEAD
-bindkey -e
-#bindkey -v
-#bindkey '^W' 'backward-kill-word'
-#bindkey '^H' 'backward-delete-char'
-#bindkey '^U' 'backward-kill-line'
-#bindkey '^?' 'backward-delete-char'
-||||||| merged common ancestors
-bindkey -v
-bindkey '^W' 'backward-kill-word'
-bindkey '^H' 'backward-delete-char'
-bindkey '^U' 'backward-kill-line'
-bindkey '^?' 'backward-delete-char'
-=======
 alias tmux='tmux -2'
 
 if [[ "$TERM" != 'dumb' ]]; then
@@ -66,7 +52,6 @@ fi
 #bindkey '^H' 'backward-delete-char'
 #bindkey '^U' 'backward-kill-line'
 #bindkey '^?' 'backward-delete-char'
->>>>>>> 06b8d9fffc1966efd8f03592d07b39f35cc405bd
 
 
 # Misc {{{1

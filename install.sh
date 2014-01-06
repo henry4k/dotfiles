@@ -24,4 +24,10 @@ source-file "$Dotfiles/tmux.conf"
 # DOTFILES END
 EOF
 
+cat >> "$HOME/.gdbinit" << EOF
+# DOTFILES BEGIN
+source $Dotfiles/gdbinit
+# DOTFILES END
+EOF
+
 echo 'Installed dotfiles!'
