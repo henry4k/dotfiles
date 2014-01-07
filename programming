@@ -1,0 +1,24 @@
+vim: set foldmethod=marker filetype=markdown:
+
+DOs und DONTs beim Programmieren
+================================
+
+### C/C++ Spezifisches {{{1
+
+## Strukturen initialisieren {{{2
+    struct Test
+    {
+        int foo;
+    };
+
+    Test test;
+    test.foo = 42;
+
+Soweit läuft alles korrekt.
+Nun beschliesst aber jemand die Struktur `Test` um neue Attribute zu erweitern
+und schon hat man uninitialisierte Speicherbereiche.
+
+Auch wenn die Struktur über `{ 42 }` oder `{ .foo=42 }` initialisiert wird,
+würde das den Compiler nicht bewegen ein Warning oder gar einen Error auszugeben.
+Die einzig sichere Methode scheint der konsequente Einsatz eines Konstruktors zu sein.
+(In C dann analog eine Konstruktor-Funktion.)

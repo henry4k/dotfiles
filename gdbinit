@@ -1,7 +1,5 @@
 # vim: set filetype=gdb:
 
-set print address off
-
 set print array on
 set print elements 50
 
