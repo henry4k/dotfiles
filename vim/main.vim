@@ -342,3 +342,12 @@ set nocompatible
 "
 "
 " \c in regex patterns to enable ignore-case
+"
+" J um Zeilen zusammenzufassen. Z.B. um aus 'Foo\n{' 'Foo {' zu machen
+"
+" H - Cursor oben im Bildschirm plazieren.
+" M - Cursor mittig plazieren.
+" L - Cursor unten plazieren.
+"
+" Ctrl-n - (n)ext completion (für Wortvervollständigung)
+" Ctrl-p - (p)revious completion
