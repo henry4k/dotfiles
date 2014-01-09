@@ -1,0 +1,30 @@
+# vim: set filetype=gitconfig:
+[user]
+    email = henrykielmann@gmail.com
+    name = Henry Kielmann
+[color]
+    ui = true
+[core]
+    editor = /usr/bin/vim
+    autocrlf = input
+[push]
+    default = simple
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = true
+[alias]
+    d = difftool
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[merge]
+    tool = splice
+    conflictstyle = diff3
+[mergetool]
+    prompt = false
+[mergetool "fugitive"]
+    cmd = "vim -f -c 'Gdiff' $MERGED"
+[mergetool "splice"]
+    cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+    trustExitCode = true
+[log]
+    decorate = full
