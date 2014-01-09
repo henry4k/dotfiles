@@ -3,6 +3,43 @@ vim: set foldmethod=marker filetype=markdown:
 DOs und DONTs beim Programmieren
 ================================
 
+### Multithreading {{{1
+
+## Convars {{{2
+
+Ein von einer Convar gelockter Mutex, kann jederzeit wieder geöffnet werden.
+Es muss also immer geprüft werden, ob die von der Convar
+kontrollierte Variable auch tatsächlich den entsprechenden Status hat.
+
+    bool   fooReady = false
+    Convar fooConvar
+    Mutex  fooMutex
+
+    void WaiterThreadFn()
+    {
+        fooMutex.lock()
+        while(true)
+        {
+            fooConvar.wait(fooMutex)
+            if(fooReady)
+                break;
+        }
+        // dinge tun
+        fooMutex.unlock()
+    }
+
+    void SignalThreadFn()
+    {
+        fooMutex.lock()
+        fooRead = true
+        fooConvar.signal() // Vor unlock!
+        fooMutex.unlock()
+    }
+
+Ausserdem sollte bei `conver.signal` immer der entsprechende Mutex gelockt sein.
+Siehe: http://www.domaigne.com/blog/computing/condvars-signal-with-mutex-locked-or-not/
+
+
 ### C/C++ Spezifisches {{{1
 
 ## Strukturen initialisieren {{{2

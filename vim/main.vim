@@ -179,6 +179,10 @@ set nocompatible
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set display+=lastline
 
+    " Show colorcolumn only in insert mode.
+    autocmd InsertEnter * :set colorcolumn=78
+    autocmd InsertLeave * :set colorcolumn=0
+
     syntax on
     if has('gui_running')
         set guioptions=cip
