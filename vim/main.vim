@@ -48,6 +48,9 @@ set nocompatible
     "Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-git'
     Bundle 'tpope/vim-fugitive'
+    Bundle 'tpope/vim-markdown'
+    Bundle 'nelstrom/vim-markdown-folding'
+    Bundle 'othree/eregex.vim'
     Bundle 'majutsushi/tagbar'
     "Bundle 'mivok/vimtodo'
     Bundle 'vhdirk/vim-cmake'
@@ -245,9 +248,12 @@ set nocompatible
     inoremap <F7> <C-\><C-O>:setlocal spelllang=en,de spell! spell?<CR>
 
 " Folding {{{1
-    let g:xml_syntax_folding=1
+    let g:xml_syntax_folding = 1
     set foldmethod=syntax
     set foldenable
+
+    " markdown-folding:
+        let g:markdown_fold_style = 'nested'
 
 " Search and replace {{{1
     set incsearch

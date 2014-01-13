@@ -1,11 +1,9 @@
-vim: set foldmethod=marker filetype=markdown:
-
 DOs und DONTs beim Programmieren
 ================================
 
-### Multithreading {{{1
+## Multithreading
 
-## Convars {{{2
+### Convars
 
 Ein von einer Convar gelockter Mutex, kann jederzeit wieder geöffnet werden.
 Es muss also immer geprüft werden, ob die von der Convar
@@ -40,9 +38,9 @@ Ausserdem sollte bei `conver.signal` immer der entsprechende Mutex gelockt sein.
 Siehe: http://www.domaigne.com/blog/computing/condvars-signal-with-mutex-locked-or-not/
 
 
-### C/C++ Spezifisches {{{1
+## C/C++ Spezifisches
 
-## Strukturen initialisieren {{{2
+### Strukturen initialisieren
     struct Test
     {
         int foo;
