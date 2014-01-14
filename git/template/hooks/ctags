@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+if [[ $(git config --bool --get 'ctags.enabled') != 'true' ]]
+    exit 0
+fi
+
+CtagsArgs=$(git config --get 'ctags.args')
+
+trap "rm -f .git/tags.$$" EXIT
+ctags --tag-relative -Rf.git/tags.$$ --exclude=.git $CtagsArgs
+mv .git/tags.$$ .git/tags

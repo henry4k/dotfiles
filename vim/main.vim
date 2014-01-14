@@ -38,6 +38,7 @@ set nocompatible
     " Libs {{{2
     Bundle 'tlib'
     Bundle 'L9'
+    Bundle 'tpope/repeat'
 
 
     " Tools {{{2
@@ -70,6 +71,8 @@ set nocompatible
     Bundle 'sjl/splice.vim'
     Bundle 'sjl/tslime.vim'
     Bundle 'mhinz/vim-signify'
+    Bundle 'Townk/vim-autoclose'
+    Bundle 'YankRing'
     Bundle 'kana/vim-textobj-user'
 
     " az/iz:
@@ -320,6 +323,10 @@ set nocompatible
 " dw - Löscht Wort.
 " d/) - Löscht bis zum Klammerende.
 "
+" % um zwischen (){}[]<> Paaren zu springen.
+" Da es eine Bewegung ist, kann es auch mit c/d/y/etc benutzt werden.
+" Praktisch um Funktionsaufrufe zu extrahieren.
+"
 " :cn um zum nächsten fehler zu springen (bzw zum nächsten eintrag in der quick-list)
 "
 "
@@ -333,8 +340,8 @@ set nocompatible
 "  a -> komplettes objekt wählen
 "  i -> inhalt (inneres) wählen
 " Text-Objekte:
-"   (w)ord
-"   (W)ORD
+"   (w)ord separated by punctuation and whitespace
+"   (W)ord separated by whitespace
 "   (s)entence
 "   (p)aragraph
 "   []
@@ -346,7 +353,7 @@ set nocompatible
 "   (t)ag (xml tags)
 "   l/x (single character)
 "
-" % => aktuelle datei
+" im Command Mode: % => aktuelle datei
 "
 " (c)hange Operator ist wie eine kombinierte d und i operation
 "
@@ -358,6 +365,13 @@ set nocompatible
 " H - Cursor oben im Bildschirm plazieren.
 " M - Cursor mittig plazieren.
 " L - Cursor unten plazieren.
+"
+" zt(op)    - Aktuelle Zeile nach Oben.
+" zz(enter) - Aktuelle Zeile in die Mitte.
+" zb(ottom) - Aktuelle Zeile ans Ende.
+"
+" [[ - Vorherige Funktion
+" ]] - Nächste Funktion
 "
 " Ctrl-n - (n)ext completion (für Wortvervollständigung)
 " Ctrl-p - (p)revious completion
