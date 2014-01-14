@@ -8,5 +8,14 @@ fi
 CtagsArgs=$(git config --get 'ctags.args')
 
 trap "rm -f .git/tags.$$" EXIT
-ctags --tag-relative -Rf.git/tags.$$ --exclude=.git $CtagsArgs
+
+ctags \
+    --tag-relative \
+    -Rf.git/tags.$$ \
+    --excmd=mixed \
+    --format=2 \
+    --fields=+fkst \
+    --exclude=.git \
+    $CtagsArgs
+
 mv .git/tags.$$ .git/tags
