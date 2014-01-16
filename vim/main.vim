@@ -6,7 +6,7 @@ set nocompatible
     filetype off
 
     let s:vimDir=expand('<sfile>:p:h')
-    let &g:runtimepath=printf('%s,%s,%s/bundle/vundle,%/manpageview', &g:runtimepath, s:vimDir, s:vimDir)
+    let &g:runtimepath=printf('%s,%s,%s/bundle/vundle,%s/manpageview', &g:runtimepath, s:vimDir, s:vimDir, s:vimDir)
     call vundle#rc(s:vimDir.'/bundle')
 
 
@@ -38,7 +38,7 @@ set nocompatible
     " Libs {{{2
     Bundle 'tlib'
     Bundle 'L9'
-    Bundle 'tpope/repeat'
+    Bundle 'tpope/vim-repeat'
 
 
     " Tools {{{2
@@ -70,9 +70,12 @@ set nocompatible
     Bundle 'sjl/gundo.vim'
     Bundle 'sjl/splice.vim'
     Bundle 'sjl/tslime.vim'
-    Bundle 'mhinz/vim-signify'
-    Bundle 'Townk/vim-autoclose'
-    Bundle 'YankRing'
+    " TODO: Erst aktivieren wenn man Zeit hat, sich damit zu beschäftigen :)
+    "Bundle 'mhinz/vim-signify'
+    "Bundle 'Townk/vim-autoclose'
+    "Bundle 'YankRing'
+    Bundle 'kshenoy/vim-signature'
+    Bundle 'Mark--Karkat'
     Bundle 'kana/vim-textobj-user'
 
     " az/iz:
@@ -260,7 +263,8 @@ set nocompatible
 
 " Search and replace {{{1
     set incsearch
-    noremap <silent> <nowait> <C-H> :set hlsearch!<CR>
+    noremap <silent> <nowait> <C-H> :set hlsearch!<CR>:Mark<CR>
+    noremap <silent> <leader><space> :nohlsearch<cr>:MarkClear<cr>
 
 " System {{{1
     " set autochdir
@@ -306,8 +310,8 @@ set nocompatible
 "
 " :vimgrep <pattern> <file patterns>
 "
-" c-t [<^v>]
-" c-w [<^v>]
+" c-t [<^v>] <- Tab wechseln
+" c-w [<^v>] <- Fenster wechseln
 "
 " <>= bzw == um Code automatisch zu formatieren
 " :only[!] um alle anderen fenster zu schliessen
