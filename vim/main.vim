@@ -290,6 +290,8 @@ set nocompatible
     set noswapfile
     set nostartofline
     set shell=bash
+    set shellcmdflag=-ic
+    set makeprg=tup " Since I use tup way more often, than make
 
 
 " Tipps {{{1

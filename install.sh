@@ -38,7 +38,7 @@ $GitConfig user.name 'Henry Kielmann'
 $GitConfig color.ui true
 $GitConfig core.editor '/usr/bin/env vim'
 $GitConfig core.autocrlf 'input'
-$GitConfig push.default 'simple'
+$GitConfig push.default 'nothing'
 $GitConfig diff.tool 'vimdiff'
 $GitConfig difftool.prompt true
 $GitConfig log.decorate full

@@ -15,26 +15,16 @@ function prompt_custom_setup ()
     autoload -U colors && colors
     add-zsh-hook precmd prompt_custom_precmd
     zle -N zle-keymap-select
-    zle -N zle-line-init
 }
 
 function prompt_custom_precmd ()
 {
-    local reset="$reset_color"
-    local userColor="$reset%F{blue}"
-    local shadedColor="$reset%B%F{black}"
-    local hostColor="$shadedColor"
-    local dirColor="$reset%F{white}"
-
-
-    #if [[ "$ZKEYMAP" == 'vicmd' ]]; then
-    #    local end="$reset%F{green}N>"
-    #else
-    #    local end="$reset%F{cyan}I>"
-    #fi
-
-    local end="$reset%F{green}>"
-
+    if [[ "$ZKEYMAP" == 'vicmd' ]]; then
+        local end="%F{green}N>"
+    else
+        local end="%F{cyan}I>"
+    fi
+    #local end="%F{green}>"
 
     local topDir=$(basename $PWD)
     local parentDir=$(dirname $PWD)
@@ -45,15 +35,11 @@ function prompt_custom_precmd ()
         local parentDir="$parentDir/"
     fi
 
-
     PROMPT="\
-${userColor}%n\
-${shadedColor}@\
-${hostColor}%m \
-${shadedColor}${parentDir}\
-${dirColor}${topDir} \
-${end} \
-%{$reset_color%}"
+%F{blue}%n\
+%B%F{black}@%m $parentDir%b\
+%F{white}$topDir \
+$end %f"
 }
 
 

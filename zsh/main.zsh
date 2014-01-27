@@ -1,5 +1,6 @@
 # vim: set filetype=zsh foldmethod=marker:
-zshDir=$(dirname $0)
+script="$_"
+zshDir=$(dirname $script)
 
 # Common {{{1
 export MANPATH="/opt/local/share/man:$MANPATH"
@@ -47,11 +48,11 @@ fi
 
 
 # Keymap {{{1
-#bindkey -v
-#bindkey '^W' 'backward-kill-word'
-#bindkey '^H' 'backward-delete-char'
-#bindkey '^U' 'backward-kill-line'
-#bindkey '^?' 'backward-delete-char'
+bindkey -v
+bindkey '^W' 'backward-kill-word'
+bindkey '^H' 'backward-delete-char'
+bindkey '^U' 'backward-kill-line'
+bindkey '^?' 'backward-delete-char'
 
 
 # Misc {{{1
