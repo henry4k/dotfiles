@@ -156,7 +156,7 @@ set nocompatible
     endif
 
     " tslime {{{2
-        let g:tslime_ensure_trailing_newlines = 1
+        let g:tslime_ensure_trailing_newlines = 2
 
 " Indent {{{1
     set tabstop=4
@@ -207,6 +207,10 @@ set nocompatible
         endif
     else
         colorscheme ubaryd
+        highlight Normal ctermbg=none
+        highlight LineNr ctermbg=none
+        highlight Folded ctermbg=none
+        highlight NonText ctermbg=none
     endif
 
     " C syntax {{{2
@@ -290,7 +294,6 @@ set nocompatible
     set noswapfile
     set nostartofline
     set shell=bash
-    set shellcmdflag=-ic
     set makeprg=tup " Since I use tup way more often, than make
 
 

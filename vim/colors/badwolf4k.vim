@@ -110,8 +110,8 @@ let s:bwc.toffee = ['b88853', 137]
 let s:bwc.coffee    = ['c7915b', 173]
 let s:bwc.darkroast = ['88633f', 95]
 
-let s:bwc.darklime = ['272b18', 22]
-let s:bwc.darkdress = ['2c2424', 52]
+let s:bwc.darklime   = ['272b18', 22]
+let s:bwc.darkdress  = ['2c2424', 52]
 let s:bwc.darkorange = ['2b241b', 94]
 
 " }}}
