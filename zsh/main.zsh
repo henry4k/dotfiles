@@ -13,6 +13,16 @@ export GROFF_NO_SGR=1
 
 alias tmux='tmux -2'
 
+if which 'pinfo' > /dev/null; then
+    function info()
+    {
+        local page="$1"
+        local node="$2"
+        pinfo "$page" "--node=$node"
+    }
+fi
+
+# Colors {{{1
 if [[ "$TERM" != 'dumb' ]]; then
     export TERM='xterm-256color'
     export COLORTERM='yes'
@@ -26,6 +36,9 @@ if [[ "$TERM" != 'dumb' ]]; then
     alias ls="ls -bF $lsColor"
     alias  l="ls -bF $lsColor"
     alias ll="ls -blFh $lsColor"
+    if [[ -e "$HOME/.dircolors" ]]; then
+        eval "$(dircolors "$HOME/.dircolors")"
+    fi
 
     alias grep='grep --color=auto'
 

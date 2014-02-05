@@ -28,4 +28,7 @@ UninstallDotfile "$HOME/.vimrc"
 UninstallDotfile "$HOME/.tmux.conf"
 UninstallDotfile "$HOME/.gdbinit"
 
+rm -f "$HOME/.gitconfig"
+rm -f "$HOME/.dircolors"
+
 echo 'Uninstalled dotfiles!'

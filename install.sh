@@ -1,11 +1,10 @@
 #!/bin/bash
-
 set -e
-
-$(dirname $0)/uninstall.sh
 
 Dotfiles="$PWD/$(dirname $0)"
 Destination="$HOME"
+
+"$Dotfiles/uninstall.sh"
 
 cat >> "$Destination/.zshrc" << EOF
 # DOTFILES BEGIN
@@ -38,7 +37,6 @@ $GitConfig user.name 'Henry Kielmann'
 $GitConfig color.ui true
 $GitConfig core.editor '/usr/bin/env vim'
 $GitConfig core.autocrlf 'input'
-$GitConfig push.default 'nothing'
 $GitConfig diff.tool 'vimdiff'
 $GitConfig difftool.prompt true
 $GitConfig log.decorate full
@@ -53,10 +51,12 @@ $GitConfig alias.ctags '!.git/hooks/ctags'
 $GitConfig alias.lg "log --color --graph --pretty format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 $GitConfig alias.up "!f() { git pull \$@ && git log --reverse --pretty=format:\"%C(blue)%an %C(bold)%C(black)- %Creset%s %C(bold)%C(black)(%ar)\" HEAD@{1}.. ; }; f"
 
+"$Dotfiles/dircolors.sh" > "$Destination/.dircolors"
+
 PostInstallScript="$Destination/.dotfiles/post-install"
 if [[ -x "$PostInstallScript" ]]; then
     echo "Executing $PostInstallScript .."
-    $PostInstallScript
+    "$PostInstallScript"
 fi
 
 echo 'Installed dotfiles!'

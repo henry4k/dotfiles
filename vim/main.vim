@@ -129,8 +129,8 @@ set nocompatible
 " Mouse and Handling {{{1
     set mouse=a
     set mousemodel=popup_setpos
-    let g:mapleader=','
-    let g:maplocalleader='.'
+    let g:mapleader=';'
+    let g:maplocalleader=','
     map <C-t><up>    :tabr<cr>
     map <C-t><down>  :tabl<cr>
     map <C-t><left>  :tabp<cr>
