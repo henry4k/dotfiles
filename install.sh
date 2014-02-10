@@ -34,6 +34,7 @@ GitConfig='git config --global'
 $GitConfig user.email 'henrykielmann@gmail.com'
 $GitConfig user.name 'Henry Kielmann'
 #$GitConfig init.templatedir "$Dotfiles/git/template"
+$GitConfig push.default 'current'
 $GitConfig color.ui true
 $GitConfig core.editor '/usr/bin/env vim'
 $GitConfig core.autocrlf 'input'

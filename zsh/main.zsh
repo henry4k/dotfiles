@@ -28,17 +28,17 @@ if [[ "$TERM" != 'dumb' ]]; then
     export COLORTERM='yes'
     export CLICOLOR=1
 
-    if [[ "$(uname)" == 'Linux' ]]; then
+    if which 'dircolors' > /dev/null; then
         lsColor='--color=auto'
+        if [[ -e "$HOME/.dircolors" ]]; then
+            eval "$(dircolors "$HOME/.dircolors")"
+        fi
     else
         lsColor='-G'
     fi
     alias ls="ls -bF $lsColor"
     alias  l="ls -bF $lsColor"
     alias ll="ls -blFh $lsColor"
-    if [[ -e "$HOME/.dircolors" ]]; then
-        eval "$(dircolors "$HOME/.dircolors")"
-    fi
 
     alias grep='grep --color=auto'
 
@@ -75,17 +75,20 @@ setopt extended_glob
 
 # Prompt {{{1
 if [[ "$TERM" != 'dumb' ]]; then
-#    zstyle ':completion:*' menu select=5
-#    zstyle ':completion:*:manuals'    separate-sections true
-#    zstyle ':completion:*:manuals.*'  insert-sections   true
-#    zstyle ':completion:*:man:*'      menu yes select
-#    zstyle ':completion:*:sudo:*' command-path /usr/local/sbin \
-#                                               /usr/local/bin  \
-#                                               /usr/sbin       \
-#                                               /usr/bin        \
-#                                               /sbin           \
-#                                               /bin            \
-#                                               /usr/X11R6/bin
+    zstyle ':completion:*' menu select=5
+    zstyle ':completion:*:manuals'    separate-sections true
+    zstyle ':completion:*:manuals.*'  insert-sections   true
+    zstyle ':completion:*:man:*'      menu yes select
+    zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+    zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+    zstyle ':completion:*:sudo:*' command-path /usr/local/sbin \
+                                               /usr/local/bin  \
+                                               /usr/sbin       \
+                                               /usr/bin        \
+                                               /sbin           \
+                                               /bin            \
+                                               /usr/X11R6/bin
+    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
     source "$zshDir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
