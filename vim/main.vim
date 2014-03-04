@@ -187,16 +187,25 @@ set nocompatible
     set list
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set display+=lastline
+    set cursorline " See augroup CSFix
 
     " Show colorcolumn only in insert mode.
     autocmd InsertEnter * :set colorcolumn=78
     autocmd InsertLeave * :set colorcolumn=0
 
+    augroup CSFix
+        autocmd ColorScheme * highlight clear CursorLine
+        autocmd ColorScheme * highlight Normal ctermbg=none
+        autocmd ColorScheme * highlight LineNr ctermbg=none
+        autocmd ColorScheme * highlight Folded ctermbg=none
+        autocmd ColorScheme * highlight NonText ctermbg=none
+        "autocmd ColorScheme * highlight clear CursorLineNR cterm=bold
+    augroup END
+
     syntax on
     if has('gui_running')
         set guioptions=cip
         set guicursor+=a:blinkon0
-        set cursorline
         colorscheme badwolf4k
         "highlight clear DiffDelete
         "highlight DiffDelete guibg=#2c2424 ctermbg=52
@@ -207,11 +216,8 @@ set nocompatible
         endif
     else
         colorscheme ubaryd
-        highlight Normal ctermbg=none
-        highlight LineNr ctermbg=none
-        highlight Folded ctermbg=none
-        highlight NonText ctermbg=none
     endif
+
 
     " C syntax {{{2
         let g:c_space_errors=1
@@ -293,6 +299,7 @@ set nocompatible
     set nobackup
     set noswapfile
     set nostartofline
+    set sessionoptions-=options
     set shell=bash
     set makeprg=tup " Since I use tup way more often, than make
 
