@@ -13,6 +13,7 @@ function prompt_custom_setup ()
     #autoload -Uz vcs_info
     autoload -Uz add-zsh-hook
     autoload -U colors && colors
+    autoload -U regexp-replace
     add-zsh-hook precmd prompt_custom_precmd
     zle -N zle-keymap-select
 }
@@ -32,7 +33,12 @@ function prompt_custom_precmd ()
     if [[ "$topDir" == '/' ]]; then
         local parentDir=''
     elif [ "$parentDir" != '/' ]; then
-        local parentDir="$parentDir/"
+        # Truncuate parentDir to 2 directories.
+        local tmp="$(echo -n "$parentDir" | sed 's_^.*\(\(/[^/]*\)\{2\}\)$_\1_')"
+        if [[ "$tmp" != "$parentDir" ]]; then
+            local tmp="$(echo -n "$tmp" | sed 's_^/__')"
+        fi
+        local parentDir="$tmp/"
     fi
 
     PROMPT="\

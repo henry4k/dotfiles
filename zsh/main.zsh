@@ -62,10 +62,29 @@ fi
 
 # Keymap {{{1
 bindkey -v
-bindkey '^W' 'backward-kill-word'
-bindkey '^H' 'backward-delete-char'
-bindkey '^U' 'backward-kill-line'
-bindkey '^?' 'backward-delete-char'
+export KEYTIMEOUT=1 # 0.1s delay after pressing <ESC>
+
+bindkey -M vicmd ' ' execute-named-cmd
+
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
+bindkey '^W' backward-kill-word
+bindkey '^U' backward-kill-line
+
+bindkey -M vicmd 'yy' vi-yank-whole-line
+bindkey -M vicmd 'Y' vi-yank-eol
+bindkey -M vicmd 'cc' vi-change-whole-line
+bindkey -M vicmd 'dd' kill-whole-line
+bindkey -M vicmd 'u' undo
+bindkey -M vicmd 'U' redo
+
+# ctrl-r starts searching history backward
+bindkey '^R' history-incremental-search-backward
 
 
 # Misc {{{1
