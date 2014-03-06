@@ -105,4 +105,4 @@ PrintColors "$blue_fg" \
 
 # Configuration
 PrintColors "$bold" \
-    .cfg .conf .ini .json .xml .yaml .yml .html .htm .css
+    .cfg .conf .ini .json .xml .yaml .yml .html .htm .css .markdown .md .mustache

@@ -71,7 +71,7 @@ set nocompatible
     Bundle 'sjl/splice.vim'
     Bundle 'sjl/tslime.vim'
     " TODO: Erst aktivieren wenn man Zeit hat, sich damit zu beschäftigen :)
-    "Bundle 'mhinz/vim-signify'
+    Bundle 'mhinz/vim-signify'
     "Bundle 'Townk/vim-autoclose'
     "Bundle 'YankRing'
     Bundle 'kshenoy/vim-signature'
@@ -129,7 +129,7 @@ set nocompatible
 " Mouse and Handling {{{1
     set mouse=a
     set mousemodel=popup_setpos
-    let g:mapleader=';'
+    let g:mapleader=','
     let g:maplocalleader=','
     map <C-t><up>    :tabr<cr>
     map <C-t><down>  :tabl<cr>
@@ -211,6 +211,7 @@ set nocompatible
         highlight LineNr ctermbg=none
         highlight Folded ctermbg=none
         highlight NonText ctermbg=none
+        highlight SignColumn ctermbg=none
     endif
 
     " C syntax {{{2
@@ -278,6 +279,10 @@ set nocompatible
     cmap w!! w !sudo tee % >/dev/null
 
     set autoread
+    autocmd CursorHold * checktime
+    " ^- autoread files every time the CursorHold event is fired.
+    " This should happen every 4 seconds.
+
     set nrformats-=octal
     set modeline
     set endofline
@@ -295,6 +300,7 @@ set nocompatible
     set nostartofline
     set shell=bash
     set makeprg=tup " Since I use tup way more often, than make
+    set path+=/usr/local/include,/opt/local/include
 
 
 " Tipps {{{1

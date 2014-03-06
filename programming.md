@@ -1,6 +1,34 @@
 DOs und DONTs beim Programmieren
 ================================
 
+## Allgemeines
+
+- Beautiful is better than ugly.
+- Explicit is better than implicit.
+- Simple is better than complex.
+- Complex is better than complicated.
+- Flat is better than nested. (=> Complex)
+- Sparse is better than dense.
+- Readabillity counts.
+- Special cases aren't special enough to break the rules.
+  Although practicality beats purity.
+- Errors should never pass silently.
+  Unless explicitly silenced.
+- If the implementation is hard to explain, it's a bad idea.
+
+- Enable compiler warnings and pay attention to them.
+- Use assertions to validate your assumptions.
+- Don't quietly ignore error conditions or invalid input.
+- For a complicated, critical algorithm, consider using a second algorithm to validate the first. (e.g. validate binary search with a linear search).
+- Don't write multi-purpose functions such as realloc (it can grow memory, shrink memory, free memory, or allocate new memory -- it does it all).
+- Check boundary conditions carefully.
+- Avoid risky language idioms.
+- *Write code for the "average" programmer. Don't make the "average" programmer reach for a reference manual to understand your code.*
+- Fix bugs now, not later.
+- *There are no free features; don't allow needless flexibility (like realloc).*
+- Ultimately the developer is responsible for finding bugs; he shouldn't write sloppy code and hope that QA will find all his bugs. 
+
+
 ## Multithreading
 
 ### Convars
@@ -36,6 +64,8 @@ kontrollierte Variable auch tatsächlich den entsprechenden Status hat.
 
 Ausserdem sollte bei `conver.signal` immer der entsprechende Mutex gelockt sein.
 Siehe: http://www.domaigne.com/blog/computing/condvars-signal-with-mutex-locked-or-not/
+
+TODO: notify
 
 
 ## C/C++ Spezifisches

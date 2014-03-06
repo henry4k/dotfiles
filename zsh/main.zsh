@@ -3,8 +3,6 @@ script="$_"
 zshDir=$(dirname $script)
 
 # Common {{{1
-export MANPATH="/opt/local/share/man:$MANPATH"
-
 export EDITOR='vim'
 export VISUAL="$EDITOR"
 export PAGER='less -isR'
@@ -18,7 +16,11 @@ if which 'pinfo' > /dev/null; then
     {
         local page="$1"
         local node="$2"
-        pinfo "$page" "--node=$node"
+        if [[ -n "$node" ]]; then
+            pinfo "$page" "--node=$node"
+        else
+            pinfo "$page"
+        fi
     }
 fi
 
