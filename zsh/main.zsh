@@ -30,17 +30,17 @@ if [[ "$TERM" != 'dumb' ]]; then
     export COLORTERM='yes'
     export CLICOLOR=1
 
-    if [[ "$(uname)" == 'Linux' ]]; then
+    if which 'dircolors' > /dev/null; then
         lsColor='--color=auto'
+        if [[ -e "$HOME/.dircolors" ]]; then
+            eval "$(dircolors "$HOME/.dircolors")"
+        fi
     else
         lsColor='-G'
     fi
     alias ls="ls -bF $lsColor"
     alias  l="ls -bF $lsColor"
     alias ll="ls -blFh $lsColor"
-    if [[ -e "$HOME/.dircolors" ]]; then
-        eval "$(dircolors "$HOME/.dircolors")"
-    fi
 
     alias grep='grep --color=auto'
 
@@ -64,10 +64,29 @@ fi
 
 # Keymap {{{1
 bindkey -v
-bindkey '^W' 'backward-kill-word'
-bindkey '^H' 'backward-delete-char'
-bindkey '^U' 'backward-kill-line'
-bindkey '^?' 'backward-delete-char'
+export KEYTIMEOUT=1 # 0.1s delay after pressing <ESC>
+
+bindkey -M vicmd ' ' execute-named-cmd
+
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
+bindkey '^W' backward-kill-word
+bindkey '^U' backward-kill-line
+
+bindkey -M vicmd 'yy' vi-yank-whole-line
+bindkey -M vicmd 'Y' vi-yank-eol
+bindkey -M vicmd 'cc' vi-change-whole-line
+bindkey -M vicmd 'dd' kill-whole-line
+bindkey -M vicmd 'u' undo
+bindkey -M vicmd 'U' redo
+
+# ctrl-r starts searching history backward
+bindkey '^R' history-incremental-search-backward
 
 
 # Misc {{{1
@@ -77,17 +96,20 @@ setopt extended_glob
 
 # Prompt {{{1
 if [[ "$TERM" != 'dumb' ]]; then
-#    zstyle ':completion:*' menu select=5
-#    zstyle ':completion:*:manuals'    separate-sections true
-#    zstyle ':completion:*:manuals.*'  insert-sections   true
-#    zstyle ':completion:*:man:*'      menu yes select
-#    zstyle ':completion:*:sudo:*' command-path /usr/local/sbin \
-#                                               /usr/local/bin  \
-#                                               /usr/sbin       \
-#                                               /usr/bin        \
-#                                               /sbin           \
-#                                               /bin            \
-#                                               /usr/X11R6/bin
+    zstyle ':completion:*' menu select=5
+    zstyle ':completion:*:manuals'    separate-sections true
+    zstyle ':completion:*:manuals.*'  insert-sections   true
+    zstyle ':completion:*:man:*'      menu yes select
+    zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+    zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+    zstyle ':completion:*:sudo:*' command-path /usr/local/sbin \
+                                               /usr/local/bin  \
+                                               /usr/sbin       \
+                                               /usr/bin        \
+                                               /sbin           \
+                                               /bin            \
+                                               /usr/X11R6/bin
+    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
     source "$zshDir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
