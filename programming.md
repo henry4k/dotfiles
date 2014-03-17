@@ -28,6 +28,10 @@ DOs und DONTs beim Programmieren
 - *There are no free features; don't allow needless flexibility (like realloc).*
 - Ultimately the developer is responsible for finding bugs; he shouldn't write sloppy code and hope that QA will find all his bugs. 
 
+> Google often builds the "minimum useful product" as an initial version and then quickly iterates successive versions allowing for internal and user feedback and careful consideration of quality with every small step.
+
+    ThisIsHardToRead, asIsThis. This_is_easier, unless_it_is_underlined. This.is.easy. This-is-easy-too. Almost as easy to read as this.
+
 
 ## Multithreading
 
