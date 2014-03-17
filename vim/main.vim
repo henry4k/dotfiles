@@ -188,6 +188,7 @@ set nocompatible
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set display+=lastline
     set cursorline " See augroup CSFix
+    set noerrorbells
 
     " Show colorcolumn only in insert mode.
     autocmd InsertEnter * :set colorcolumn=78
@@ -199,6 +200,8 @@ set nocompatible
         autocmd ColorScheme * highlight LineNr ctermbg=none
         autocmd ColorScheme * highlight Folded ctermbg=none
         autocmd ColorScheme * highlight NonText ctermbg=none
+        autocmd ColorScheme * highlight SpecialKey ctermbg=none
+        autocmd ColorScheme * highlight VertSplit ctermbg=none
         autocmd ColorScheme * highlight SignColumn ctermbg=none
         "autocmd ColorScheme * highlight clear CursorLineNR cterm=bold
     augroup END
@@ -216,7 +219,7 @@ set nocompatible
             set fuoptions=maxvert,maxhorz,background:Normal
         endif
     else
-        colorscheme ubaryd
+        colorscheme badwolf4k
     endif
 
 
