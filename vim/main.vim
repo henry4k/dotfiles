@@ -120,6 +120,8 @@ set nocompatible
     set completeopt=menu,preview,longest
     nnoremap <c-space> <c-p>
 
+    set isfname-==,:
+
     let g:ycm_filepath_completion_use_working_dir=1
     " ^- since we sync the workdir ourselves
     let g:ycm_autoclose_preview_window_after_completion=1
