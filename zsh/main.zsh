@@ -39,7 +39,7 @@ if [[ "$TERM" != 'dumb' ]]; then
         lsColor='-G'
     fi
     alias ls="ls -bF $lsColor"
-    alias  l="ls -bF $lsColor"
+    alias  l="ls -bF1 $lsColor"
     alias ll="ls -blFh $lsColor"
 
     alias grep='grep --color=auto'
