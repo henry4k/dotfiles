@@ -3,6 +3,66 @@ DOs und DONTs beim Programmieren
 
 ## Allgemeines
 
+### Code Craft
+
+Dinge, die mir beim lesen von 'Code Craft' besonders wichtig erschienen:
+
+#### Die Einstellung zählt
+Wie bei vielen Dingen im Leben geht es auch hier zuallererst
+um die innere Einstellung zum Thema. Wenn man nicht wirklich schönen/guten
+Code schreiben *will*, wird man auch keinen hervorbringen.
+
+#### Programmiere defensiv
+
+Defensiv programmieren bedeutet keine Ahnnahmen
+über die Nutzung seines Codes zu machen.
+
+- Was mache ich, wenn Parameter X ausserhalb von 0-1 ist?
+
+
+Lösungen:
+
+- Variablen immer initialisieren.
+- Unterstützende Sprachfeatures wie `const` immer nutzen.
+- Return-Werte und Fehler-Codes prüfen.
+
+
+#### Gute und durchdachte Namen
+
+So kurz und prägnant wie möglich. Nicht nur prägnant für dich selbst.
+
+Auf den Kontext achten.  
+Wenn ein Name immer nur in einem bestimmten Kontext genutzt wird,
+muss er auch nur in diesem eindeutig sein.
+
+Makros sollten herrausstechen,
+weil sie sich nicht an die Regeln der Sprache halten.
+
+
+#### Dokumentation
+
+Die beste Dokumentation ist der Code selbst.  
+Man sollte also Code immer so schreiben, dass dieser leicht verständlich ist:
+
+- Gute Namen benutzten
+- Elemente im Quellcode dem optimalen Lesefluss entsprechend anordnen.  
+  Interne Funktionen sollten also immer am *Ende* einer Datei stehen,
+  denn den Leser interessiert erstmal der öffentliche Teil.
+- Zusammengehörige Anweisungen sollten gruppiert werden.
+- Bei if-else-Statements sollte der gängige Fall immer zuerst behandelt werden.
+
+Je weiter die Dokumentation vom Code entfernt ist,
+desto eher vergisst man diese zu aktualisieren.
+
+(Überraschende) Seiteneffekte müssen vermieden werden.
+Ansonsten müssen sie dokumentiert und die Dokumentation befolgt werden. => Doof
+
+Keine großen Funktionen!
+Kleine verschachtelte Funktionen sind viel leichter zu lesen und zu warten.
+
+
+### Statements von irgendwelchen Leuten
+
 - Beautiful is better than ugly.
 - Explicit is better than implicit.
 - Simple is better than complex.
