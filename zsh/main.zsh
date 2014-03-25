@@ -3,6 +3,9 @@ script="$_"
 zshDir=$(dirname $script)
 
 # Common {{{1
+
+source "$zshDir/../locale.sh"
+
 export EDITOR='vim'
 export VISUAL="$EDITOR"
 export PAGER='less -isR'
