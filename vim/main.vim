@@ -315,6 +315,7 @@ set nocompatible
     set sessionoptions-=options
     set shell=bash
     set makeprg=tup " Since I use tup way more often, than make
+    set tags+=tag;/ " upward search till filesystem root for 'tags' files
     set path+=/usr/local/include,/opt/local/include
 
 
