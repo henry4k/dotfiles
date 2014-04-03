@@ -28,6 +28,5 @@ else
     exit 1
 fi
 
-git fetch $FetchArgs
-echo 'Fetched commits:'
-git lg --reverse "$Ref@{1}..$Ref"
+git fetch --verbose $FetchArgs
+git lg --reverse "HEAD..$Ref"
