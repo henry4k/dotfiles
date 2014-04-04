@@ -1,0 +1,32 @@
+#!/bin/bash -e
+
+FetchArgs=
+Ref=
+
+# git update-branch origin master
+if [[ "$#" == 2 ]]; then
+    FetchArgs="$1 $2"
+    Ref="$1/$2"
+# git update-brach master
+elif [[ "$#" == 1 ]]; then
+    FetchArgs="$1"
+    Ref="$1@{upstream}"
+# git update-branch
+elif [[ "$#" == 0 ]]; then
+    FetchArgs=""
+    Ref="HEAD@{upstream}"
+else
+    CommandBase="git $(basename $0)"
+    echo 'Invalid parameters!' 1>&2
+    echo 'Usage:'
+    echo "  $CommandBase <remote> <branch>"
+    echo '    Fetches given remote branch.'
+    echo "  $CommandBase <branch>"
+    echo '    Fetches upstream of <branch>.'
+    echo "  $CommandBase"
+    echo '    Fetches HEADs upstream branch.'
+    exit 1
+fi
+
+git fetch --verbose $FetchArgs
+git lg --reverse "HEAD..$Ref"

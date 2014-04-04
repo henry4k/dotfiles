@@ -122,7 +122,9 @@ set nocompatible
     set completeopt=menu,preview,longest
     nnoremap <c-space> <c-p>
 
+    " Remove '=' and ':' and add ' ' to the path matching variable.
     set isfname-==,:
+    set isfname+=32
 
     let g:ycm_filepath_completion_use_working_dir=1
     " ^- since we sync the workdir ourselves
@@ -421,3 +423,8 @@ set nocompatible
 "
 " Ctrl-n - (n)ext completion (für Wortvervollständigung)
 " Ctrl-p - (p)revious completion
+"
+" gf => goto file z.B. #include <fo|o.h>
+" gF => goto file line z.B.  Syntax error at f|oo.h:42
+" <C-W>f goto file in new window
+" <C-W>gf goto file in new tab
