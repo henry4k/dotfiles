@@ -98,6 +98,8 @@ set nocompatible
     " a,/i,:
     "Bundle 'sgur/vim-textobj-parameter'
 
+    Bundle 'Townk/vim-autoclose'
+
     filetype plugin indent on
 
 
@@ -136,6 +138,13 @@ set nocompatible
     set mousemodel=popup_setpos
     let g:mapleader=','
     let g:maplocalleader=','
+
+    " Cause I accidently hit that all the time
+    noremap <S-up> <NOP>
+    noremap <S-down> <NOP>
+    noremap <S-left> <NOP>
+    noremap <S-right> <NOP>
+
     map <C-t><up>    :tabr<cr>
     map <C-t><down>  :tabl<cr>
     map <C-t><left>  :tabp<cr>
@@ -152,6 +161,12 @@ set nocompatible
     " Signify {{{2
         nmap <leader>gh <plug>(signify-next-hunk)
         nmap <leader>gH <plug>(signify-prev-hunk)
+
+    " Surround {{{2
+        let g:surround_indent = 1
+        " Block comments
+        let g:surround_{char2nr("*")} = "/*\r*/"
+        let g:surround_{char2nr("/")} = "/*\r*/"
 
 " Clipboard {{{1
     if has('unnamedplus')
