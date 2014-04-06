@@ -75,7 +75,6 @@ set nocompatible
     Bundle 'sjl/tslime.vim'
     " TODO: Erst aktivieren wenn man Zeit hat, sich damit zu beschäftigen :)
     Bundle 'mhinz/vim-signify'
-    "Bundle 'Townk/vim-autoclose'
     "Bundle 'YankRing'
     "Bundle 'kshenoy/vim-signature'
     Bundle 'Mark--Karkat'
@@ -98,7 +97,7 @@ set nocompatible
     " a,/i,:
     "Bundle 'sgur/vim-textobj-parameter'
 
-    Bundle 'Townk/vim-autoclose'
+    Bundle 'wikitopian/hardmode'
 
     filetype plugin indent on
 
