@@ -54,10 +54,6 @@ $GitConfig alias.ctags '!.git/hooks/ctags'
 $GitConfig alias.lg "log --color --abbrev-commit --pretty=format:'%C(bold black)%h by %C(reset)%C(blue)%an %C(bold black)%ar: %C(reset)%s'"
 $GitConfig alias.up "!$Dotfiles/git/bin/up \$@"
 
-# subtree
-$GitConfig alias.subtree "!$Dotfiles/git/bin/subtree/subtree.sh \$@"
-"$Dotfiles/git/bin/subtree/install-doc.sh" "$HOME/.local"
-
 "$Dotfiles/dircolors.sh" > "$Destination/.dircolors"
 
 PostInstallScript="$Destination/.dotfiles/post-install"

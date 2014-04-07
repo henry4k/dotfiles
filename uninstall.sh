@@ -33,6 +33,4 @@ UninstallDotfile "$HOME/.gdbinit"
 rm -f "$HOME/.gitconfig"
 rm -f "$HOME/.dircolors"
 
-"$Dotfiles/git/bin/subtree/uninstall-doc.sh" "$HOME/.local"
-
 echo 'Uninstalled dotfiles!'
