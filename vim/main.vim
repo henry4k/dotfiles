@@ -6,7 +6,7 @@ set nocompatible
     filetype off
 
     let s:vimDir=expand('<sfile>:p:h')
-    let &g:runtimepath=printf('%s,%s,%s/bundle/vundle,%s/manpageview', &g:runtimepath, s:vimDir, s:vimDir, s:vimDir)
+    let &g:runtimepath=printf('%s,%s,%s/bundle/vundle', &g:runtimepath, s:vimDir, s:vimDir)
     call vundle#rc(s:vimDir.'/bundle')
 
 
