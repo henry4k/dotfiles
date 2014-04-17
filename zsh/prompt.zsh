@@ -46,6 +46,8 @@ function prompt_custom_precmd ()
 %B%F{black}@%m $parentDir%b\
 %F{white}$topDir \
 $end %f"
+
+    RPS1=''
 }
 
 

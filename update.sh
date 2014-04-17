@@ -2,23 +2,24 @@
 set -e
 cd $(dirname $0)
 
+function GitCloneOrPull()
+{
+    local dir="$1"
+    local url="$2"
+
+    if [[ -e "$dir" ]]; then
+        pushd "$dir"
+        git pull
+        popd
+    else
+        git clone "$url" "$dir"
+    fi
+}
+
 pushd zsh
-if [ -e zsh-syntax-highlighting ]; then
-    pushd zsh-syntax-highlighting
-    git pull
-    popd
-else
-    git clone 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
-fi
+GitCloneOrPull 'antigen' 'https://github.com/zsh-users/antigen.git'
 popd
 
 pushd vim/bundle
-if [ -e vundle ]; then
-    pushd vundle
-    git pull
-    popd
-else
-    git clone 'https://github.com/gmarik/vundle.git'
-fi
-vim +BundleInstall +BundleClean! +qall
+GitCloneOrPull 'vundle' 'https://github.com/gmarik/vundle.git'
 popd
