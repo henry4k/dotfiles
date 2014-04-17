@@ -30,6 +30,7 @@ UninstallDotfile "$HOME/.vimrc"
 UninstallDotfile "$HOME/.tmux.conf"
 UninstallDotfile "$HOME/.gdbinit"
 
+rm -f "$HOME/.tupoptions"
 rm -f "$HOME/.gitconfig"
 rm -f "$HOME/.dircolors"
 

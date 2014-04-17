@@ -4,33 +4,35 @@ set -e
 cd "$(dirname $0)"
 Dotfiles="$PWD"
 
-Destination="$HOME"
+HOME="$HOME"
 
 "$Dotfiles/uninstall.sh"
 
-cat >> "$Destination/.zshrc" << EOF
+cat >> "$HOME/.zshrc" << EOF
 # DOTFILES BEGIN
 source '$Dotfiles/zsh/main.zsh'
 # DOTFILES END
 EOF
 
-cat >> "$Destination/.vimrc" << EOF
+cat >> "$HOME/.vimrc" << EOF
 " DOTFILES BEGIN
 source $Dotfiles/vim/main.vim
 " DOTFILES END
 EOF
 
-cat >> "$Destination/.tmux.conf" << EOF
+cat >> "$HOME/.tmux.conf" << EOF
 # DOTFILES BEGIN
 source-file "$Dotfiles/tmux.conf"
 # DOTFILES END
 EOF
 
-cat >> "$Destination/.gdbinit" << EOF
+cat >> "$HOME/.gdbinit" << EOF
 # DOTFILES BEGIN
 source $Dotfiles/gdbinit
 # DOTFILES END
 EOF
+
+ln -s "$Dotfiles/tupoptions" "$HOME/.tupoptions"
 
 GitConfig='git config --global'
 $GitConfig user.email 'henrykielmann@gmail.com'
@@ -54,9 +56,9 @@ $GitConfig alias.ctags '!.git/hooks/ctags'
 $GitConfig alias.lg "log --color --abbrev-commit --pretty=format:'%C(bold black)%h by %C(reset)%C(blue)%an %C(bold black)%ar: %C(reset)%s'"
 $GitConfig alias.up "!$Dotfiles/git/bin/up \$@"
 
-"$Dotfiles/dircolors.sh" > "$Destination/.dircolors"
+"$Dotfiles/dircolors.sh" > "$HOME/.dircolors"
 
-PostInstallScript="$Destination/.dotfiles/post-install"
+PostInstallScript="$HOME/.dotfiles/post-install"
 if [[ -x "$PostInstallScript" ]]; then
     echo "Executing $PostInstallScript .."
     "$PostInstallScript"
