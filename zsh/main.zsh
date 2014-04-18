@@ -2,8 +2,20 @@
 script="$_"
 zshDir=$(dirname $script)
 
-# Common {{{1
+# Bundles {{{1
+source "$zshDir/antigen/antigen.zsh"
+## run 'antigen update' to update bundles
+antigen bundle zsh-users/zsh-syntax-highlighting
+#antigen bundle zsh-users/zsh-completions src
+#antigen bundle zsh-users/zsh-history-substring-search
+#antigen bundle tarruda/zsh-autosuggestions
+antigen bundle sharat87/zsh-vim-mode
+antigen apply
 
+
+
+
+# Common {{{1
 source "$zshDir/../locale.sh"
 
 export EDITOR='vim'
@@ -13,19 +25,6 @@ export MANPAGER="$PAGER"
 export GROFF_NO_SGR=1
 
 alias tmux='tmux -2'
-
-if which 'pinfo' > /dev/null; then
-    function info()
-    {
-        local page="$1"
-        local node="$2"
-        if [[ -n "$node" ]]; then
-            pinfo "$page" "--node=$node"
-        else
-            pinfo "$page"
-        fi
-    }
-fi
 
 # Colors {{{1
 if [[ "$TERM" != 'dumb' ]]; then
@@ -54,69 +53,52 @@ if [[ "$TERM" != 'dumb' ]]; then
     export LESS_TERMCAP_so=$(printf '\e[1;44;33m')
     export LESS_TERMCAP_ue=$(printf '\e[0m')
     export LESS_TERMCAP_us=$(printf '\e[1;32m')
-
-    #export LESS_TERMCAP_mb=$(printf '\e[1;31m')
-    #export LESS_TERMCAP_md=$(printf '\e[1;38;5;74m')
-    #export LESS_TERMCAP_me=$(printf '\e[0m')
-    #export LESS_TERMCAP_se=$(printf '\e[0m')
-    #export LESS_TERMCAP_so=$(printf '\e[38;5;246m')
-    #export LESS_TERMCAP_ue=$(printf '\e[0m')
-    #export LESS_TERMCAP_us=$(printf '\e[4;38;5;146m')
 fi
 
 
 # Keymap {{{1
-bindkey -v
-export KEYTIMEOUT=1 # 0.1s delay after pressing <ESC>
-
-bindkey -M vicmd ' ' execute-named-cmd
-
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
-
-bindkey '^?' backward-delete-char
-bindkey '^H' backward-delete-char
-bindkey '^W' backward-kill-word
-bindkey '^U' backward-kill-line
-
-bindkey -M vicmd 'yy' vi-yank-whole-line
-bindkey -M vicmd 'Y' vi-yank-eol
-bindkey -M vicmd 'cc' vi-change-whole-line
-bindkey -M vicmd 'dd' kill-whole-line
-bindkey -M vicmd 'u' undo
-bindkey -M vicmd 'U' redo
-
-# ctrl-r starts searching history backward
-bindkey '^R' history-incremental-search-backward
+bindkey '^f' vi-forward-word
+#bindkey '^f' vi-forward-blank-word
 
 
 # Misc {{{1
-setopt extendedglob
 setopt extended_glob
+setopt autocd
+setopt autopushd
+setopt pushd_ignore_dups
+setopt interactive_comments
+
+autoload colors && colors
 
 
-# Prompt {{{1
-if [[ "$TERM" != 'dumb' ]]; then
-    zstyle ':completion:*' menu select=5
-    zstyle ':completion:*:manuals'    separate-sections true
-    zstyle ':completion:*:manuals.*'  insert-sections   true
-    zstyle ':completion:*:man:*'      menu yes select
-    zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-    zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-    zstyle ':completion:*:sudo:*' command-path /usr/local/sbin \
-                                               /usr/local/bin  \
-                                               /usr/sbin       \
-                                               /usr/bin        \
-                                               /sbin           \
-                                               /bin            \
-                                               /usr/X11R6/bin
-    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# Autocomplete {{{1
+autoload -U compinit && compinit
 
-    source "$zshDir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+setopt automenu
+setopt hash_list_all
+setopt correct
+setopt correct_all
+setopt complete_in_word
+setopt always_to_end
+setopt mark_dirs
 
-    if autoload promptinit && promptinit 2>/dev/null; then
-        source "$zshDir/prompt.zsh"
-    fi
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' use-cache on
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path $zshDir/cache/ # TODO
+zstyle ':completion:*' menu select
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+#function zle-line-init
+#{
+#    zle autosuggest-start
+#}
+#zle -N zle-line-init
+
+if autoload promptinit && promptinit 2>/dev/null; then
+    source "$zshDir/prompt.zsh"
 fi
