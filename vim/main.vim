@@ -98,6 +98,7 @@ set nocompatible
     "Bundle 'sgur/vim-textobj-parameter'
 
     Bundle 'wikitopian/hardmode'
+    Bundle 'editorconfig/editorconfig-vim'
 
     filetype plugin indent on
 
