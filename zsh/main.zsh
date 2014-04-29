@@ -77,7 +77,6 @@ autoload -U compinit && compinit
 setopt automenu
 setopt hash_list_all
 setopt correct
-setopt correct_all
 setopt complete_in_word
 setopt always_to_end
 setopt mark_dirs
