@@ -102,7 +102,6 @@ set nocompatible
 
     filetype plugin indent on
 
-
 " Temp Dir {{{1
     let s:tempDir=s:vimDir.'/tmp'
     if isdirectory(s:tempDir)
@@ -120,7 +119,7 @@ set nocompatible
 " Completion {{{1
     set complete-=i
     set completeopt=menu,preview,longest
-    nnoremap <c-space> <c-p>
+    nnoremap <c-space> <c-n>
 
     " Remove '=' and ':' and add ' ' to the path matching variable.
     set isfname-==,:
@@ -141,12 +140,14 @@ set nocompatible
     let g:mapleader=','
     let g:maplocalleader=','
 
-    " Cause I accidently hit that all the time
+    " Cause I accidently hit these all the time
+    noremap <f1> <NOP>
     noremap <S-up> <NOP>
     noremap <S-down> <NOP>
     noremap <S-left> <NOP>
     noremap <S-right> <NOP>
 
+    " Moving between tabs
     map <C-t><up>    :tabr<cr>
     map <C-t><down>  :tabl<cr>
     map <C-t><left>  :tabp<cr>
@@ -169,6 +170,9 @@ set nocompatible
         " Block comments
         let g:surround_{char2nr("*")} = "/*\r*/"
         let g:surround_{char2nr("/")} = "/*\r*/"
+
+     " Gundo {{{2
+        nnoremap <leader>u :GundoToggle<cr>
 
 " Clipboard {{{1
     if has('unnamedplus')
@@ -211,6 +215,10 @@ set nocompatible
     set display+=lastline
     set cursorline " See augroup CSFix
     set noerrorbells
+    set synmaxcol=500
+    set listchars=tab:▸\ ,extends:❯,precedes:❮ " ,eol:¬
+    set showbreak=↪
+    set fillchars=diff:⣿,vert:│
 
     " Show colorcolumn only in insert mode.
     autocmd InsertEnter * :set colorcolumn=78
@@ -307,6 +315,7 @@ set nocompatible
     autocmd BufEnter * silent! lcd %:p:h
     "command lcdf :lcd %:p:h<CR>
 
+    " save file as root
     cmap w!! w !sudo tee % >/dev/null
 
     set autoread
@@ -334,7 +343,7 @@ set nocompatible
     set makeprg=tup " Since I use tup way more often, than make
     set tags+=tag;/ " upward search till filesystem root for 'tags' files
     set path+=/usr/local/include,/opt/local/include
-
+    let $PAGER='' " use vim to read man pages
 
 " Tipps {{{1
 "
