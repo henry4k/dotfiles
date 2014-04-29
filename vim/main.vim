@@ -98,6 +98,8 @@ set nocompatible
     " a,/i,:
     "Bundle 'sgur/vim-textobj-parameter'
 
+    Bundle 'editorconfig/editorconfig-vim'
+
     filetype plugin indent on
 
 
