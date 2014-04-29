@@ -38,7 +38,6 @@ set nocompatible
     " Libs {{{2
     Bundle 'tlib'
     Bundle 'L9'
-    Bundle 'tpope/vim-repeat'
 
 
     " Tools {{{2
