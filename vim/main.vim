@@ -53,6 +53,7 @@ set nocompatible
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-abolish'
+    Bundle 'tpope/vim-dispatch'
     Bundle 'nelstrom/vim-markdown-folding'
     Bundle 'othree/eregex.vim'
     Bundle 'majutsushi/tagbar'
@@ -89,15 +90,13 @@ set nocompatible
     " ac/ic:
     Bundle 'glts/vim-textobj-comment'
     " av/iv:
-    Bundle 'Julian/vim-textobj-variable-segment'
+    "Bundle 'Julian/vim-textobj-variable-segment'
     " aS/iS:
     "Bundle 'saihoooooooo/vim-textobj-space'
     " ih:
     "Bundle 'killphi/vim-textobj-signify-hunk'
     " a,/i,:
     "Bundle 'sgur/vim-textobj-parameter'
-
-    Bundle 'wikitopian/hardmode'
 
     filetype plugin indent on
 
