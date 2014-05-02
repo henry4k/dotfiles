@@ -32,6 +32,7 @@ source $Dotfiles/gdbinit
 # DOTFILES END
 EOF
 
+ln -s "$Dotfiles/proverc" "$HOME/.proverc"
 ln -s "$Dotfiles/tupoptions" "$HOME/.tupoptions"
 
 GitConfig='git config --global'

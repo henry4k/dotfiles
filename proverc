@@ -1,0 +1,4 @@
+--exec ''
+--recurse
+--failures
+-W
