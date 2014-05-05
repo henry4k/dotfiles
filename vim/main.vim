@@ -173,6 +173,12 @@ set nocompatible
      " Gundo {{{2
         nnoremap <leader>u :GundoToggle<cr>
 
+     " Dispatch {{{2
+        function! RunProve( args )
+            exec "Dispatch prove ".g:proveargs. a:args
+        endfunction
+        command! -nargs=* Prove call RunProve("<args>")
+
 " Clipboard {{{1
     if has('unnamedplus')
         set clipboard=unnamedplus,autoselect
@@ -205,6 +211,12 @@ set nocompatible
     set wildignore+=*.o,*.swp,*.bak,*.pyc
     set wildmode=longest,list:full
     set winminheight=0
+     " Dispatch {{{2
+        function! RunProve( args )
+            exec "Dispatch prove ".g:proveargs." ".a:args
+        endfunction
+        command! -nargs=* Prove call RunProve("<args>")
+
     set noequalalways
     set showmatch
     set title
