@@ -121,7 +121,8 @@ set nocompatible
     nnoremap <c-space> <c-n>
 
     " Remove '=' and ':' and add ' ' to the path matching variable.
-    set isfname-==,:
+    set isfname-==
+    set isfname-=:
     set isfname+=32
 
     let g:ycm_filepath_completion_use_working_dir=1
@@ -211,25 +212,18 @@ set nocompatible
     set wildignore+=*.o,*.swp,*.bak,*.pyc
     set wildmode=longest,list:full
     set winminheight=0
-     " Dispatch {{{2
-        function! RunProve( args )
-            exec "Dispatch prove ".g:proveargs." ".a:args
-        endfunction
-        command! -nargs=* Prove call RunProve("<args>")
-
     set noequalalways
     set showmatch
     set title
     set laststatus=2
     set list
-    set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set display+=lastline
     set cursorline " See augroup CSFix
     set noerrorbells
     set synmaxcol=500
-    set listchars=tab:▸\ ,extends:❯,precedes:❮ " ,eol:¬
-    set showbreak=↪
-    set fillchars=diff:⣿,vert:│
+    set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
+    set showbreak=>\ 
+    set fillchars=vert:│
 
     " Show colorcolumn only in insert mode.
     autocmd InsertEnter * :set colorcolumn=78
