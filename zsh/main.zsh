@@ -2,6 +2,7 @@
 script="$_"
 zshDir=$(dirname $script)
 
+
 # Bundles {{{1
 source "$zshDir/antigen/antigen.zsh"
 ## run 'antigen update' to update bundles
@@ -11,8 +12,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 #antigen bundle tarruda/zsh-autosuggestions
 antigen bundle sharat87/zsh-vim-mode
 antigen apply
-
-
 
 
 # Common {{{1
@@ -60,12 +59,17 @@ fi
 bindkey '^f' vi-forward-word
 #bindkey '^f' vi-forward-blank-word
 
+bindkey "^W" backward-kill-word    # vi-backward-kill-word
+bindkey "^H" backward-delete-char  # vi-backward-delete-char
+bindkey "^U" kill-line             # vi-kill-line
+bindkey "^?" backward-delete-char  # vi-backward-delete-char
+
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
+
 
 # Misc {{{1
 setopt extended_glob
-setopt autocd
-setopt autopushd
-setopt pushd_ignore_dups
 setopt interactive_comments
 
 autoload colors && colors
@@ -91,12 +95,6 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $zshDir/cache/ # TODO
 zstyle ':completion:*' menu select
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-
-#function zle-line-init
-#{
-#    zle autosuggest-start
-#}
-#zle -N zle-line-init
 
 if autoload promptinit && promptinit 2>/dev/null; then
     source "$zshDir/prompt.zsh"
