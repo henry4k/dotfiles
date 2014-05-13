@@ -55,7 +55,7 @@ $GitConfig mergetool.fugitive.cmd "vim -f -c 'Gdiff' \$MERGED"
 $GitConfig alias.d 'difftool'
 $GitConfig alias.ctags '!.git/hooks/ctags'
 $GitConfig alias.lg "log --color --abbrev-commit --pretty=format:'%C(bold black)%h by %C(reset)%C(blue)%an %C(bold black)%ar: %C(reset)%s'"
-$GitConfig alias.up "!$Dotfiles/git/bin/up \$@"
+$GitConfig alias.up "!$Dotfiles/git/bin/up"
 
 "$Dotfiles/dircolors.sh" > "$HOME/.dircolors"
 

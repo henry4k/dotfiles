@@ -13,26 +13,9 @@ set nocompatible
     Bundle 'gmarik/vundle'
 
     " Color schemes {{{2
-    "Bundle 'Zenburn'
     Bundle 'molokai'
-    "Bundle 'moria'
-    "Bundle 'tesla'
-    "Bundle 'Wombat'
-    "Bundle 'rdark'
-    "Bundle 'peaksea'
-    "Bundle 'wgibbs/vim-irblack'
-    "Bundle 'shinzui/vim-idleFingers'
-    "Bundle 'rainux/vim-desert-warm-256'
-    "Bundle 'Lokaltog/vim-distinguished'
-    "Bundle 'nanotech/jellybeans.vim'
-    "Bundle 'tetragrammaton'
-    "Bundle 'Guardian'
-    "Bundle 'Distinguished'
     Bundle 'github-theme'
-    "Bundle 'zeis/vim-kolor'
-    "Bundle 'morhetz/gruvbox'
     Bundle 'sjl/badwolf'
-    "Bundle 'halbtuerke/madeofcode.vim'
 
 
     " Libs {{{2
@@ -41,11 +24,6 @@ set nocompatible
 
 
     " Tools {{{2
-    Bundle 'The-NERD-tree'
-    "Bundle 'Lokaltog/vim-powerline'
-    "Bundle 'Lokaltog/powerline'
-    "Bundle 'Lokaltog/vim-easymotion'
-    "Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-git'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-markdown'
@@ -55,28 +33,17 @@ set nocompatible
     Bundle 'tpope/vim-dispatch'
     Bundle 'nelstrom/vim-markdown-folding'
     Bundle 'othree/eregex.vim'
-    Bundle 'majutsushi/tagbar'
     "Bundle 'mivok/vimtodo'
     "Bundle 'vhdirk/vim-cmake'
     "Bundle 'scrooloose/syntastic'
-    "Bundle 'chrisbra/csv.vim'
-    "Bundle 'Ack'
-    "Bundle 'hlissner/vim-multiedit'
-    "Bundle 'terryma/vim-multiple-cursors'
-    "Bundle 'hexman.vim'
     Bundle 'valgrind.vim'
     Bundle 'cmdline-completion'
     Bundle 'thinca/vim-localrc'
-    "Bundle 'scrooloose/syntastic'
     "Bundle 'Valloric/YouCompleteMe'
-    "Bundle 'Tabular'
     Bundle 'sjl/gundo.vim'
     Bundle 'sjl/splice.vim'
     Bundle 'sjl/tslime.vim'
-    " TODO: Erst aktivieren wenn man Zeit hat, sich damit zu beschäftigen :)
     Bundle 'mhinz/vim-signify'
-    "Bundle 'YankRing'
-    "Bundle 'kshenoy/vim-signature'
     Bundle 'Mark--Karkat'
     Bundle 'kana/vim-textobj-user'
 
@@ -90,14 +57,6 @@ set nocompatible
     Bundle 'glts/vim-textobj-comment'
     " av/iv:
     "Bundle 'Julian/vim-textobj-variable-segment'
-    " aS/iS:
-    "Bundle 'saihoooooooo/vim-textobj-space'
-    " ih:
-    "Bundle 'killphi/vim-textobj-signify-hunk'
-    " a,/i,:
-    "Bundle 'sgur/vim-textobj-parameter'
-
-    Bundle 'editorconfig/editorconfig-vim'
 
     filetype plugin indent on
 
@@ -153,13 +112,6 @@ set nocompatible
     map <C-t><left>  :tabp<cr>
     map <C-t><right> :tabn<cr>
     map <C-t><t>     :tabn<cr>
-
-    " Tagbar {{{2
-        nnoremap <silent> <C-I> :TagbarToggle<CR>
-        nnoremap <C-U> :TagbarTogglePause<CR>
-
-    " Nerd Tree {{{2
-        nnoremap <silent> <C-O> :NERDTreeToggle<CR>
 
     " Signify {{{2
         nmap <leader>gh <plug>(signify-next-hunk)
@@ -257,7 +209,6 @@ set nocompatible
         colorscheme badwolf4k
     endif
 
-
     " C syntax {{{2
         let g:c_space_errors=1
         let g:c_curly_error=1
@@ -271,17 +222,6 @@ set nocompatible
         let g:kolor_alternative_matchparen=1
         let g:badwolf_darkgutter=1
         let g:badwolf_tabline=0 " darker background
-
-    " Tagbar {{{2
-        let g:tagbar_width=30
-        let g:tagbar_left=1
-        let g:tagbar_sort=0
-        let g:tagbar_autoshowtag=1
-
-    " Nerd Tree {{{2
-        " Set working directory to file tree root
-        let g:NERDTreeChDirMode=2
-        let g:NERDTreeWinPos='right'
 
     " Signify {{{2
         let g:signify_vcs_list = ['git']
