@@ -382,3 +382,10 @@ set nocompatible
 " gF => goto file line z.B.  Syntax error at f|oo.h:42
 " <C-W>f goto file in new window
 " <C-W>gf goto file in new tab
+"
+" cr[cm_uU] <- Schreibweise eines Wortes ändern.
+" c = camelCase
+" m = MixedCase
+" _ = snake_case
+" usw.
+" Benötigt abolish.vim
