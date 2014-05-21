@@ -17,6 +17,8 @@ antigen apply
 # Common {{{1
 source "$zshDir/../locale.sh"
 
+fpath=("$zshDir/functions" $fpath)
+
 export EDITOR='vim'
 export VISUAL="$EDITOR"
 export PAGER='less -isR'
