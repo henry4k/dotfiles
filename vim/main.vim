@@ -31,6 +31,7 @@ set nocompatible
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-abolish'
     Bundle 'tpope/vim-dispatch'
+    Bundle 'tpope/vim-eunuch'
     Bundle 'nelstrom/vim-markdown-folding'
     Bundle 'othree/eregex.vim'
     "Bundle 'mivok/vimtodo'
@@ -259,9 +260,6 @@ set nocompatible
     " set autochdir
     autocmd BufEnter * silent! lcd %:p:h
     "command lcdf :lcd %:p:h<CR>
-
-    " save file as root
-    cmap w!! w !sudo tee % >/dev/null
 
     set autoread
     autocmd CursorHold * checktime
