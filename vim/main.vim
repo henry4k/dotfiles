@@ -46,6 +46,8 @@ set nocompatible
     Bundle 'sjl/tslime.vim'
     Bundle 'mhinz/vim-signify'
     Bundle 'Mark--Karkat'
+    Bundle 'kana/vim-operator-user'
+    Bundle 'kana/vim-operator-replace'
     Bundle 'kana/vim-textobj-user'
 
     " az/iz:
@@ -132,6 +134,11 @@ set nocompatible
             exec "Dispatch prove ".g:proveargs. a:args
         endfunction
         command! -nargs=* Prove call RunProve("<args>")
+
+     " operator-replace {{{2
+        map x <Plug>(operator-replace)
+        " Because x makes a great mnemonic for eXchange.
+        " And deleting single letters can also accomplished by typing dl.
 
 " Clipboard {{{1
     if has('unnamedplus')
