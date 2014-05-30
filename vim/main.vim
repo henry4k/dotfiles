@@ -123,7 +123,6 @@ set nocompatible
     " Surround {{{2
         let g:surround_indent = 1
         " Block comments
-        let g:surround_{char2nr("*")} = "/*\r*/"
         let g:surround_{char2nr("/")} = "/*\r*/"
 
      " Gundo {{{2
@@ -294,6 +293,38 @@ set nocompatible
     set tags+=tag;/ " upward search till filesystem root for 'tags' files
     set path+=/usr/local/include,/opt/local/include
     let $PAGER='' " use vim to read man pages
+
+" Filetypes {{{1
+augroup filetype_settings
+    autocmd!
+
+    autocmd BufNewFile,BufRead *.fs,*.vs,*.glsl,*frag,*.vert
+        \   setfiletype glsl
+
+    autocmd BufNewFile,BufRead *.less
+        \   setfiletype css
+
+    autocmd BufNewFile,BufRead *.nut
+        \   setfiletype squirrel
+
+    autocmd BufNewFile,BufRead Tupfile,*.tup
+        \   setfiletype tup
+
+    autocmd FileType vim
+        \   setlocal foldmethod=marker
+
+    autocmd FileType sh,bash,zsh
+        \   setlocal foldmethod=marker
+        \ | setlocal noexpandtab
+
+    autocmd FileType man
+        \   setlocal foldmethod=indent
+
+    autocmd FileType markdown
+        \   let g:surround_{char2nr("*")} = "*\r*"
+        \ | let g:surround_{char2nr("_")} = "_\r_"
+
+augroup END
 
 " Tipps {{{1
 "
