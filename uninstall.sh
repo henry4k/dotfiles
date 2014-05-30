@@ -25,6 +25,7 @@ EOF
     echo "Uninstalled dotfiles from $file"
 }
 
+UninstallDotfile "$HOME/.profile"
 UninstallDotfile "$HOME/.zshrc"
 UninstallDotfile "$HOME/.vimrc"
 UninstallDotfile "$HOME/.tmux.conf"

@@ -8,6 +8,12 @@ HOME="$HOME"
 
 "$Dotfiles/uninstall.sh"
 
+cat >> "$HOME/.profile" << EOF
+# DOTFILES BEGIN
+source '$Dotfiles/profile.sh'
+# DOTFILES END
+EOF
+
 cat >> "$HOME/.zshrc" << EOF
 # DOTFILES BEGIN
 source '$Dotfiles/zsh/main.zsh'
@@ -38,6 +44,8 @@ ln -s "$Dotfiles/tupoptions" "$HOME/.tupoptions"
 GitConfig='git config --global'
 $GitConfig user.email 'henrykielmann@gmail.com'
 $GitConfig user.name 'Henry Kielmann'
+$GitConfig credential.username 'henry4k'
+$GitConfig credential.helper 'cache --timeout=3600'
 #$GitConfig init.templatedir "$Dotfiles/git/template"
 $GitConfig push.default 'current'
 $GitConfig color.ui true
