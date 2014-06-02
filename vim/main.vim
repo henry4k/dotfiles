@@ -225,6 +225,7 @@ set nocompatible
 
     " Colorscheme {{{2
         let g:molokai_original=1
+        let g:rehash256=1 " better molokai terminal colors
         let g:kolor_underlined=1
         let g:kolor_alternative_matchparen=1
         let g:badwolf_darkgutter=1
