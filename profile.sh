@@ -1,2 +1,3 @@
-#ssh-agent -k
-eval `ssh-agent`
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval `ssh-agent`
+fi
