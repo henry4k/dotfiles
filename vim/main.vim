@@ -169,7 +169,7 @@ set nocompatible
     set scrolloff=3
     set wildmenu
     set wildignore+=*.o,*.swp,*.bak,*.pyc
-    set wildmode=longest:full,list:full
+    set wildmode=longest,list,full
     set winminheight=0
     set noequalalways
     set showmatch
