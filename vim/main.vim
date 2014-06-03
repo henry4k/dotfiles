@@ -13,7 +13,7 @@ set nocompatible
     Bundle 'gmarik/vundle'
 
     " Color schemes {{{2
-    Bundle 'molokai'
+    Bundle 'tomasr/molokai'
     Bundle 'github-theme'
     Bundle 'sjl/badwolf'
 
@@ -169,7 +169,7 @@ set nocompatible
     set scrolloff=3
     set wildmenu
     set wildignore+=*.o,*.swp,*.bak,*.pyc
-    set wildmode=longest,list:full
+    set wildmode=longest:full,list:full
     set winminheight=0
     set noequalalways
     set showmatch
@@ -316,7 +316,6 @@ augroup filetype_settings
 
     autocmd FileType sh,bash,zsh
         \   setlocal foldmethod=marker
-        \ | setlocal noexpandtab
 
     autocmd FileType man
         \   setlocal foldmethod=indent
