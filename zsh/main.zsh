@@ -11,7 +11,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 #antigen bundle zsh-users/zsh-history-substring-search
 #antigen bundle tarruda/zsh-autosuggestions
 antigen bundle sharat87/zsh-vim-mode
-antigen apply
 
 
 # Common {{{1
@@ -101,3 +100,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 if autoload promptinit && promptinit 2>/dev/null; then
     source "$zshDir/prompt.zsh"
 fi
+
+
+# Finalization {{{1
+antigen apply
