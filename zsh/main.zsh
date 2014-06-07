@@ -8,7 +8,7 @@ source "$zshDir/antigen/antigen.zsh"
 ## run 'antigen update' to update bundles
 antigen bundle zsh-users/zsh-syntax-highlighting
 #antigen bundle zsh-users/zsh-completions src
-#antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-history-substring-search
 #antigen bundle tarruda/zsh-autosuggestions
 antigen bundle sharat87/zsh-vim-mode
 
@@ -70,18 +70,30 @@ bindkey '\e[B' history-beginning-search-forward
 
 
 # Misc {{{1
+setopt nobeep
 setopt extended_glob
 setopt interactive_comments
 
 autoload colors && colors
 
 
+# History {{{1
+export HISTSIZE=1000
+export SAVEHIST=700
+export HISTFILE="$HOME/.zsh_history"
+
+setopt share_history
+setopt hist_fcntl_lock
+setopt hist_expire_dups_first
+setopt hist_reduce_blanks
+
+
 # Autocomplete {{{1
 autoload -U compinit && compinit
 
 setopt automenu
+setopt list_ambiguous
 setopt hash_list_all
-setopt correct
 setopt complete_in_word
 setopt always_to_end
 setopt mark_dirs
