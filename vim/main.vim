@@ -33,6 +33,8 @@ set nocompatible
     Bundle 'tpope/vim-dispatch'
     Bundle 'tpope/vim-eunuch'
     Bundle 'nelstrom/vim-markdown-folding'
+    Bundle 'elzr/vim-json'
+    Bundle 'hirochachacha/AnsiEsc.vim'
     Bundle 'othree/eregex.vim'
     "Bundle 'mivok/vimtodo'
     "Bundle 'vhdirk/vim-cmake'
@@ -273,6 +275,7 @@ set nocompatible
     " ^- autoread files every time the CursorHold event is fired.
     " This should happen every 4 seconds.
 
+    set formatoptions=tcroqwanj
     set cpo+=J " A sentence has to end with two spaces after punctuation.
     set nrformats-=octal
     set modeline
