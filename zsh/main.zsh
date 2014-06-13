@@ -40,9 +40,11 @@ if [[ "$TERM" != 'dumb' ]]; then
     else
         lsColor='-G'
     fi
-    alias ls="ls -bF $lsColor"
-    alias  l="ls -bF1 $lsColor"
-    alias ll="ls -blFh $lsColor"
+    lsFlags="--group-directories-first --escape --classify"
+    #lsFlags="-bF"
+    alias ls="ls $lsFlags $lsColor"
+    alias  l="ls $lsFlags -1 $lsColor"
+    alias ll="ls $lsFlags -lh $lsColor"
 
     alias grep='grep --color=auto'
 
@@ -108,6 +110,7 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $zshDir/cache/ # TODO
 zstyle ':completion:*' menu select
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-dirs-first true
 
 if autoload promptinit && promptinit 2>/dev/null; then
     source "$zshDir/prompt.zsh"
