@@ -87,7 +87,7 @@ set nocompatible
     " Remove '=' and ':' and add ' ' to the path matching variable.
     set isfname-==
     set isfname-=:
-    set isfname+=32
+    set isfname-=32
 
     let g:ycm_filepath_completion_use_working_dir=1
     " ^- since we sync the workdir ourselves
