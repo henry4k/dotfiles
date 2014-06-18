@@ -16,3 +16,6 @@ curl 'xgit/' 2>/dev/null | perl -ne '/href="\/\?p=(.+?)\.git/g; print $1,"\n"' |
 # Praktisch für download scripte:
 xargs -n 1 -E x youtube-dl
 # ^- Einfach URLs pasten und 'x' schreiben um einen Batch abzuarbeiten.
+
+# Dateien eines Baums der größe nach sortiert anzeigen
+find . -printf '%s %p\n' | sort -n | less
