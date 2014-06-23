@@ -26,36 +26,35 @@ export GROFF_NO_SGR=1
 
 alias tmux='tmux -2'
 
+
 # Colors {{{1
-if [[ "$TERM" != 'dumb' ]]; then
-    export TERM='xterm-256color'
-    export COLORTERM='yes'
-    export CLICOLOR=1
+export TERM='xterm-256color'
+export COLORTERM='yes'
+export CLICOLOR=1
 
-    if which 'dircolors' > /dev/null; then
-        lsColor='--color=auto'
-        if [[ -e "$HOME/.dircolors" ]]; then
-            eval "$(dircolors "$HOME/.dircolors")"
-        fi
-    else
-        lsColor='-G'
+if which 'dircolors' > /dev/null; then
+    lsColor='--color=auto'
+    if [[ -e "$HOME/.dircolors" ]]; then
+        eval "$(dircolors "$HOME/.dircolors")"
     fi
-    lsFlags="--group-directories-first --escape --classify"
-    #lsFlags="-bF"
-    alias ls="ls $lsFlags $lsColor"
-    alias  l="ls $lsFlags -1 $lsColor"
-    alias ll="ls $lsFlags -lh $lsColor"
-
-    alias grep='grep --color=auto'
-
-    export LESS_TERMCAP_mb=$(printf '\e[1;31m')
-    export LESS_TERMCAP_md=$(printf '\e[1;31m')
-    export LESS_TERMCAP_me=$(printf '\e[0m')
-    export LESS_TERMCAP_se=$(printf '\e[0m')
-    export LESS_TERMCAP_so=$(printf '\e[1;44;33m')
-    export LESS_TERMCAP_ue=$(printf '\e[0m')
-    export LESS_TERMCAP_us=$(printf '\e[1;32m')
+else
+    lsColor='-G'
 fi
+lsFlags="--group-directories-first --escape --classify"
+#lsFlags="-bF"
+alias ls="ls $lsFlags $lsColor"
+alias  l="ls $lsFlags -1 $lsColor"
+alias ll="ls $lsFlags -lh $lsColor"
+
+alias grep='grep --color=auto'
+
+export LESS_TERMCAP_mb=$(printf '\e[1;31m')
+export LESS_TERMCAP_md=$(printf '\e[1;31m')
+export LESS_TERMCAP_me=$(printf '\e[0m')
+export LESS_TERMCAP_se=$(printf '\e[0m')
+export LESS_TERMCAP_so=$(printf '\e[1;44;33m')
+export LESS_TERMCAP_ue=$(printf '\e[0m')
+export LESS_TERMCAP_us=$(printf '\e[1;32m')
 
 
 # Keymap {{{1
