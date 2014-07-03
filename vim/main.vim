@@ -51,6 +51,7 @@ set nocompatible
     Bundle 'kana/vim-operator-user'
     Bundle 'kana/vim-operator-replace'
     Bundle 'kana/vim-textobj-user'
+    Bundle 'SyntaxRange'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
