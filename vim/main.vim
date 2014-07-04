@@ -283,7 +283,7 @@ set nocompatible
     " ^- autoread files every time the CursorHold event is fired.
     " This should happen every 4 seconds.
 
-    set formatoptions=tcroqwanj
+    set formatoptions=tcroqnj
     set cpo+=J " A sentence has to end with two spaces after punctuation.
     set nrformats-=octal
     set modeline
@@ -335,6 +335,14 @@ augroup filetype_settings
     autocmd FileType markdown
         \   let g:surround_{char2nr("*")} = "*\r*"
         \ | let g:surround_{char2nr("_")} = "_\r_"
+        \ | setlocal formatoptions+=w
+
+    autocmd FileType xml
+        \   setlocal equalprg=xmllint\ --format\ - " <- libxml2-utils
+      " \   setlocal equalprg=xml_pp " <- XML::Twig (Perl)
+
+    autocmd FileType json
+        \   setlocal equalprg=json_pp
 
 augroup END
 
