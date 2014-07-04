@@ -16,6 +16,7 @@ set nocompatible
     Bundle 'tomasr/molokai'
     Bundle 'github-theme'
     Bundle 'sjl/badwolf'
+    Bundle 'reedes/vim-colors-pencil'
 
 
     " Libs {{{2
@@ -38,7 +39,7 @@ set nocompatible
     Bundle 'othree/eregex.vim'
     "Bundle 'mivok/vimtodo'
     "Bundle 'vhdirk/vim-cmake'
-    "Bundle 'scrooloose/syntastic'
+    Bundle 'scrooloose/syntastic'
     Bundle 'valgrind.vim'
     Bundle 'cmdline-completion'
     Bundle 'thinca/vim-localrc'
@@ -54,6 +55,8 @@ set nocompatible
     Bundle 'SyntaxRange'
     Bundle 'matchit.zip'
     Bundle 'maxbrunsfeld/vim-yankstack'
+    Bundle 'reedes/vim-wordy'
+    Bundle 'Align'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
