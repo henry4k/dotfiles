@@ -52,6 +52,8 @@ set nocompatible
     Bundle 'kana/vim-operator-replace'
     Bundle 'kana/vim-textobj-user'
     Bundle 'SyntaxRange'
+    Bundle 'matchit.zip'
+    Bundle 'maxbrunsfeld/vim-yankstack'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -141,6 +143,11 @@ set nocompatible
         map x <Plug>(operator-replace)
         " Because x makes a great mnemonic for eXchange.
         " And deleting single letters can also accomplished by typing dl.
+
+     " yankstack {{{2
+        let g:yankstack_map_keys = 0
+        nmap <C-n> <Plug>yankstack_substitute_newer_paste
+        nmap <C-p> <Plug>yankstack_substitute_older_paste
 
 " Clipboard {{{1
     if has('unnamedplus')
