@@ -87,6 +87,8 @@ set nocompatible
     set completeopt=menu,preview,longest
     nnoremap <c-space> <c-n>
 
+    set infercase
+
     " Remove '=' and ':' and add ' ' to the path matching variable.
     set isfname-==
     set isfname-=:
@@ -254,11 +256,26 @@ set nocompatible
         "endif
 
 " Spell Check {{{1
-    let &spellfile=printf('%s/spell.en.utf-8.add', s:vimDir)
+    set dictionary+=/usr/share/dict/words
+    let &thesaurus=printf('%s/dictionaries/mthesaur.txt', s:vimDir)
+    let &spellfile=printf('%s/tmp/spell.en.utf-8.add', s:vimDir)
+
     hi clear SpellBad
     hi SpellBad cterm=underline gui=undercurl
     map <F7> :setlocal spelllang=en,de spell! spell?<CR>
     inoremap <F7> <C-\><C-O>:setlocal spelllang=en,de spell! spell?<CR>
+
+    " Enable infercase/ignorecase for dictionary lookups only:
+    " from: http://jeetworks.org/smart-dictionary-completions-in-vim/
+    let g:_old_ignorecase_state=&ignorecase
+    inoremap <C-X><C-K> <ESC>:let g:_old_ignorecase_state=&ignorecase<CR>:set ignorecase<CR>:set infercase<CR>a<C-X><C-K>
+    let restore=' pumvisible() ? "\<C-y><ESC>:let &ignorecase=g:_old_ignorecase_state<CR>'
+    for key in ["<CR>", "<C-J>", "<C-Y>"]
+        execute "inoremap <expr> " . key . restore . 'a" : "\<C-g>u\<CR>"'
+    endfor
+    for key in ["<ESC>", "<C-C>"]
+        execute "inoremap <expr> " . key . restore . '" : "\' . key . '"'
+    endfor
 
 " Folding {{{1
     let g:xml_syntax_folding = 1
