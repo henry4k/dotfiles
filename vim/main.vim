@@ -346,22 +346,32 @@ augroup filetype_settings
         \   setlocal foldmethod=marker
 
     autocmd FileType sh,bash,zsh
-        \   setlocal foldmethod=marker
+        \   setlocal iskeyword+=-
+        \ | setlocal foldmethod=marker
 
     autocmd FileType man
         \   setlocal foldmethod=indent
 
+    autocmd FileType config,dosini
+        \   setlocal iskeyword+=-
+
+    autocmd FileType css,scss
+        \   setlocal iskeyword+=-
+
     autocmd FileType markdown
-        \   let g:surround_{char2nr("*")} = "*\r*"
+        \   setlocal iskeyword+=-
+        \ | let g:surround_{char2nr("*")} = "*\r*"
         \ | let g:surround_{char2nr("_")} = "_\r_"
         \ | setlocal formatoptions+=w
 
     autocmd FileType xml
-        \   setlocal equalprg=xmllint\ --format\ - " <- libxml2-utils
-      " \   setlocal equalprg=xml_pp " <- XML::Twig (Perl)
+        \   setlocal iskeyword+=-
+        \ | setlocal equalprg=xmllint\ --format\ - " <- libxml2-utils
+      " \ | setlocal equalprg=xml_pp " <- XML::Twig (Perl)
 
     autocmd FileType json
-        \   setlocal equalprg=json_pp
+        \   setlocal iskeyword+=-
+        \ | setlocal equalprg=json_pp
 
 augroup END
 
