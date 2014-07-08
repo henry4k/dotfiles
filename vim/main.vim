@@ -68,20 +68,6 @@ set nocompatible
 
     filetype plugin indent on
 
-" Temp Dir {{{1
-    let s:tempDir=s:vimDir.'/tmp'
-    if isdirectory(s:tempDir)
-        if &backupdir =~# '^\.,'
-            let &backupdir=s:tempDir.'/backup//,'.&backupdir
-        endif
-        if exists('+undodir') && &undodir =~# '^\.\%(,\|$\)'
-            let &undodir=s:tempDir.'/undo//,'.&undodir
-        endif
-    endif
-    if exists('+undofile')
-        set undofile
-    endif
-
 " Completion {{{1
     set complete-=i
     set completeopt=menu,preview,longest
@@ -317,6 +303,10 @@ set nocompatible
     set tags+=tag;/ " upward search till filesystem root for 'tags' files
     set path+=/usr/local/include,/opt/local/include
     let $PAGER='' " use vim to read man pages
+
+    let &backupdir=s:vimDir.'/tmp/backup'
+    let &undodir=s:vimDir.'/tmp/undo'
+    set undofile
 
 " Filetypes {{{1
 augroup filetype_settings
