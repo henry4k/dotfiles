@@ -54,6 +54,8 @@ set nocompatible
     Bundle 'maxbrunsfeld/vim-yankstack'
     Bundle 'reedes/vim-wordy'
     Bundle 'Align'
+    Bundle 'junegunn/limelight.vim'
+    Bundle 'junegunn/goyo.vim'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -138,6 +140,9 @@ set nocompatible
         let g:yankstack_map_keys = 0
         nmap <C-n> <Plug>yankstack_substitute_newer_paste
         nmap <C-p> <Plug>yankstack_substitute_older_paste
+
+    " Goyo {{{2
+        nmap <Leader><Space> :Goyo<CR>
 
 " Clipboard {{{1
     if has('unnamedplus')
@@ -247,6 +252,19 @@ set nocompatible
         let g:undotree_TreeNodeShape = 'o'
         let g:undotree_WindowLayout = 2
 
+    " Goyo {{{2
+        function! GoyoBefore()
+            SignifyToggle
+            Limelight
+        endfunction
+
+        function! GoyoAfter()
+            SignifyToggle
+            Limelight!
+        endfunction
+
+        let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
+
 " Spell Check {{{1
     set dictionary+=/usr/share/dict/words
     let &thesaurus=printf('%s/dictionaries/mthesaur.txt', s:vimDir)
@@ -268,7 +286,7 @@ set nocompatible
 " Search and replace {{{1
     set incsearch
     noremap <silent> <nowait> <C-H> :set hlsearch!<CR>:Mark<CR>
-    noremap <silent> <leader><space> :nohlsearch<cr>:MarkClear<cr>
+    " noremap <silent> <leader><space> :nohlsearch<cr>:MarkClear<cr>
 
 " System {{{1
     " set autochdir
