@@ -9,7 +9,6 @@ set nocompatible
     let &g:runtimepath=printf('%s,%s,%s/bundle/vundle', &g:runtimepath, s:vimDir, s:vimDir)
     call vundle#rc(s:vimDir.'/bundle')
 
-
     Bundle 'gmarik/vundle'
 
     " Color schemes {{{2
@@ -18,11 +17,9 @@ set nocompatible
     Bundle 'sjl/badwolf'
     Bundle 'reedes/vim-colors-pencil'
 
-
     " Libs {{{2
     Bundle 'tlib'
     Bundle 'L9'
-
 
     " Tools {{{2
     Bundle 'tpope/vim-git'
@@ -44,7 +41,7 @@ set nocompatible
     Bundle 'cmdline-completion'
     Bundle 'thinca/vim-localrc'
     "Bundle 'Valloric/YouCompleteMe'
-    Bundle 'sjl/gundo.vim'
+    Bundle 'mbbill/undotree'
     Bundle 'sjl/splice.vim'
     Bundle 'sjl/tslime.vim'
     Bundle 'mhinz/vim-signify'
@@ -136,8 +133,9 @@ set nocompatible
         " Block comments
         let g:surround_{char2nr("/")} = "/*\r*/"
 
-     " Gundo {{{2
-        nnoremap <leader>u :GundoToggle<cr>
+     " Undotree {{{2
+        let g:undotree_SetFocusWhenToggle = 1
+        nnoremap <leader>u :UndotreeToggle<CR>
 
      " Dispatch {{{2
         function! RunProve( args )
@@ -258,6 +256,10 @@ set nocompatible
         "if has('gui_running')
             "let g:signify_line_highlight = 1
         "endif
+
+     " Undotree {{{2
+        let g:undotree_TreeNodeShape = 'o'
+        let g:undotree_WindowLayout = 2
 
 " Spell Check {{{1
     set dictionary+=/usr/share/dict/words
