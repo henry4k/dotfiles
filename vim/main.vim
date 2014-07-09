@@ -362,6 +362,10 @@ augroup filetype_settings
         \   setlocal iskeyword+=-
         \ | let g:surround_{char2nr("*")} = "*\r*"
         \ | let g:surround_{char2nr("_")} = "_\r_"
+        \ | call SyntaxRange#Include('```c', '```', 'c', 'markdownCodeBlock')
+        \ | call SyntaxRange#Include('```cpp', '```', 'cpp', 'markdownCodeBlock')
+        \ | call SyntaxRange#Include('```lua', '```', 'lua', 'markdownCodeBlock')
+        \ | call SyntaxRange#Include('```python', '```', 'python', 'markdownCodeBlock')
         \ | setlocal formatoptions+=w
 
     autocmd FileType xml
