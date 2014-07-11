@@ -56,6 +56,7 @@ set nocompatible
     Bundle 'Align'
     Bundle 'junegunn/limelight.vim'
     Bundle 'junegunn/goyo.vim'
+    Bundle 'ConradIrwin/vim-bracketed-paste'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -478,3 +479,6 @@ augroup END
 " _ = snake_case
 " usw.
 " Benötigt abolish.vim
+"
+" Mit ** kann bei Pfadnamen rekursiv geglobbt werden.
+" Z.B. :e **/mai<Tab> => foo/bar/main.cpp
