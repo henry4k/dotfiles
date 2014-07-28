@@ -57,6 +57,8 @@ set nocompatible
     Bundle 'junegunn/limelight.vim'
     Bundle 'junegunn/goyo.vim'
     Bundle 'ConradIrwin/vim-bracketed-paste'
+    Bundle 'thinca/vim-ref'
+    Bundle 'vim-ref-dictcc', {'pinned': 1}
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -144,6 +146,9 @@ set nocompatible
 
     " Goyo {{{2
         nmap <Leader><Space> :Goyo<CR>
+
+    " vim-ref {{{2
+        let g:ref_cache_dir = printf('%s/tmp/ref_cache', s:vimDir)
 
 " Clipboard {{{1
     if has('unnamedplus')
