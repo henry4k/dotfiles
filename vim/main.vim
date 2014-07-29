@@ -59,6 +59,7 @@ set nocompatible
     Bundle 'ConradIrwin/vim-bracketed-paste'
     Bundle 'thinca/vim-ref'
     Bundle 'vim-ref-dictcc', {'pinned': 1}
+    Bundle 'rking/ag.vim'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -293,6 +294,10 @@ set nocompatible
     set incsearch
     noremap <silent> <nowait> <C-H> :set hlsearch!<CR>:Mark<CR>
     " noremap <silent> <leader><space> :nohlsearch<cr>:MarkClear<cr>
+
+    " Ag {{{2
+        let g:aghighlight = 1
+        let g:ag_mapping_message = 0
 
 " System {{{1
     " set autochdir
