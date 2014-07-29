@@ -16,6 +16,8 @@ set nocompatible
     Bundle 'github-theme'
     Bundle 'sjl/badwolf'
     Bundle 'reedes/vim-colors-pencil'
+    Bundle 'freeo/vim-kalisi'
+    Bundle 'w0ng/vim-hybrid'
 
     " Libs {{{2
     Bundle 'tlib'
@@ -32,7 +34,7 @@ set nocompatible
     Bundle 'tpope/vim-eunuch'
     Bundle 'nelstrom/vim-markdown-folding'
     Bundle 'elzr/vim-json'
-    Bundle 'hirochachacha/AnsiEsc.vim'
+    "Bundle 'hirochachacha/AnsiEsc.vim'
     Bundle 'othree/eregex.vim'
     "Bundle 'mivok/vimtodo'
     "Bundle 'vhdirk/vim-cmake'
@@ -40,6 +42,7 @@ set nocompatible
     Bundle 'valgrind.vim'
     Bundle 'cmdline-completion'
     Bundle 'thinca/vim-localrc'
+    Bundle 'thinca/vim-fontzoom'
     "Bundle 'Valloric/YouCompleteMe'
     Bundle 'mbbill/undotree'
     Bundle 'sjl/splice.vim'
@@ -51,15 +54,17 @@ set nocompatible
     Bundle 'kana/vim-textobj-user'
     Bundle 'SyntaxRange'
     Bundle 'matchit.zip'
-    Bundle 'maxbrunsfeld/vim-yankstack'
+    "Bundle 'maxbrunsfeld/vim-yankstack'
     Bundle 'reedes/vim-wordy'
-    Bundle 'Align'
+    "Bundle 'Align'
     Bundle 'junegunn/limelight.vim'
     Bundle 'junegunn/goyo.vim'
     Bundle 'ConradIrwin/vim-bracketed-paste'
     Bundle 'thinca/vim-ref'
     Bundle 'vim-ref-dictcc', {'pinned': 1}
-    Bundle 'rking/ag.vim'
+    Bundle 'nddrylliog/ooc.vim'
+    Bundle 'terryma/vim-multiple-cursors'
+    Bundle 'mileszs/ack.vim'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -85,6 +90,7 @@ set nocompatible
     " Remove '=' and ':' and add ' ' to the path matching variable.
     set isfname-==
     set isfname-=:
+    set isfname-='
     set isfname-=32
 
     let g:ycm_filepath_completion_use_working_dir=1
@@ -101,6 +107,7 @@ set nocompatible
     set mousemodel=popup_setpos
     let g:mapleader=','
     let g:maplocalleader=','
+    nnoremap <Space> :
 
     " Cause I accidently hit these all the time
     noremap <f1> <NOP>
@@ -150,6 +157,14 @@ set nocompatible
 
     " vim-ref {{{2
         let g:ref_cache_dir = printf('%s/tmp/ref_cache', s:vimDir)
+        autocmd FileType ref call s:initialize_ref_viewer()
+        function! s:initialize_ref_viewer()
+            nmap <buffer> b <Plug>(ref-back)
+            nmap <buffer> f <Plug>(ref-forward)
+            nnoremap <buffer> q <C-w>c
+            setlocal nonumber
+            setlocal nolist
+        endfunction
 
 " Clipboard {{{1
     if has('unnamedplus')
@@ -223,6 +238,9 @@ set nocompatible
         "highlight DiffCahnge guibg=#2b241b ctermbg=94
         if has('gui_macvim')
             set fuoptions=maxvert,maxhorz,background:Normal
+            set guifont=Menlo\ 10
+        else
+            set guifont=Monospace\ 10
         endif
     else
         colorscheme badwolf4k
@@ -285,6 +303,7 @@ set nocompatible
 " Folding {{{1
     let g:xml_syntax_folding = 1
     set foldmethod=syntax
+    set foldlevelstart=99
     set foldenable
 
     " markdown-folding:
@@ -294,12 +313,17 @@ set nocompatible
     set incsearch
     noremap <silent> <nowait> <C-H> :set hlsearch!<CR>:Mark<CR>
     " noremap <silent> <leader><space> :nohlsearch<cr>:MarkClear<cr>
+    set grepprg=grep\ -nrI\ --exclude-dir=.git\ --exclude-dir=.hg\ --exclude-dir=.svn\ $*\ /dev/null
 
-    " Ag {{{2
-        let g:aghighlight = 1
-        let g:ag_mapping_message = 0
+    " Ack {{{2
+        cnoremap A<Space> Ack<Space>
+        let g:ackprg = "ag"
+        let g:ackhighlight = 1
+        let g:ackpreview = 1
+        let g:ack_use_dispatch = 1
 
 " System {{{1
+
     " set autochdir
     autocmd BufEnter * silent! lcd %:p:h
     "command lcdf :lcd %:p:h<CR>
@@ -336,6 +360,10 @@ set nocompatible
     let &backupdir=s:vimDir.'/tmp/backup'
     let &undodir=s:vimDir.'/tmp/undo'
     set undofile
+
+    " Easy Tags {{{2
+        "let g:easytags_async = 1
+        let g:easytags_file = printf('%s/tmp/tags', s:vimDir)
 
 " Filetypes {{{1
 augroup filetype_settings
