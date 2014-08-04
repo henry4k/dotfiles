@@ -29,4 +29,10 @@ else
 fi
 
 git fetch --verbose $FetchArgs
-git lg --reverse "HEAD..$Ref"
+
+if git rev-list --quiet "HEAD..$Ref" 2>/dev/null; then
+    git lg --reverse "HEAD..$Ref" --
+    # -- is needed so git can differentiate between revisions and files
+else
+    echo 'NO UPSTREAM CONFIGURED!'
+fi
