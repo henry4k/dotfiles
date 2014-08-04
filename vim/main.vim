@@ -34,9 +34,7 @@ set nocompatible
     Bundle 'tpope/vim-eunuch'
     Bundle 'nelstrom/vim-markdown-folding'
     Bundle 'elzr/vim-json'
-    "Bundle 'hirochachacha/AnsiEsc.vim'
     Bundle 'othree/eregex.vim'
-    "Bundle 'mivok/vimtodo'
     "Bundle 'vhdirk/vim-cmake'
     Bundle 'scrooloose/syntastic'
     Bundle 'valgrind.vim'
@@ -54,16 +52,13 @@ set nocompatible
     Bundle 'kana/vim-textobj-user'
     Bundle 'SyntaxRange'
     Bundle 'matchit.zip'
-    "Bundle 'maxbrunsfeld/vim-yankstack'
     Bundle 'reedes/vim-wordy'
-    "Bundle 'Align'
     Bundle 'junegunn/limelight.vim'
     Bundle 'junegunn/goyo.vim'
     Bundle 'ConradIrwin/vim-bracketed-paste'
     Bundle 'thinca/vim-ref'
     Bundle 'vim-ref-dictcc', {'pinned': 1}
     Bundle 'nddrylliog/ooc.vim'
-    Bundle 'terryma/vim-multiple-cursors'
     Bundle 'mileszs/ack.vim'
 
     " az/iz:
