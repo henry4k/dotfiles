@@ -60,7 +60,10 @@ set nocompatible
     Bundle 'vim-ref-dictcc', {'pinned': 1}
     Bundle 'nddrylliog/ooc.vim'
     Bundle 'mileszs/ack.vim'
+    Bundle 'ap/vim-you-keep-using-that-word'
     Bundle 'glts/vim-cottidie'
+    Bundle 'johnsyweb/vim-makeshift'
+    Bundle 'kien/ctrlp.vim'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -191,7 +194,7 @@ set nocompatible
     set linebreak
     set scrolloff=3
     set wildmenu
-    set wildignore+=*.o,*.swp,*.bak,*.pyc
+    set wildignore+=*.o,*.swp,*.bak,*.pyc,*.t
     set wildmode=longest,list,full
     set winminheight=0
     set noequalalways
@@ -365,6 +368,9 @@ set nocompatible
         autocmd VimEnter * CottidieTip
         let g:cottidie_no_default_tips = 1
         let g:cottidie_tips_files = [ printf('%s/tips', s:vimDir) ]
+
+    " Makeshift {{{2
+        let g:makeshift_systems = { 'Tupfile.ini': 'tup' }
 
 " Filetypes {{{1
 augroup filetype_settings
