@@ -1,0 +1,22 @@
+## vim:ft=help:tw=0:ts=32:cc=110:noet:nowrap:fde=getline(v\:lnum)=~'^#'?'>1'\:1:fdm=expr:
+## Personal cottidie tips
+
+Henry	:args *.c | split all
+Henry	CTRL-A & CTRL-X: Increment/Decrement numbers!
+Henry	<>= bzw == um Code automatisch zu formatieren
+Henry	d/) - Löscht bis zum Klammerende.
+Henry	% um zwischen (){}[]<> Paaren zu springen.
+Henry	Da % eine Bewegung ist, kann es auch mit c/d/y/etc benutzt werden.
+Henry	:cn um zum nächsten fehler zu springen (bzw zum nächsten eintrag in der quick-list)
+Henry	\c in regex patterns to enable ignore-case
+Henry	J um Zeilen zusammenzufassen. Z.B. um aus 'Foo\n{' 'Foo {' zu machen
+Henry	Cursor verschieben: H(igh)  M(iddle)  L(ow)
+Henry	Seite verschieben: zt(op)  zz(enter)  zb(ottom)
+Henry	[[ - Vorherige Funktion; ]] - Nächste Funktion
+Henry	Ctrl-n - (n)ext completion (für Wortvervollständigung); Ctrl-p - (p)revious completion
+Henry	gf => goto file z.B. #include <fo|o.h>
+Henry	gF => goto file line z.B.  Syntax error at f|oo.h:42
+Henry	<C-W>f goto file in new window
+Henry	<C-W>gf goto file in new tab
+Henry	cr[cm_uU] <- Schreibweise eines Wortes ändern: c=camelCase m=MixedCase _=snake_case
+Henry	Mit ** kann bei Pfadnamen rekursiv geglobbt werden.  Z.B. :e **/mai<Tab> => foo/bar/main.cpp

@@ -60,6 +60,7 @@ set nocompatible
     Bundle 'vim-ref-dictcc', {'pinned': 1}
     Bundle 'nddrylliog/ooc.vim'
     Bundle 'mileszs/ack.vim'
+    Bundle 'glts/vim-cottidie'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -359,6 +360,11 @@ set nocompatible
     " Easy Tags {{{2
         "let g:easytags_async = 1
         let g:easytags_file = printf('%s/tmp/tags', s:vimDir)
+
+    " Cottidie {{{2
+        autocmd VimEnter * CottidieTip
+        let g:cottidie_no_default_tips = 1
+        let g:cottidie_tips_files = [ printf('%s/tips', s:vimDir) ]
 
 " Filetypes {{{1
 augroup filetype_settings
