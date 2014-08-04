@@ -62,9 +62,11 @@ set nocompatible
     Bundle 'ConradIrwin/vim-bracketed-paste'
     Bundle 'thinca/vim-ref'
     Bundle 'vim-ref-dictcc', {'pinned': 1}
+    Bundle 'tup.vim', {'pinned': 1}
     Bundle 'nddrylliog/ooc.vim'
     Bundle 'terryma/vim-multiple-cursors'
     Bundle 'mileszs/ack.vim'
+    Bundle 'camelcasemotion'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -109,6 +111,14 @@ set nocompatible
     let g:maplocalleader=','
     nnoremap <Space> :
 
+    " A cheap exchange operator
+    nnoremap x Pld
+
+    " Use shift to avoid implicit yanks
+    nnoremap D "_d
+    nnoremap C "_c
+    nnoremap X Pl"_d
+
     " Cause I accidently hit these all the time
     noremap <f1> <NOP>
     noremap <S-up> <NOP>
@@ -122,6 +132,22 @@ set nocompatible
     map <C-t><left>  :tabp<cr>
     map <C-t><right> :tabn<cr>
     map <C-t><t>     :tabn<cr>
+
+    " CamelCaseMotion {{{2
+        " Move over camel case or snake case elements
+        map W <Plug>CamelCaseMotion_w
+        map B <Plug>CamelCaseMotion_b
+        map E <Plug>CamelCaseMotion_e
+        sunmap W
+        sunmap B
+        sunmap E
+
+        omap iW <Plug>CamelCaseMotion_iw
+        xmap iW <Plug>CamelCaseMotion_iw
+        omap iB <Plug>CamelCaseMotion_ib
+        xmap iB <Plug>CamelCaseMotion_ib
+        omap iE <Plug>CamelCaseMotion_ie
+        xmap iE <Plug>CamelCaseMotion_ie
 
     " Signify {{{2
         nmap <leader>gh <plug>(signify-next-hunk)
@@ -378,9 +404,6 @@ augroup filetype_settings
     autocmd BufNewFile,BufRead *.nut
         \   setfiletype squirrel
 
-    autocmd BufNewFile,BufRead Tupfile,*.tup
-        \   setfiletype tup
-
     autocmd FileType vim
         \   setlocal foldmethod=marker
 
@@ -520,3 +543,7 @@ augroup END
 "
 " Mit ** kann bei Pfadnamen rekursiv geglobbt werden.
 " Z.B. :e **/mai<Tab> => foo/bar/main.cpp
+"
+" [( springt vom Cursor zum Anfang des ()-Blocks
+" ]) springt von Cursor zum Ende des ()-Blocks
+" ]p und ]P zum automatischen Einrücken vom gepastetem Text.
