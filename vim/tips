@@ -18,5 +18,5 @@ Henry	gf => goto file z.B. #include <fo|o.h>
 Henry	gF => goto file line z.B.  Syntax error at f|oo.h:42
 Henry	<C-W>f goto file in new window
 Henry	<C-W>gf goto file in new tab
-Henry	cr[cm_uU] <- Schreibweise eines Wortes ändern: c=camelCase m=MixedCase _=snake_case
+Henry	cr[cm_uU] <- Schreibweise eines Wortes ändern: c=camelCase m=MixedCase s=snake_case
 Henry	Mit ** kann bei Pfadnamen rekursiv geglobbt werden.  Z.B. :e **/mai<Tab> => foo/bar/main.cpp

@@ -52,15 +52,16 @@ $GitConfig color.ui true
 $GitConfig core.editor '/usr/bin/env vim'
 $GitConfig core.autocrlf 'input'
 $GitConfig diff.tool 'vimdiff'
-$GitConfig difftool.prompt true
+$GitConfig difftool.prompt false
 $GitConfig log.decorate full
 $GitConfig merge.conflictstyle 'diff3'
-$GitConfig merge.tool 'splice'
+$GitConfig merge.tool 'fugitive'
 $GitConfig mergetool.prompt false
 $GitConfig mergetool.splice.cmd "vim -f \"\$BASE \$LOCAL \$REMOTE \$MERGED -c 'SpliceInit'\""
 $GitConfig mergetool.splice.trustexitcode true
 $GitConfig mergetool.fugitive.cmd "vim -f -c 'Gdiff' \$MERGED"
 $GitConfig alias.d 'difftool'
+$GitConfig alias.s 'status'
 $GitConfig alias.ctags '!.git/hooks/ctags'
 $GitConfig alias.lg "log --color --abbrev-commit --pretty=format:'%C(bold black)%h by %C(reset)%C(blue)%an %C(bold black)%ar: %C(reset)%s'"
 $GitConfig alias.up "!$Dotfiles/git/bin/up"

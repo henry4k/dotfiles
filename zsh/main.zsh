@@ -25,6 +25,7 @@ export MANPAGER="$PAGER"
 export GROFF_NO_SGR=1
 
 alias tmux='tmux -2'
+alias mv='mv --no-clobber'
 
 
 # Colors {{{1

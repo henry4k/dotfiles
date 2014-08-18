@@ -47,8 +47,6 @@ set nocompatible
     Bundle 'sjl/tslime.vim'
     Bundle 'mhinz/vim-signify'
     Bundle 'Mark--Karkat'
-    Bundle 'kana/vim-operator-user'
-    Bundle 'kana/vim-operator-replace'
     Bundle 'kana/vim-textobj-user'
     Bundle 'SyntaxRange'
     Bundle 'matchit.zip'
@@ -325,13 +323,19 @@ set nocompatible
     map <F7> :setlocal spelllang=en,de spell! spell?<CR>
     inoremap <F7> <C-\><C-O>:setlocal spelllang=en,de spell! spell?<CR>
 
+    " Syntastic {{{2
+        let g:syntastic_text_checkers = ['language_check']
+        let g:syntastic_text_language_check_args = '--language=en-GB'
+        " TODO: OCLint?
+        " TODO: pyflake/pep8?
+
 " Folding {{{1
     let g:xml_syntax_folding = 1
     set foldmethod=syntax
     set foldlevelstart=99
     set foldenable
 
-    " markdown-folding:
+    " markdown-folding {{{2
         let g:markdown_fold_style = 'nested'
 
 " Search and replace {{{1

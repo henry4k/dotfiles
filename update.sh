@@ -60,3 +60,7 @@ mkdir -p vim/dictionaries
 pushd vim/dictionaries
 DownloadAndExtractZipFile 'mthesaur.txt' 'http://www.gutenberg.org/dirs/etext02/mthes10.zip'
 popd
+
+pip3 install --user --upgrade pep8
+pip3 install --user --upgrade pylint
+pip3 install --user --upgrade language-check
