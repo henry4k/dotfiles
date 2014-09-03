@@ -26,6 +26,15 @@ export GROFF_NO_SGR=1
 
 alias tmux='tmux -2'
 
+if which 'xdg-open' > /dev/null; then
+    alias open='xdg-open'
+fi
+
+function ag-files
+{
+    ag $@ | grep -oe '^[^:]*' | uniq
+}
+
 
 # Colors {{{1
 export TERM='xterm-256color'

@@ -20,3 +20,13 @@ Henry	<C-W>f goto file in new window
 Henry	<C-W>gf goto file in new tab
 Henry	cr[cm_uU] <- Schreibweise eines Wortes ändern: c=camelCase m=MixedCase _=snake_case
 Henry	Mit ** kann bei Pfadnamen rekursiv geglobbt werden.  Z.B. :e **/mai<Tab> => foo/bar/main.cpp
+Henry	[( und ]) springen vom Cursor zum Anfang bzw zum Ende eines ()-Blocks
+Henry	]p und ]P zum automatischen Einrücken vom gepastetem Text.
+Henry	W B E iW iB iE für CamelCase und snake_case Bewegungen
+Henry	x<motion> um Text zu ersetzen.
+Henry	D C X verändern keine Register
+Henry	gh und gH um zwischen Diff-Hunks zu springen.
+Henry	<leader>u um den Undotree zu öffnen
+Henry	<Space> kann als alternative zu : benutzt werden.
+Henry	:A als Kurzform für :Ack
+Henry	<Leader><Space> aktiviert distractions free writing

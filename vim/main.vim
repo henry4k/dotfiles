@@ -66,6 +66,7 @@ set nocompatible
     Bundle 'johnsyweb/vim-makeshift'
     Bundle 'kien/ctrlp.vim'
     Bundle 'camelcasemotion'
+    Bundle 'tikhomirov/vim-glsl'
 
     " az/iz:
     "Bundle 'kana/vim-textobj-fold'
@@ -118,19 +119,17 @@ set nocompatible
     nnoremap C "_c
     nnoremap X Pl"_d
 
-    " Cause I accidently hit these all the time
-    noremap <f1> <NOP>
-    noremap <S-up> <NOP>
-    noremap <S-down> <NOP>
-    noremap <S-left> <NOP>
-    noremap <S-right> <NOP>
+    " Paste formatted by default
+    "nnoremap p ]p
+    "nnoremap P ]P
 
-    " Moving between tabs
-    map <C-t><up>    :tabr<cr>
-    map <C-t><down>  :tabl<cr>
-    map <C-t><left>  :tabp<cr>
-    map <C-t><right> :tabn<cr>
-    map <C-t><t>     :tabn<cr>
+    " Cause I accidently hit these all the time
+    map <f1> <NOP>
+    imap <f1> <NOP>
+    map <S-up> <NOP>
+    map <S-down> <NOP>
+    map <S-left> <NOP>
+    map <S-right> <NOP>
 
     " CamelCaseMotion {{{2
         " Move over camel case or snake case elements
@@ -157,25 +156,25 @@ set nocompatible
         " Block comments
         let g:surround_{char2nr("/")} = "/*\r*/"
 
-     " Undotree {{{2
-        let g:undotree_SetFocusWhenToggle = 1
-        nnoremap <leader>u :UndotreeToggle<CR>
+    " Undotree {{{2
+       let g:undotree_SetFocusWhenToggle = 1
+       nnoremap <leader>u :UndotreeToggle<CR>
 
-     " Dispatch {{{2
-        function! RunProve( args )
-            exec "Dispatch prove ".g:proveargs. a:args
-        endfunction
-        command! -nargs=* Prove call RunProve("<args>")
+    " Dispatch {{{2
+       function! RunProve( args )
+           exec "Dispatch prove ".g:proveargs. a:args
+       endfunction
+       command! -nargs=* Prove call RunProve("<args>")
 
-     " operator-replace {{{2
-        map x <Plug>(operator-replace)
-        " Because x makes a great mnemonic for eXchange.
-        " And deleting single letters can also accomplished by typing dl.
+    " operator-replace {{{2
+       map x <Plug>(operator-replace)
+       " Because x makes a great mnemonic for eXchange.
+       " And deleting single letters can also accomplished by typing dl.
 
-     " yankstack {{{2
-        let g:yankstack_map_keys = 0
-        nmap <C-n> <Plug>yankstack_substitute_newer_paste
-        nmap <C-p> <Plug>yankstack_substitute_older_paste
+    " yankstack {{{2
+       let g:yankstack_map_keys = 0
+       nmap <C-n> <Plug>yankstack_substitute_newer_paste
+       nmap <C-p> <Plug>yankstack_substitute_older_paste
 
     " Goyo {{{2
         nmap <Leader><Space> :Goyo<CR>
@@ -286,6 +285,12 @@ set nocompatible
         let g:badwolf_darkgutter=1
         let g:badwolf_tabline=0 " darker background
 
+    " NetRW {{{2
+        let g:netrw_banner = 0
+        let g:netrw_hide = 1
+        let g:netrw_list_hide = '^\.'
+        let g:netrw_liststyle = 3
+
     " Signify {{{2
         let g:signify_vcs_list = ['git']
         let g:signify_sign_overwrite = 1
@@ -327,6 +332,9 @@ set nocompatible
 
 " Folding {{{1
     let g:xml_syntax_folding = 1
+    let g:javaScript_fold = 1
+    let g:sh_fold_enabled = 1
+    let g:vimsyn_folding = 'af'
     set foldmethod=syntax
     set foldlevelstart=99
     set foldenable
@@ -402,9 +410,6 @@ set nocompatible
 augroup filetype_settings
     autocmd!
 
-    autocmd BufNewFile,BufRead *.fs,*.vs,*.glsl,*frag,*.vert
-        \   setfiletype glsl
-
     autocmd BufNewFile,BufRead *.less
         \   setfiletype css
 
@@ -437,7 +442,7 @@ augroup filetype_settings
         \ | call SyntaxRange#Include('```python', '```', 'python', 'markdownCodeBlock')
         \ | setlocal formatoptions+=w
 
-    autocmd FileType xml
+    autocmd FileType xml,html
         \   setlocal iskeyword+=-
         \ | setlocal equalprg=xmllint\ --format\ - " <- libxml2-utils
       " \ | setlocal equalprg=xml_pp " <- XML::Twig (Perl)

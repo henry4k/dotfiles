@@ -28,6 +28,7 @@ EOF
 UninstallDotfile "$HOME/.profile"
 UninstallDotfile "$HOME/.zshrc"
 UninstallDotfile "$HOME/.vimrc"
+UninstallDotfile "$HOME/.nvimrc"
 UninstallDotfile "$HOME/.tmux.conf"
 UninstallDotfile "$HOME/.gdbinit"
 

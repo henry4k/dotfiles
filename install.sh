@@ -26,6 +26,12 @@ source $Dotfiles/vim/main.vim
 " DOTFILES END
 EOF
 
+cat >> "$HOME/.nvimrc" << EOF
+" DOTFILES BEGIN
+source $Dotfiles/vim/main.vim
+" DOTFILES END
+EOF
+
 cat >> "$HOME/.tmux.conf" << EOF
 # DOTFILES BEGIN
 source-file "$Dotfiles/tmux.conf"
@@ -55,7 +61,7 @@ $GitConfig diff.tool 'vimdiff'
 $GitConfig difftool.prompt true
 $GitConfig log.decorate full
 $GitConfig merge.conflictstyle 'diff3'
-$GitConfig merge.tool 'splice'
+$GitConfig merge.tool 'fugitive'
 $GitConfig mergetool.prompt false
 $GitConfig mergetool.splice.cmd "vim -f \"\$BASE \$LOCAL \$REMOTE \$MERGED -c 'SpliceInit'\""
 $GitConfig mergetool.splice.trustexitcode true
