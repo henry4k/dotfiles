@@ -79,15 +79,17 @@ autoload colors && colors
 
 
 # History {{{1
-export HISTSIZE=1000
-export SAVEHIST=700
+export HISTSIZE=3000
+export SAVEHIST=2500
 export HISTFILE="$HOME/.zsh_history"
 
-setopt share_history
 setopt hist_fcntl_lock
-setopt hist_expire_dups_first
+setopt inc_append_history
+setopt hist_no_functions
+setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 
+alias shist fc -RI # sync history
 
 # Autocomplete {{{1
 autoload -U compinit && compinit

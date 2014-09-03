@@ -49,7 +49,6 @@ set nocompatible
     Bundle 'Mark--Karkat'
     Bundle 'kana/vim-textobj-user'
     Bundle 'SyntaxRange'
-    Bundle 'matchit.zip'
     Bundle 'reedes/vim-wordy'
     Bundle 'junegunn/limelight.vim'
     Bundle 'junegunn/goyo.vim'
@@ -57,7 +56,6 @@ set nocompatible
     Bundle 'thinca/vim-ref'
     Bundle 'vim-ref-dictcc', {'pinned': 1}
     Bundle 'tup.vim', {'pinned': 1}
-    Bundle 'nddrylliog/ooc.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'ap/vim-you-keep-using-that-word'
     Bundle 'glts/vim-cottidie'
@@ -75,6 +73,8 @@ set nocompatible
     Bundle 'glts/vim-textobj-comment'
     " av/iv:
     "Bundle 'Julian/vim-textobj-variable-segment'
+
+    runtime macros/matchit.vim
 
     filetype plugin indent on
 
@@ -414,6 +414,9 @@ augroup filetype_settings
 
     autocmd BufNewFile,BufRead *.nut
         \   setfiletype squirrel
+
+    autocmd BufNewFile,BufRead *.rockspec
+        \   setfiletype lua
 
     autocmd FileType vim
         \   setlocal foldmethod=marker
