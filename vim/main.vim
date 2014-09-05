@@ -12,67 +12,95 @@ set nocompatible
     Bundle 'gmarik/vundle'
 
     " Color schemes {{{2
-    Bundle 'tomasr/molokai'
-    Bundle 'github-theme'
-    Bundle 'sjl/badwolf'
-    Bundle 'reedes/vim-colors-pencil'
-    Bundle 'freeo/vim-kalisi'
-    Bundle 'w0ng/vim-hybrid'
+        Bundle 'tomasr/molokai'
+        Bundle 'github-theme'
+        Bundle 'sjl/badwolf'
+        Bundle 'reedes/vim-colors-pencil'
+        Bundle 'freeo/vim-kalisi'
+        Bundle 'w0ng/vim-hybrid'
 
     " Libs {{{2
-    Bundle 'tlib'
-    Bundle 'L9'
+        Bundle 'tlib'
+        Bundle 'L9'
+        Bundle 'tpope/vim-repeat'
+        Bundle 'kana/vim-textobj-user'
+
+    " Text objects {{{2
+        " az/iz:
+        "Bundle 'kana/vim-textobj-fold'
+        " ai/ii:
+        Bundle 'kana/vim-textobj-indent'
+        " af/if:
+        Bundle 'kana/vim-textobj-function'
+        " ac/ic:
+        Bundle 'glts/vim-textobj-comment'
+        " av/iv:
+        "Bundle 'Julian/vim-textobj-variable-segment'
+
+    " Integrations {{{2
+        " Git:
+        Bundle 'tpope/vim-git'
+        Bundle 'tpope/vim-fugitive'
+        " Markdown:
+        Bundle 'tpope/vim-markdown'
+        Bundle 'nelstrom/vim-markdown-folding'
+        " JSON:
+        Bundle 'elzr/vim-json'
+        " Tup:
+        Bundle 'tup.vim', {'pinned': 1}
+        " Ack:
+        Bundle 'mileszs/ack.vim'
 
     " Tools {{{2
-    Bundle 'tpope/vim-git'
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'tpope/vim-markdown'
-    Bundle 'tpope/vim-repeat'
-    Bundle 'tpope/vim-surround'
-    Bundle 'tpope/vim-abolish'
-    Bundle 'tpope/vim-dispatch'
-    Bundle 'tpope/vim-eunuch'
-    Bundle 'nelstrom/vim-markdown-folding'
-    Bundle 'elzr/vim-json'
-    Bundle 'othree/eregex.vim'
-    "Bundle 'vhdirk/vim-cmake'
-    Bundle 'scrooloose/syntastic'
-    Bundle 'valgrind.vim'
-    Bundle 'cmdline-completion'
-    Bundle 'thinca/vim-localrc'
-    Bundle 'thinca/vim-fontzoom'
-    "Bundle 'Valloric/YouCompleteMe'
-    Bundle 'mbbill/undotree'
-    Bundle 'sjl/splice.vim'
-    Bundle 'sjl/tslime.vim'
-    Bundle 'mhinz/vim-signify'
-    Bundle 'Mark--Karkat'
-    Bundle 'kana/vim-textobj-user'
-    Bundle 'SyntaxRange'
-    Bundle 'reedes/vim-wordy'
-    Bundle 'junegunn/limelight.vim'
-    Bundle 'junegunn/goyo.vim'
-    Bundle 'ConradIrwin/vim-bracketed-paste'
-    Bundle 'thinca/vim-ref'
-    Bundle 'vim-ref-dictcc', {'pinned': 1}
-    Bundle 'tup.vim', {'pinned': 1}
-    Bundle 'mileszs/ack.vim'
-    Bundle 'ap/vim-you-keep-using-that-word'
-    Bundle 'glts/vim-cottidie'
-    Bundle 'johnsyweb/vim-makeshift'
-    Bundle 'kien/ctrlp.vim'
-    Bundle 'camelcasemotion'
+        " Surround movements/selections with quotes or similar:
+        Bundle 'tpope/vim-surround'
+        " Powerful substitution tools:
+        Bundle 'tpope/vim-abolish'
+        " Background task runner:
+        Bundle 'tpope/vim-dispatch'
+        " Utillity commands for file handling:
+        Bundle 'tpope/vim-eunuch'
+        " Perl regex for vim:
+        Bundle 'othree/eregex.vim'
+        " Check files for syntax errors:
+        Bundle 'scrooloose/syntastic'
+        " Ctrl-n/p completion in the command line:
+        Bundle 'cmdline-completion'
+        " Run directory specific .local.vimrc files:
+        Bundle 'thinca/vim-localrc'
+        " Zoom font in GVIM:
+        Bundle 'thinca/vim-fontzoom'
+        " Interface to the undo tree:
+        Bundle 'mbbill/undotree'
+        " Three way merges with vim:
+        Bundle 'sjl/splice.vim'
+        " Send code to a terminal:
+        Bundle 'sjl/tslime.vim'
+        " Mark modified lines of VCS controlled files:
+        Bundle 'mhinz/vim-signify'
+        " Mark words:
+        Bundle 'Mark--Karkat'
+        " Inject syntax definitions to range:
+        Bundle 'SyntaxRange'
+        " Highlight word misusages:
+        Bundle 'reedes/vim-wordy'
+        " Distraction free editing:
+        Bundle 'junegunn/limelight.vim'
+        Bundle 'junegunn/goyo.vim'
+        " Support for bracketed paste mode:
+        Bundle 'ConradIrwin/vim-bracketed-paste'
+        " Unified interface to documentation sources:
+        Bundle 'thinca/vim-ref'
+        Bundle 'vim-ref-dictcc', {'pinned': 1}
+        " Fixes word movement:
+        Bundle 'ap/vim-you-keep-using-that-word'
+        " Shows tips at startup:
+        Bundle 'glts/vim-cottidie'
+        " Detect project build system:
+        Bundle 'johnsyweb/vim-makeshift'
+        " Move over camel and snake case word parts:
+        Bundle 'camelcasemotion'
 
-    " az/iz:
-    "Bundle 'kana/vim-textobj-fold'
-    " ai/ii:
-    Bundle 'kana/vim-textobj-indent'
-    " af/if:
-    Bundle 'kana/vim-textobj-function'
-    " ac/ic:
-    Bundle 'glts/vim-textobj-comment'
-    " av/iv:
-    "Bundle 'Julian/vim-textobj-variable-segment'
 
     runtime macros/matchit.vim
 
