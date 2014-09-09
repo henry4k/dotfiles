@@ -309,12 +309,10 @@ set nocompatible
 
     " Goyo {{{2
         function! GoyoBefore()
-            SignifyToggle
             Limelight
         endfunction
 
         function! GoyoAfter()
-            SignifyToggle
             Limelight!
         endfunction
 
