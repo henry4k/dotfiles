@@ -12,72 +12,97 @@ set nocompatible
     Bundle 'gmarik/vundle'
 
     " Color schemes {{{2
-    Bundle 'tomasr/molokai'
-    Bundle 'github-theme'
-    Bundle 'sjl/badwolf'
-    Bundle 'reedes/vim-colors-pencil'
-    Bundle 'freeo/vim-kalisi'
-    Bundle 'w0ng/vim-hybrid'
+        Bundle 'tomasr/molokai'
+        Bundle 'github-theme'
+        Bundle 'sjl/badwolf'
+        Bundle 'reedes/vim-colors-pencil'
+        Bundle 'freeo/vim-kalisi'
+        Bundle 'w0ng/vim-hybrid'
 
     " Libs {{{2
-    Bundle 'tlib'
-    Bundle 'L9'
+        Bundle 'tlib'
+        Bundle 'L9'
+        Bundle 'tpope/vim-repeat'
+        Bundle 'kana/vim-textobj-user'
+
+    " Text objects {{{2
+        " ai/ii:
+        Bundle 'kana/vim-textobj-indent'
+        " af/if, ac/ic for Python:
+        Bundle 'bps/vim-textobj-python'
+        " af/if:
+        Bundle 'kana/vim-textobj-function'
+
+    " Integrations {{{2
+        " Git:
+        Bundle 'tpope/vim-git'
+        Bundle 'tpope/vim-fugitive'
+        " Markdown:
+        Bundle 'tpope/vim-markdown'
+        Bundle 'nelstrom/vim-markdown-folding'
+        " JSON:
+        Bundle 'elzr/vim-json'
+        " Tup:
+        Bundle 'tup.vim', {'pinned': 1}
+        " Ack:
+        Bundle 'mileszs/ack.vim'
 
     " Tools {{{2
-    Bundle 'tpope/vim-git'
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'tpope/vim-markdown'
-    Bundle 'tpope/vim-repeat'
-    Bundle 'tpope/vim-surround'
-    Bundle 'tpope/vim-abolish'
-    Bundle 'tpope/vim-dispatch'
-    Bundle 'tpope/vim-eunuch'
-    Bundle 'nelstrom/vim-markdown-folding'
-    Bundle 'elzr/vim-json'
-    Bundle 'othree/eregex.vim'
-    "Bundle 'vhdirk/vim-cmake'
-    Bundle 'scrooloose/syntastic'
-    Bundle 'valgrind.vim'
-    Bundle 'cmdline-completion'
-    Bundle 'thinca/vim-localrc'
-    Bundle 'thinca/vim-fontzoom'
-    "Bundle 'Valloric/YouCompleteMe'
-    Bundle 'mbbill/undotree'
-    Bundle 'sjl/splice.vim'
-    Bundle 'sjl/tslime.vim'
-    Bundle 'mhinz/vim-signify'
-    Bundle 'Mark--Karkat'
-    Bundle 'kana/vim-operator-user'
-    Bundle 'kana/vim-operator-replace'
-    Bundle 'kana/vim-textobj-user'
-    Bundle 'SyntaxRange'
-    Bundle 'matchit.zip'
-    Bundle 'reedes/vim-wordy'
-    Bundle 'junegunn/limelight.vim'
-    Bundle 'junegunn/goyo.vim'
-    Bundle 'ConradIrwin/vim-bracketed-paste'
-    Bundle 'thinca/vim-ref'
-    Bundle 'vim-ref-dictcc', {'pinned': 1}
-    Bundle 'tup.vim', {'pinned': 1}
-    Bundle 'nddrylliog/ooc.vim'
-    Bundle 'mileszs/ack.vim'
-    Bundle 'ap/vim-you-keep-using-that-word'
-    Bundle 'glts/vim-cottidie'
-    Bundle 'johnsyweb/vim-makeshift'
-    Bundle 'kien/ctrlp.vim'
-    Bundle 'camelcasemotion'
-    Bundle 'tikhomirov/vim-glsl'
+        " Surround movements/selections with quotes or similar:
+        Bundle 'tpope/vim-surround'
+        " Powerful substitution tools:
+        Bundle 'tpope/vim-abolish'
+        " Background task runner:
+        Bundle 'tpope/vim-dispatch'
+        " Utillity commands for file handling:
+        Bundle 'tpope/vim-eunuch'
+        " Perl regex for vim:
+        Bundle 'othree/eregex.vim'
+        " Check files for syntax errors:
+        Bundle 'scrooloose/syntastic'
+        " Ctrl-n/p completion in the command line:
+        Bundle 'cmdline-completion'
+        " Run directory specific .local.vimrc files:
+        Bundle 'thinca/vim-localrc'
+        " Zoom font in GVIM:
+        Bundle 'thinca/vim-fontzoom'
+        " Interface to the undo tree:
+        Bundle 'mbbill/undotree'
+        " Three way merges with vim:
+        Bundle 'sjl/splice.vim'
+        " Send code to a terminal:
+        Bundle 'sjl/tslime.vim'
+        " Mark modified lines of VCS controlled files:
+        Bundle 'mhinz/vim-signify'
+        " Mark words:
+        Bundle 'Mark--Karkat'
+        " Inject syntax definitions to range:
+        Bundle 'SyntaxRange'
+        " Highlight word misusages:
+        Bundle 'reedes/vim-wordy'
+        " Distraction free editing:
+        Bundle 'junegunn/limelight.vim'
+        Bundle 'junegunn/goyo.vim'
+        " Support for bracketed paste mode:
+        Bundle 'ConradIrwin/vim-bracketed-paste'
+        " Unified interface to documentation sources:
+        Bundle 'thinca/vim-ref'
+        Bundle 'vim-ref-dictcc', {'pinned': 1}
+        " Fixes word movement:
+        Bundle 'ap/vim-you-keep-using-that-word'
+        " Shows tips at startup:
+        Bundle 'glts/vim-cottidie'
+        " Detect project build system:
+        Bundle 'johnsyweb/vim-makeshift'
+        " Move over camel and snake case word parts:
+        Bundle 'camelcasemotion'
+        " Text objects for function arguments (aa/ia):
+        Bundle 'argtextobj.vim'
+        " Automatically close braces:
+        Bundle 'Townk/vim-autoclose'
 
-    " az/iz:
-    "Bundle 'kana/vim-textobj-fold'
-    " ai/ii:
-    Bundle 'kana/vim-textobj-indent'
-    " af/if:
-    Bundle 'kana/vim-textobj-function'
-    " ac/ic:
-    Bundle 'glts/vim-textobj-comment'
-    " av/iv:
-    "Bundle 'Julian/vim-textobj-variable-segment'
+
+    runtime macros/matchit.vim
 
     filetype plugin indent on
 
@@ -181,6 +206,7 @@ set nocompatible
 
     " vim-ref {{{2
         let g:ref_cache_dir = printf('%s/tmp/ref_cache', s:vimDir)
+        let g:ref_pydoc_cmd = 'python3 -m pydoc'
         autocmd FileType ref call s:initialize_ref_viewer()
         function! s:initialize_ref_viewer()
             nmap <buffer> b <Plug>(ref-back)
@@ -303,7 +329,7 @@ set nocompatible
             "let g:signify_line_highlight = 1
         "endif
 
-     " Undotree {{{2
+    " Undotree {{{2
         let g:undotree_TreeNodeShape = 'o'
         let g:undotree_WindowLayout = 2
 
@@ -318,6 +344,9 @@ set nocompatible
 
         let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
 
+    " Pencil {{{2
+        let g:pencil_terminal_italics = 1
+
 " Spell Check {{{1
     set dictionary+=/usr/share/dict/words
     let &thesaurus=printf('%s/dictionaries/mthesaur.txt', s:vimDir)
@@ -328,6 +357,12 @@ set nocompatible
     map <F7> :setlocal spelllang=en,de spell! spell?<CR>
     inoremap <F7> <C-\><C-O>:setlocal spelllang=en,de spell! spell?<CR>
 
+    " Syntastic {{{2
+        "let g:syntastic_text_checkers = ['language_check']
+        let g:syntastic_text_language_check_args = '-m en-GB -l de-DE'
+        " TODO: OCLint?
+        " TODO: pyflake/pep8?
+
 " Folding {{{1
     let g:xml_syntax_folding = 1
     let g:javaScript_fold = 1
@@ -337,7 +372,7 @@ set nocompatible
     set foldlevelstart=99
     set foldenable
 
-    " markdown-folding:
+    " markdown-folding {{{2
         let g:markdown_fold_style = 'nested'
 
 " Search and replace {{{1
@@ -413,6 +448,9 @@ augroup filetype_settings
 
     autocmd BufNewFile,BufRead *.nut
         \   setfiletype squirrel
+
+    autocmd BufNewFile,BufRead *.rockspec
+        \   setfiletype lua
 
     autocmd FileType vim
         \   setlocal foldmethod=marker
