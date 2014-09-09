@@ -26,16 +26,12 @@ set nocompatible
         Bundle 'kana/vim-textobj-user'
 
     " Text objects {{{2
-        " az/iz:
-        "Bundle 'kana/vim-textobj-fold'
         " ai/ii:
         Bundle 'kana/vim-textobj-indent'
+        " af/if, ac/ic for Python:
+        Bundle 'bps/vim-textobj-python'
         " af/if:
         Bundle 'kana/vim-textobj-function'
-        " ac/ic:
-        Bundle 'glts/vim-textobj-comment'
-        " av/iv:
-        "Bundle 'Julian/vim-textobj-variable-segment'
 
     " Integrations {{{2
         " Git:
@@ -100,6 +96,10 @@ set nocompatible
         Bundle 'johnsyweb/vim-makeshift'
         " Move over camel and snake case word parts:
         Bundle 'camelcasemotion'
+        " Text objects for function arguments (aa/ia):
+        Bundle 'argtextobj.vim'
+        " Automatically close braces:
+        Bundle 'Townk/vim-autoclose'
 
 
     runtime macros/matchit.vim
@@ -208,6 +208,7 @@ set nocompatible
 
     " vim-ref {{{2
         let g:ref_cache_dir = printf('%s/tmp/ref_cache', s:vimDir)
+        let g:ref_pydoc_cmd = 'python3 -m pydoc'
         autocmd FileType ref call s:initialize_ref_viewer()
         function! s:initialize_ref_viewer()
             nmap <buffer> b <Plug>(ref-back)
@@ -324,7 +325,7 @@ set nocompatible
             "let g:signify_line_highlight = 1
         "endif
 
-     " Undotree {{{2
+    " Undotree {{{2
         let g:undotree_TreeNodeShape = 'o'
         let g:undotree_WindowLayout = 2
 
@@ -341,6 +342,9 @@ set nocompatible
 
         let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
 
+    " Pencil {{{2
+        let g:pencil_terminal_italics = 1
+
 " Spell Check {{{1
     set dictionary+=/usr/share/dict/words
     let &thesaurus=printf('%s/dictionaries/mthesaur.txt', s:vimDir)
@@ -352,8 +356,8 @@ set nocompatible
     inoremap <F7> <C-\><C-O>:setlocal spelllang=en,de spell! spell?<CR>
 
     " Syntastic {{{2
-        let g:syntastic_text_checkers = ['language_check']
-        let g:syntastic_text_language_check_args = '--language=en-GB'
+        "let g:syntastic_text_checkers = ['language_check']
+        let g:syntastic_text_language_check_args = '-m en-GB -l de-DE'
         " TODO: OCLint?
         " TODO: pyflake/pep8?
 
