@@ -26,6 +26,7 @@ export GROFF_NO_SGR=1
 
 alias tmux='tmux -2'
 alias mv='mv --no-clobber'
+alias t="$zshDir/../bin/t/t.py --task-dir ~/.tasks --list tasks"
 
 if which 'xdg-open' > /dev/null; then
     alias open='xdg-open'

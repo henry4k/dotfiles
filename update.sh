@@ -24,6 +24,11 @@ pushd vim/bundle
 GitCloneOrPull 'vundle' 'https://github.com/gmarik/vundle.git'
 popd
 
+pushd bin
+GitCloneOrPull 't' 'https://github.com/sjl/t.git'
+popd
+mkdir -p "$HOME/.tasks"
+
 
 function DownloadAndExtractZip()
 {
