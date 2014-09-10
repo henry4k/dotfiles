@@ -96,8 +96,8 @@ set nocompatible
         Bundle 'johnsyweb/vim-makeshift'
         " Move over camel and snake case word parts:
         Bundle 'camelcasemotion'
-        " Text objects for function arguments (aa/ia):
-        Bundle 'argtextobj.vim'
+        " Text objects for comma separated arguments (aa/ia,aA/iA):
+        Bundle 'b4winckler/vim-angry'
         " Automatically close braces:
         Bundle 'Townk/vim-autoclose'
 
