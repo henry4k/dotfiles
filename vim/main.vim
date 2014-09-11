@@ -256,6 +256,7 @@ set nocompatible
     set display+=lastline
     set cursorline " See augroup CSFix
     set noerrorbells
+    set visualbell " Disables beeping or screen flashing
     set synmaxcol=500
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set showbreak=>\ 
