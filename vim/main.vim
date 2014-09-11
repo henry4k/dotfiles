@@ -455,6 +455,7 @@ augroup filetype_settings
 
     autocmd FileType vim
         \   setlocal foldmethod=marker
+        \ | let b:AutoClosePairs = AutoClose#DefaultPairsModified('', '"')
 
     autocmd FileType sh,bash,zsh
         \   setlocal iskeyword+=-
