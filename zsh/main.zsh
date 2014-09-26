@@ -125,7 +125,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 if autoload promptinit && promptinit 2>/dev/null; then
     source "$zshDir/prompt.zsh"
 fi
-source "$zshDir/safe-paste.zsh"
 
 
 # Finalization {{{1
