@@ -216,6 +216,18 @@ set nocompatible
             setlocal nolist
         endfunction
 
+    " Scratch buffer {{{2
+        function! CreateScratchBuffer( new_buffer_cmd, filetype )
+            let filetype = a:filetype
+            if filetype == ''
+                let filetype = &filetype
+            endif
+            exec a:new_buffer_cmd
+            exec 'setlocal filetype='.filetype
+        endfunction
+        command! -nargs=* -complete=filetype Scratch  call CreateScratchBuffer('new',  <q-args>)
+        command! -nargs=* -complete=filetype VScratch call CreateScratchBuffer('vnew', <q-args>)
+
 " Clipboard {{{1
     if has('unnamedplus')
         set clipboard=unnamedplus,autoselect
