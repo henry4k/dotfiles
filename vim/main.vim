@@ -83,8 +83,6 @@ set nocompatible
         " Distraction free editing:
         Bundle 'junegunn/limelight.vim'
         Bundle 'junegunn/goyo.vim'
-        " Support for bracketed paste mode:
-        Bundle 'ConradIrwin/vim-bracketed-paste'
         " Unified interface to documentation sources:
         Bundle 'thinca/vim-ref'
         Bundle 'vim-ref-dictcc', {'pinned': 1}
