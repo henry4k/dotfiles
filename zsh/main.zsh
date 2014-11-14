@@ -14,28 +14,18 @@ antigen bundle sharat87/zsh-vim-mode
 
 
 # Common {{{1
-source "$zshDir/../locale.sh"
-
+source "$zshDir/../profile.sh" # Since ZSH doesn't sources ~/.profile
 fpath=("$zshDir/functions" $fpath)
-
-export EDITOR='vim'
-export VISUAL="$EDITOR"
-export PAGER='less -isR'
-export MANPAGER="$PAGER"
-export GROFF_NO_SGR=1
 
 alias tmux='tmux -2'
 alias mv='mv --no-clobber'
+alias info='info --vi-keys'
+alias gdb='gdb --quiet'
 alias t="$zshDir/../bin/t/t.py --task-dir ~/.tasks --list tasks"
 
 if which 'xdg-open' > /dev/null; then
     alias open='xdg-open'
 fi
-
-function ag-files
-{
-    ag $@ | grep -oe '^[^:]*' | uniq
-}
 
 
 # Colors {{{1
@@ -58,13 +48,6 @@ alias ll="ls $lsFlags -lh $lsColor"
 
 alias grep='grep --color=auto'
 
-export LESS_TERMCAP_mb=$(printf '\e[1;31m')
-export LESS_TERMCAP_md=$(printf '\e[1;31m')
-export LESS_TERMCAP_me=$(printf '\e[0m')
-export LESS_TERMCAP_se=$(printf '\e[0m')
-export LESS_TERMCAP_so=$(printf '\e[1;44;33m')
-export LESS_TERMCAP_ue=$(printf '\e[0m')
-export LESS_TERMCAP_us=$(printf '\e[1;32m')
 
 
 # Keymap {{{1

@@ -98,6 +98,8 @@ set nocompatible
         Bundle 'b4winckler/vim-angry'
         " Automatically close braces:
         Bundle 'Townk/vim-autoclose'
+        " Enhances completion handling:
+        Bundle 'ervandew/supertab'
 
 
     runtime macros/matchit.vim
@@ -126,6 +128,10 @@ set nocompatible
     nnoremap <C-y><c> :YcmForceCompileAndDiagnostics<CR>
     nnoremap <leader>yd :YcmCompleter GoToDefinitionElseDeclaration<CR>
     nnoremap <C-y><d> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+    " SuperTab {{{2
+        let g:SuperTabLongestEnhanced = 1
+        let g:SuperTabLongestHighlight = 1
 
 " Mouse and Handling {{{1
     set mouse=a
