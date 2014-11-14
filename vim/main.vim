@@ -46,6 +46,8 @@ set nocompatible
         Bundle 'tup.vim', {'pinned': 1}
         " Ack:
         Bundle 'mileszs/ack.vim'
+        " C:
+        Bundle 'justinmk/vim-syntax-extra'
 
     " Tools {{{2
         " Surround movements/selections with quotes or similar:
@@ -151,6 +153,10 @@ set nocompatible
     " Paste formatted by default
     "nnoremap p ]p
     "nnoremap P ]P
+
+    " In command mode %% will insert the basename with a trailing dot.
+    " I.e. 'foobar.cpp' becomes 'foobar.'
+    cnoremap %% <C-R>=expand('%:r').'.'<CR>
 
     " Cause I accidently hit these all the time
     map <f1> <NOP>
@@ -272,7 +278,7 @@ set nocompatible
     set display+=lastline
     set cursorline " See augroup CSFix
     set noerrorbells
-    set visualbell " Disables beeping or screen flashing
+    set novisualbell " Disables beeping or screen flashing
     set synmaxcol=500
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set showbreak=>\ 
@@ -302,7 +308,7 @@ set nocompatible
         "highlight clear DiffDelete
         "highlight DiffDelete guibg=#2c2424 ctermbg=52
         "highlight DiffAdd    guibg=#272b18 ctermbg=22
-        "highlight DiffCahnge guibg=#2b241b ctermbg=94
+        "highlight DiffChange guibg=#2b241b ctermbg=94
         if has('gui_macvim')
             set fuoptions=maxvert,maxhorz,background:Normal
             set guifont=Menlo\ 10
@@ -424,9 +430,6 @@ set nocompatible
     set history=1000
     set undolevels=1000
     set encoding=utf-8
-    set timeoutlen=1000
-    set ttimeout
-    set ttimeoutlen=0
     set backspace=indent,eol,start
     set ttyfast
     set shortmess+=I " hide :intro
@@ -488,6 +491,7 @@ augroup filetype_settings
 
     autocmd FileType markdown
         \   setlocal iskeyword+=-
+        \ | let b:AutoClosePairs = AutoClose#DefaultPairsModified('', '`')
         \ | let g:surround_{char2nr("*")} = "*\r*"
         \ | let g:surround_{char2nr("_")} = "_\r_"
         \ | call SyntaxRange#Include('```c', '```', 'c', 'markdownCodeBlock')
