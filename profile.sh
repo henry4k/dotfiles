@@ -28,6 +28,10 @@ export LC_ALL="$LANG"
 
 
 # Colors {{{1
+export TERM='xterm-256color'
+export COLORTERM='yes'
+export CLICOLOR=1
+
 export LESS_TERMCAP_mb=$(printf '\e[1;31m')
 export LESS_TERMCAP_md=$(printf '\e[1;31m')
 export LESS_TERMCAP_me=$(printf '\e[0m')
@@ -35,10 +39,3 @@ export LESS_TERMCAP_se=$(printf '\e[0m')
 export LESS_TERMCAP_so=$(printf '\e[1;44;33m')
 export LESS_TERMCAP_ue=$(printf '\e[0m')
 export LESS_TERMCAP_us=$(printf '\e[1;32m')
-
-
-# SSH Agent {{{1
-echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK"
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval `ssh-agent`
-fi

@@ -29,10 +29,6 @@ fi
 
 
 # Colors {{{1
-export TERM='xterm-256color'
-export COLORTERM='yes'
-export CLICOLOR=1
-
 if which 'dircolors' > /dev/null; then
     lsColor='--color=auto'
     if [[ -e "$HOME/.dircolors" ]]; then
@@ -83,6 +79,7 @@ setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 
 alias shist fc -RI # sync history
+
 
 # Autocomplete {{{1
 autoload -U compinit && compinit
