@@ -50,7 +50,7 @@ endfunction
 " Diffs {{{
 hi clear DiffDelete
 hi clear DiffChange
-call s:HL('DiffDelete', '', 'darkdress')
+call s:HL('DiffDelete', 'darkdress', 'darkdress')
 call s:HL('DiffAdd',    '', 'darklime')
 call s:HL('DiffChange', '', 'darkorange')
 call s:HL('DiffText',   '', 'darkorange')
