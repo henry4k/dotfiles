@@ -102,6 +102,8 @@ set nocompatible
         Bundle 'Townk/vim-autoclose'
         " Enhances completion handling:
         Bundle 'ervandew/supertab'
+        " Sane cursor movement in wrapped lines:
+        Bundle 'vim-display-cursor', {'pinned': 1}
 
 
     runtime macros/matchit.vim
