@@ -230,8 +230,16 @@ set nocompatible
             setlocal nonumber
             setlocal nolist
         endfunction
-        command! -nargs=1 Dcc call ref#open('dictcc', 'DE EN '.expand('<args>'))
-        nnoremap <leader>dcc :call ref#open('dictcc', 'DE EN '.expand('<cword>'))<CR>
+
+        function! DictccLookup( query ) range
+            if a:query != ''
+                call ref#open('dictcc', 'DE EN "'.a:query.'"')
+            else
+                call ref#open('dictcc', 'DE EN "'.getreg('*').'"')
+            endif
+        endfunction
+        command! -range -nargs=? Dcc call DictccLookup(expand('<args>'))
+        nnoremap <silent> <leader>dcc :call DictccLookup(expand('<cword>'))<CR>
 
     " Scratch buffer {{{2
         function! CreateScratchBuffer( new_buffer_cmd, filetype )
