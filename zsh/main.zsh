@@ -14,7 +14,7 @@ antigen bundle sharat87/zsh-vim-mode
 
 
 # Common {{{1
-source "$zshDir/../profile.sh" # Since ZSH doesn't sources ~/.profile
+source "$HOME/.profile"
 fpath=("$zshDir/functions" $fpath)
 
 alias tmux='tmux -2'
