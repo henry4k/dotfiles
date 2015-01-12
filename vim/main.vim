@@ -110,6 +110,10 @@ set nocompatible
         Bundle 'johnsyweb/vim-makeshift'
         " Move over camel and snake case word parts:
         Bundle 'camelcasemotion'
+        " I and A for linewise visual selections:
+        Bundle 'kana/vim-niceblock'
+        " Sane cursor movement in wrapped lines:
+        Bundle 'vim-display-cursor', {'pinned': 1}
 
 
     runtime macros/matchit.vim
@@ -149,6 +153,7 @@ set nocompatible
     let g:mapleader=','
     let g:maplocalleader=','
     nnoremap <Space> :
+    nnoremap ; :
 
     " A cheap exchange operator
     nnoremap x Pld
@@ -228,6 +233,16 @@ set nocompatible
             setlocal nonumber
             setlocal nolist
         endfunction
+
+        function! DictccLookup( query ) range
+            if a:query != ''
+                call ref#open('dictcc', 'DE EN "'.a:query.'"')
+            else
+                call ref#open('dictcc', 'DE EN "'.getreg('*').'"')
+            endif
+        endfunction
+        command! -range -nargs=? Dcc call DictccLookup(expand('<args>'))
+        nnoremap <silent> <leader>dcc :call DictccLookup(expand('<cword>'))<CR>
 
     " Scratch buffer {{{2
         function! CreateScratchBuffer( new_buffer_cmd, filetype )

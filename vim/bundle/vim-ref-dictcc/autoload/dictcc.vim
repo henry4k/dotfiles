@@ -12,16 +12,34 @@ function! s:source.available()
   return 1
 endfunction
 
+let s:script_file = '/Users/hki/dotfiles/vim/bundle/vim-ref-dictcc/plugin/dictcc.py'
 function! s:source.get_body(query)
-    return ref#system('echo wurst brot').stdout
+    return ref#system(s:script_file.'  '.a:query).stdout
 endfunction
 
 function! s:source.opened(query)
   call s:syntax(a:query)
 endfunction
 
-function! s:syntax(query)
+function! s:syntax(type)
+  if a:type ==# 'list'
+    syntax clear
+    return
+  elseif exists('b:current_syntax') && b:current_syntax ==# 'ref-dictcc'
+    return
+  endif
+
   syntax clear
+
+  syntax match refDictForeignWord '\v^[^-]+'
+  syntax match refDictNativeWord  '\v[^-]+$'
+  syntax match refDictSeparator '\v-+'
+
+  highlight default link refDictForeignWord Normal
+  highlight default link refDictNativeWord Normal
+  highlight default link refDictSeparator NonText
+
+  let b:current_syntax = 'ref-dictcc'
 endfunction
 
 function! dictcc#define()

@@ -5,8 +5,8 @@ import urllib2, urllib
 import re
 import sys
 
-# Edit here for default number of results
 MAX_RESULTS = 20
+USER_AGENT = ''
 
 class Dict:
     def __init__(self):
@@ -29,7 +29,7 @@ class Dict:
 
         lang = self.inputLanguage + self.outputLanguage
 
-        req = urllib2.Request("http://"+lang+".dict.cc/?s="+word, None, {'User-agent': 'Mozilla/5.0'})
+        req = urllib2.Request("http://"+lang+".dict.cc/?s="+word, None, {'User-agent': USER_AGENT})
         f = urllib2.urlopen(req)
         self.Response = f.read()
 
@@ -81,7 +81,7 @@ class Dict:
             for i in range(0,minWords):
                 if self.inputWords[i] == "\"\"": continue
                 #print self.inputWords[i].strip("\"") + "," + self.outputWords[i].strip("\"")
-                print self.inputWords[i].strip("\"") + "."*(length - len(self.inputWords[i].strip("\"")) + 15) + self.outputWords[i].strip("\"")
+                print self.inputWords[i].strip("\"") + " " + "-"*(length - len(self.inputWords[i].strip("\""))) + " " + self.outputWords[i].strip("\"")
 
 
 if __name__ == "__main__":
