@@ -102,6 +102,8 @@ set nocompatible
         Bundle 'Townk/vim-autoclose'
         " Enhances completion handling:
         Bundle 'ervandew/supertab'
+        " I and A for linewise visual selections:
+        Bundle 'kana/vim-niceblock'
         " Sane cursor movement in wrapped lines:
         Bundle 'vim-display-cursor', {'pinned': 1}
 
@@ -143,6 +145,7 @@ set nocompatible
     let g:mapleader=','
     let g:maplocalleader=','
     nnoremap <Space> :
+    nnoremap ; :
 
     " A cheap exchange operator
     nnoremap x Pld
@@ -227,6 +230,8 @@ set nocompatible
             setlocal nonumber
             setlocal nolist
         endfunction
+        command! -nargs=1 Dcc call ref#open('dictcc', 'DE EN '.expand('<args>'))
+        nnoremap <leader>dcc :call ref#open('dictcc', 'DE EN '.expand('<cword>'))<CR>
 
     " Scratch buffer {{{2
         function! CreateScratchBuffer( new_buffer_cmd, filetype )
