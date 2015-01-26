@@ -54,8 +54,6 @@ set nocompatible
         Bundle 'justinmk/vim-syntax-extra'
         " GLSL:
         Bundle 'tikhomirov/vim-glsl'
-        " Monit:
-        Bundle 'mv/mv-vim-monit'
 
     " Completion {{{2
         " Automatically close braces:
