@@ -106,6 +106,8 @@ set nocompatible
         Bundle 'kana/vim-niceblock'
         " Sane cursor movement in wrapped lines:
         Bundle 'vim-display-cursor', {'pinned': 1}
+        " Allows opening files at a specific line:
+        Bundle 'bogado/file-line'
 
 
     runtime macros/matchit.vim
