@@ -279,7 +279,6 @@ set nocompatible
 " Interface {{{1
     set ruler
     set showcmd
-    set number
     set nowrap
     set linebreak
     set scrolloff=3
@@ -322,10 +321,6 @@ set nocompatible
         set guioptions=cip
         set guicursor+=a:blinkon0
         colorscheme badwolf4k
-        "highlight clear DiffDelete
-        "highlight DiffDelete guibg=#2c2424 ctermbg=52
-        "highlight DiffAdd    guibg=#272b18 ctermbg=22
-        "highlight DiffChange guibg=#2b241b ctermbg=94
         if has('gui_macvim')
             set fuoptions=maxvert,maxhorz,background:Normal
             set guifont=Menlo\ 10
@@ -362,9 +357,6 @@ set nocompatible
         let g:signify_sign_overwrite = 1
         let g:signify_sign_change = '~'
         let g:signify_difftool = '/usr/bin/diff'
-        highlight link SignifySignAdd    diffAdded
-        highlight link SignifySignChange diffSubname
-        highlight link SignifySignDelete diffRemoved
         "if has('gui_running')
             "let g:signify_line_highlight = 1
         "endif
