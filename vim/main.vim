@@ -13,6 +13,7 @@ set nocompatible
 
     " Color schemes {{{2
         Bundle 'tomasr/molokai'
+        Bundle 'fmoralesc/molokayo'
         Bundle 'github-theme'
         Bundle 'sjl/badwolf'
         Bundle 'reedes/vim-colors-pencil'
@@ -295,7 +296,7 @@ set nocompatible
     set laststatus=2
     set list
     set display+=lastline
-    set cursorline " See augroup CSFix
+    set cursorline " See AdaptColorscheme
     set noerrorbells
     set novisualbell " Disables beeping or screen flashing
     set synmaxcol=500
@@ -307,17 +308,18 @@ set nocompatible
     autocmd InsertEnter * :set colorcolumn=78
     autocmd InsertLeave * :set colorcolumn=0
 
-    augroup CSFix
-        autocmd ColorScheme * highlight clear CursorLine
-        autocmd ColorScheme * highlight Normal ctermbg=none
-        autocmd ColorScheme * highlight LineNr ctermbg=none
-        autocmd ColorScheme * highlight Folded ctermbg=none
-        autocmd ColorScheme * highlight NonText ctermbg=none
-        autocmd ColorScheme * highlight SpecialKey ctermbg=none
-        autocmd ColorScheme * highlight VertSplit ctermbg=none
-        autocmd ColorScheme * highlight SignColumn ctermbg=none
-        "autocmd ColorScheme * highlight clear CursorLineNR cterm=bold
-    augroup END
+    autocmd ColorScheme * call AdaptColorscheme()
+    function! AdaptColorscheme()
+        highlight clear CursorLine
+        highlight Normal ctermbg=none
+        highlight LineNr ctermbg=none
+        highlight Folded ctermbg=none
+        highlight NonText ctermbg=none
+        highlight SpecialKey ctermbg=none
+        highlight VertSplit ctermbg=none
+        highlight SignColumn ctermbg=none
+        "highlight clear CursorLineNR cterm=bold
+    endfunction
 
     syntax on
     if has('gui_running')
@@ -333,6 +335,16 @@ set nocompatible
     else
         colorscheme badwolf4k
     endif
+
+    " Statusline {{{2
+        set statusline=
+        set statusline+=%f\  " filename
+        set statusline+=%m   " modified flag
+        set statusline+=%r   " readonly flag
+        set statusline+=%=   " left/right separator
+        set statusline+=%a\  " position in argument list
+        set statusline+=%-8.(%l:%c%)\  " line:column with padding
+        set statusline+=%P   " position in file as percent
 
     " C syntax {{{2
         let g:c_space_errors=1
