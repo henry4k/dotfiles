@@ -32,6 +32,10 @@ set nocompatible
         Bundle 'bps/vim-textobj-python'
         " af/if:
         Bundle 'kana/vim-textobj-function'
+        " Text objects for comma separated arguments (aa/ia,aA/iA):
+        Bundle 'wellle/targets.vim'
+        " Text objects for comma separated arguments (aa/ia,aA/iA):
+        Bundle 'b4winckler/vim-angry'
 
     " Integrations {{{2
         " Git:
@@ -48,6 +52,18 @@ set nocompatible
         Bundle 'mileszs/ack.vim'
         " C:
         Bundle 'justinmk/vim-syntax-extra'
+        " GLSL:
+        Bundle 'tikhomirov/vim-glsl'
+
+    " Completion {{{2
+        " Automatically close braces:
+        Bundle 'Townk/vim-autoclose'
+        " Same for words:
+        Bundle 'tpope/vim-endwise'
+        " Enhances completion handling:
+        Bundle 'ervandew/supertab'
+        " Ctrl-n/p completion in the command line:
+        Bundle 'cmdline-completion'
 
     " Tools {{{2
         " Surround movements/selections with quotes or similar:
@@ -62,8 +78,6 @@ set nocompatible
         Bundle 'othree/eregex.vim'
         " Check files for syntax errors:
         Bundle 'scrooloose/syntastic'
-        " Ctrl-n/p completion in the command line:
-        Bundle 'cmdline-completion'
         " Run directory specific .local.vimrc files:
         Bundle 'thinca/vim-localrc'
         " Zoom font in GVIM:
@@ -96,12 +110,6 @@ set nocompatible
         Bundle 'johnsyweb/vim-makeshift'
         " Move over camel and snake case word parts:
         Bundle 'camelcasemotion'
-        " Text objects for comma separated arguments (aa/ia,aA/iA):
-        Bundle 'b4winckler/vim-angry'
-        " Automatically close braces:
-        Bundle 'Townk/vim-autoclose'
-        " Enhances completion handling:
-        Bundle 'ervandew/supertab'
         " I and A for linewise visual selections:
         Bundle 'kana/vim-niceblock'
         " Sane cursor movement in wrapped lines:
@@ -207,11 +215,6 @@ set nocompatible
            exec "Dispatch prove ".g:proveargs. a:args
        endfunction
        command! -nargs=* Prove call RunProve("<args>")
-
-    " operator-replace {{{2
-       map x <Plug>(operator-replace)
-       " Because x makes a great mnemonic for eXchange.
-       " And deleting single letters can also accomplished by typing dl.
 
     " yankstack {{{2
        let g:yankstack_map_keys = 0
@@ -508,6 +511,8 @@ augroup filetype_settings
         \ | call SyntaxRange#Include('```lua', '```', 'lua', 'markdownCodeBlock')
         \ | call SyntaxRange#Include('```python', '```', 'python', 'markdownCodeBlock')
         \ | setlocal formatoptions+=w
+        \ | nnoremap <buffer> <LocalLeader>= yypVr=
+        \ | nnoremap <buffer> <LocalLeader>- yypVr-
 
     autocmd FileType xml,html
         \   setlocal iskeyword+=-
