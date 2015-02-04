@@ -259,6 +259,18 @@ set nocompatible
         command! -nargs=* -complete=filetype Scratch  call CreateScratchBuffer('new',  <q-args>)
         command! -nargs=* -complete=filetype VScratch call CreateScratchBuffer('vnew', <q-args>)
 
+    " Toggle background {{{2
+        function! ToggleBackground()
+            if &g:background ==? 'dark'
+                set background=light
+            else
+                set background=dark
+            endif
+        endfunction
+        command! -nargs=0 ToggleBackground call ToggleBackground()
+        nnoremap <silent> <leader>b :call ToggleBackground()<CR>
+
+
 " Clipboard {{{1
     if has('unnamedplus')
         set clipboard=unnamedplus,autoselect
