@@ -260,11 +260,7 @@ set nocompatible
         command! -nargs=* -complete=filetype VScratch call CreateScratchBuffer('vnew', <q-args>)
 
 " Clipboard {{{1
-    if has('unnamedplus')
-        set clipboard=unnamedplus,autoselect
-    else
-        set clipboard=unnamed,autoselect
-    endif
+    set clipboard=unnamedplus
 
     " tslime {{{2
         let g:tslime_ensure_trailing_newlines = 2
