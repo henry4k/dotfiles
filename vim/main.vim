@@ -174,6 +174,8 @@ set nocompatible
     " I.e. 'foobar.cpp' becomes 'foobar.'
     cnoremap %% <C-R>=expand('%:r').'.'<CR>
 
+    cnoremap %f <C-R>=expand('<cfile>')<CR>
+
     " Cause I accidently hit these all the time
     map <f1> <NOP>
     imap <f1> <NOP>
@@ -258,6 +260,17 @@ set nocompatible
         endfunction
         command! -nargs=* -complete=filetype Scratch  call CreateScratchBuffer('new',  <q-args>)
         command! -nargs=* -complete=filetype VScratch call CreateScratchBuffer('vnew', <q-args>)
+
+    " Code sanitizer {{{2
+        function! Sanitize()
+            retab
+            %substitute/\v\s+$//e
+            mark z
+            normal gg=Gg'z<CR>
+            delmarks z
+            echomsg 'Sanitized '.expand('%')
+        endfunction
+        command! Sanitize call Sanitize()
 
 " Clipboard {{{1
     set clipboard=unnamedplus
