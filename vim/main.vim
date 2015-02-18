@@ -261,6 +261,17 @@ set nocompatible
         command! -nargs=* -complete=filetype Scratch  call CreateScratchBuffer('new',  <q-args>)
         command! -nargs=* -complete=filetype VScratch call CreateScratchBuffer('vnew', <q-args>)
 
+    " Toggle background {{{2
+        function! ToggleBackground()
+            if &g:background ==? 'dark'
+                set background=light
+            else
+                set background=dark
+            endif
+        endfunction
+        command! -nargs=0 ToggleBackground call ToggleBackground()
+        nnoremap <silent> <leader>b :call ToggleBackground()<CR>
+
     " Code sanitizer {{{2
         function! Sanitize()
             retab
@@ -535,10 +546,14 @@ augroup filetype_settings
         \ | nnoremap <buffer> <LocalLeader>= yypVr=
         \ | nnoremap <buffer> <LocalLeader>- yypVr-
 
-    autocmd FileType xml,html
+    autocmd FileType xml
         \   setlocal iskeyword+=-
-        \ | setlocal equalprg=xmllint\ --format\ - " <- libxml2-utils
+        \ | setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null " <- libxml2-utils
       " \ | setlocal equalprg=xml_pp " <- XML::Twig (Perl)
+
+    autocmd FileType html
+        \   setlocal iskeyword+=-
+        \ | setlocal equalprg=xmllint\ --format\ --recover\ --html\ -\ 2>/dev/null " <- libxml2-utils
 
     autocmd FileType json
         \   setlocal iskeyword+=-
