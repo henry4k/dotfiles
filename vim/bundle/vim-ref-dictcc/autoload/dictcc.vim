@@ -12,7 +12,7 @@ function! s:source.available()
   return 1
 endfunction
 
-let s:script_file = '/Users/hki/dotfiles/vim/bundle/vim-ref-dictcc/plugin/dictcc.py'
+let s:script_file = expand('<sfile>:p:h').'/../plugin/dictcc.py'
 function! s:source.get_body(query)
     return ref#system(s:script_file.'  '.a:query).stdout
 endfunction

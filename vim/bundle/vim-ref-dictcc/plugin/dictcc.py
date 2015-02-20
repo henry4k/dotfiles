@@ -1,7 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import urllib2, urllib
+import urllib
+import urllib.parse
+import urllib.request
 import re
 import sys
 
@@ -29,9 +31,9 @@ class Dict:
 
         lang = self.inputLanguage + self.outputLanguage
 
-        req = urllib2.Request("http://"+lang+".dict.cc/?s="+word, None, {'User-agent': USER_AGENT})
-        f = urllib2.urlopen(req)
-        self.Response = f.read()
+        req = urllib.request.Request("http://"+lang+".dict.cc/?s="+word, None, {'User-agent': USER_AGENT})
+        f = urllib.request.urlopen(req)
+        self.Response = f.read().decode()
 
 
     # Find 'var c1Arr' and 'var c2Arr' 
@@ -64,7 +66,7 @@ class Dict:
 
     def printResults(self):
         if not self.inputWords or not self.outputWords:
-            print "No results."
+            print('No results.')
 
         else:
             # Get minumum number of both eng and de
@@ -81,13 +83,13 @@ class Dict:
             for i in range(0,minWords):
                 if self.inputWords[i] == "\"\"": continue
                 #print self.inputWords[i].strip("\"") + "," + self.outputWords[i].strip("\"")
-                print self.inputWords[i].strip("\"") + " " + "-"*(length - len(self.inputWords[i].strip("\""))) + " " + self.outputWords[i].strip("\"")
+                print(self.inputWords[i].strip("\"") + " " + "-"*(length - len(self.inputWords[i].strip("\""))) + " " + self.outputWords[i].strip("\""))
 
 
 if __name__ == "__main__":
 
     if len(sys.argv) < 4:
-        print "USAGE:\n$ dict.cc.py \"input language (e.g. DE for German)\" \"output language e.g. EN for English)\" \"word\" (without the \"s)"
+        print("USAGE:\n$ dict.cc.py \"input language (e.g. DE for German)\" \"output language e.g. EN for English)\" \"word\" (without the \"s)")
     else:
         # Concat all arguments into one word (urlencoded space)
         expression = ""
@@ -98,10 +100,10 @@ if __name__ == "__main__":
         for index in range(3, len(sys.argv)):
             expression += sys.argv[index] + " "
 
-        print inputFromSysArgv + " to " + outputFromSysArgv + ": " + expression + "\n"
+        print(inputFromSysArgv + " to " + outputFromSysArgv + ": " + expression + "\n")
 
         # Urlencode input
-        expression = urllib.quote(expression)
+        expression = urllib.parse.quote(expression)
 
         myDict = Dict()
         myDict.setInputLanguage( inputFromSysArgv )
