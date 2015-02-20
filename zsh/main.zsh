@@ -58,6 +58,21 @@ bindkey "^?" backward-delete-char  # vi-backward-delete-char
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
+# Use ctrl-z as an alias for fg {{{2
+# by Neitanod
+function fancy-ctrl-z
+{
+  if [[ $#BUFFER -eq 0 ]]; then
+    fg
+    zle redisplay
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 
 # Misc {{{1
 setopt nobeep
