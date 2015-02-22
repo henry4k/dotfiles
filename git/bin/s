@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+# Branch:
+git status | head -1
+
+# State of working and staging area:
+git status -s
+
+# Stashed changes:
+StashCount=$(git stash list | wc -l)
+if [ "$StashCount" -ne 0 ]; then
+    echo "$StashCount stashes"
+fi
