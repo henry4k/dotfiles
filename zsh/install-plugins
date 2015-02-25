@@ -6,5 +6,6 @@ zgen load zsh-users/zsh-syntax-highlighting
 zgen load zsh-users/zsh-history-substring-search
 #zgen load tarruda/zsh-autosuggestions
 zgen load sharat87/zsh-vim-mode
+zgen load marzocchi/zsh-notify
 
 zgen save
