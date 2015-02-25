@@ -4,13 +4,7 @@ zshDir=$(dirname $script)
 
 
 # Bundles {{{1
-source "$zshDir/antigen/antigen.zsh"
-## run 'antigen update' to update bundles
-antigen bundle zsh-users/zsh-syntax-highlighting
-#antigen bundle zsh-users/zsh-completions src
-antigen bundle zsh-users/zsh-history-substring-search
-#antigen bundle tarruda/zsh-autosuggestions
-antigen bundle sharat87/zsh-vim-mode
+source "$HOME/.zgen/init.zsh"
 
 
 # Common {{{1
@@ -92,6 +86,7 @@ setopt inc_append_history
 setopt hist_no_functions
 setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
+setopt hist_save_no_dups
 
 alias shist fc -RI # sync history
 
@@ -120,7 +115,3 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 if autoload promptinit && promptinit 2>/dev/null; then
     source "$zshDir/prompt.zsh"
 fi
-
-
-# Finalization {{{1
-antigen apply
