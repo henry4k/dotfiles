@@ -44,6 +44,14 @@ source $Dotfiles/gdbinit
 # DOTFILES END
 EOF
 
+cat >> "$HOME/.rep.lua" << EOF
+-- DOTFILES BEGIN
+local chunk = loadfile('$Dotfiles/rep.lua')
+require('repl.utils').setfenv(chunk, _G)
+chunk()
+-- DOTFILES END
+EOF
+
 ln -s "$Dotfiles/proverc" "$HOME/.proverc"
 ln -s "$Dotfiles/tupoptions" "$HOME/.tupoptions"
 
