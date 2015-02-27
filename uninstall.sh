@@ -31,6 +31,7 @@ UninstallDotfile "$HOME/.vimrc"
 UninstallDotfile "$HOME/.nvimrc"
 UninstallDotfile "$HOME/.tmux.conf"
 UninstallDotfile "$HOME/.gdbinit"
+UninstallDotfile "$HOME/.rep.lua"
 
 rm -f "$HOME/.tupoptions"
 rm -f "$HOME/.proverc"

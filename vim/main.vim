@@ -117,6 +117,8 @@ set nocompatible
         Bundle 'vim-display-cursor', {'pinned': 1}
         " Allows opening files at a specific line:
         Bundle 'bogado/file-line'
+        " Edit file regions
+        Bundle 'chrisbra/NrrwRgn'
 
 
     runtime macros/matchit.vim
