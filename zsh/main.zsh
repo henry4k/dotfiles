@@ -4,45 +4,25 @@ zshDir=$(dirname $script)
 
 
 # Bundles {{{1
-source "$zshDir/antigen/antigen.zsh"
-## run 'antigen update' to update bundles
-antigen bundle zsh-users/zsh-syntax-highlighting
-#antigen bundle zsh-users/zsh-completions src
-antigen bundle zsh-users/zsh-history-substring-search
-#antigen bundle tarruda/zsh-autosuggestions
-antigen bundle sharat87/zsh-vim-mode
+source "$HOME/.zgen/init.zsh"
 
 
 # Common {{{1
-source "$zshDir/../locale.sh"
-
+source "$HOME/.profile"
 fpath=("$zshDir/functions" $fpath)
-
-export EDITOR='vim'
-export VISUAL="$EDITOR"
-export PAGER='less -isR'
-export MANPAGER="$PAGER"
-export GROFF_NO_SGR=1
 
 alias tmux='tmux -2'
 alias mv='mv --no-clobber'
+alias info='info --vi-keys'
+alias gdb='gdb --quiet'
 alias t="$zshDir/../bin/t/t.py --task-dir ~/.tasks --list tasks"
 
 if which 'xdg-open' > /dev/null; then
     alias open='xdg-open'
 fi
 
-function ag-files
-{
-    ag $@ | grep -oe '^[^:]*' | uniq
-}
-
 
 # Colors {{{1
-export TERM='xterm-256color'
-export COLORTERM='yes'
-export CLICOLOR=1
-
 if which 'dircolors' > /dev/null; then
     lsColor='--color=auto'
     if [[ -e "$HOME/.dircolors" ]]; then
@@ -58,13 +38,6 @@ alias ll="ls $lsFlags -lh $lsColor"
 
 alias grep='grep --color=auto'
 
-export LESS_TERMCAP_mb=$(printf '\e[1;31m')
-export LESS_TERMCAP_md=$(printf '\e[1;31m')
-export LESS_TERMCAP_me=$(printf '\e[0m')
-export LESS_TERMCAP_se=$(printf '\e[0m')
-export LESS_TERMCAP_so=$(printf '\e[1;44;33m')
-export LESS_TERMCAP_ue=$(printf '\e[0m')
-export LESS_TERMCAP_us=$(printf '\e[1;32m')
 
 
 # Keymap {{{1
@@ -78,6 +51,21 @@ bindkey "^?" backward-delete-char  # vi-backward-delete-char
 
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
+
+# Use ctrl-z as an alias for fg {{{2
+# by Neitanod
+function fancy-ctrl-z
+{
+  if [[ $#BUFFER -eq 0 ]]; then
+    fg
+    zle redisplay
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
 
 
 # Misc {{{1
@@ -98,8 +86,10 @@ setopt inc_append_history
 setopt hist_no_functions
 setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
+setopt hist_save_no_dups
 
 alias shist fc -RI # sync history
+
 
 # Autocomplete {{{1
 autoload -U compinit && compinit
@@ -125,8 +115,3 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 if autoload promptinit && promptinit 2>/dev/null; then
     source "$zshDir/prompt.zsh"
 fi
-source "$zshDir/safe-paste.zsh"
-
-
-# Finalization {{{1
-antigen apply

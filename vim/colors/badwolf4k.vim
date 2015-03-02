@@ -3,6 +3,7 @@ let colors_name = "badwolf4k"
 
 " Palette {{{
 let s:bwc = {}
+let s:bwc.dress      = ['ff9eb8', 211]
 let s:bwc.darklime   = ['272b18', 22]
 let s:bwc.darkdress  = ['2c2424', 52]
 let s:bwc.darkorange = ['2b241b', 94]
@@ -50,8 +51,16 @@ endfunction
 " Diffs {{{
 hi clear DiffDelete
 hi clear DiffChange
-call s:HL('DiffDelete', '', 'darkdress')
+call s:HL('DiffDelete', 'darkdress', 'darkdress')
 call s:HL('DiffAdd',    '', 'darklime')
 call s:HL('DiffChange', '', 'darkorange')
 call s:HL('DiffText',   '', 'darkorange')
+call s:HL('DiffText',   '', 'darkorange')
+" }}}
+
+" Signify {{{
+hi link SignifySignAdd    diffAdded
+hi link SignifySignChange diffSubname
+hi link SignifySignDelete diffRemoved
+call s:HL('SignifyLineDelete', 'dress', '', 'underline')
 " }}}

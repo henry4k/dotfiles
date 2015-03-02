@@ -13,6 +13,7 @@ set nocompatible
 
     " Color schemes {{{2
         Bundle 'tomasr/molokai'
+        Bundle 'fmoralesc/molokayo'
         Bundle 'github-theme'
         Bundle 'sjl/badwolf'
         Bundle 'reedes/vim-colors-pencil'
@@ -32,6 +33,10 @@ set nocompatible
         Bundle 'bps/vim-textobj-python'
         " af/if:
         Bundle 'kana/vim-textobj-function'
+        " Text objects for comma separated arguments (aa/ia,aA/iA):
+        Bundle 'wellle/targets.vim'
+        " Text objects for comma separated arguments (aa/ia,aA/iA):
+        Bundle 'b4winckler/vim-angry'
 
     " Integrations {{{2
         " Git:
@@ -46,6 +51,20 @@ set nocompatible
         Bundle 'tup.vim', {'pinned': 1}
         " Ack:
         Bundle 'mileszs/ack.vim'
+        " C:
+        Bundle 'justinmk/vim-syntax-extra'
+        " GLSL:
+        Bundle 'tikhomirov/vim-glsl'
+
+    " Completion {{{2
+        " Automatically close braces:
+        Bundle 'Townk/vim-autoclose'
+        " Same for words:
+        Bundle 'tpope/vim-endwise'
+        " Enhances completion handling:
+        Bundle 'ervandew/supertab'
+        " Ctrl-n/p completion in the command line:
+        Bundle 'cmdline-completion'
 
     " Tools {{{2
         " Surround movements/selections with quotes or similar:
@@ -60,8 +79,6 @@ set nocompatible
         Bundle 'othree/eregex.vim'
         " Check files for syntax errors:
         Bundle 'scrooloose/syntastic'
-        " Ctrl-n/p completion in the command line:
-        Bundle 'cmdline-completion'
         " Run directory specific .local.vimrc files:
         Bundle 'thinca/vim-localrc'
         " Zoom font in GVIM:
@@ -83,8 +100,6 @@ set nocompatible
         " Distraction free editing:
         Bundle 'junegunn/limelight.vim'
         Bundle 'junegunn/goyo.vim'
-        " Support for bracketed paste mode:
-        Bundle 'ConradIrwin/vim-bracketed-paste'
         " Unified interface to documentation sources:
         Bundle 'thinca/vim-ref'
         Bundle 'vim-ref-dictcc', {'pinned': 1}
@@ -96,10 +111,14 @@ set nocompatible
         Bundle 'johnsyweb/vim-makeshift'
         " Move over camel and snake case word parts:
         Bundle 'camelcasemotion'
-        " Text objects for comma separated arguments (aa/ia,aA/iA):
-        Bundle 'b4winckler/vim-angry'
-        " Automatically close braces:
-        Bundle 'Townk/vim-autoclose'
+        " I and A for linewise visual selections:
+        Bundle 'kana/vim-niceblock'
+        " Sane cursor movement in wrapped lines:
+        Bundle 'vim-display-cursor', {'pinned': 1}
+        " Allows opening files at a specific line:
+        Bundle 'bogado/file-line'
+        " Edit file regions
+        Bundle 'chrisbra/NrrwRgn'
 
 
     runtime macros/matchit.vim
@@ -129,12 +148,17 @@ set nocompatible
         nnoremap <C-y><c> :YcmForceCompileAndDiagnostics<CR>
         nnoremap <leader>yd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+    " SuperTab {{{2
+        let g:SuperTabLongestEnhanced = 1
+        let g:SuperTabLongestHighlight = 1
+
 " Mouse and Handling {{{1
     set mouse=a
     set mousemodel=popup_setpos
     let g:mapleader=','
     let g:maplocalleader=','
     nnoremap <Space> :
+    nnoremap ; :
 
     " A cheap exchange operator
     nnoremap x Pld
@@ -147,6 +171,12 @@ set nocompatible
     " Paste formatted by default
     "nnoremap p ]p
     "nnoremap P ]P
+
+    " In command mode %% will insert the basename with a trailing dot.
+    " I.e. 'foobar.cpp' becomes 'foobar.'
+    cnoremap %% <C-R>=expand('%:r').'.'<CR>
+
+    cnoremap %f <C-R>=expand('<cfile>')<CR>
 
     " Cause I accidently hit these all the time
     map <f1> <NOP>
@@ -191,11 +221,6 @@ set nocompatible
        endfunction
        command! -nargs=* Prove call RunProve("<args>")
 
-    " operator-replace {{{2
-       map x <Plug>(operator-replace)
-       " Because x makes a great mnemonic for eXchange.
-       " And deleting single letters can also accomplished by typing dl.
-
     " yankstack {{{2
        let g:yankstack_map_keys = 0
        nmap <C-n> <Plug>yankstack_substitute_newer_paste
@@ -216,12 +241,52 @@ set nocompatible
             setlocal nolist
         endfunction
 
+        function! DictccLookup( query ) range
+            if a:query != ''
+                call ref#open('dictcc', 'DE EN "'.a:query.'"')
+            else
+                call ref#open('dictcc', 'DE EN "'.getreg('*').'"')
+            endif
+        endfunction
+        command! -range -nargs=? Dcc call DictccLookup(expand('<args>'))
+        nnoremap <silent> <leader>dcc :call DictccLookup(expand('<cword>'))<CR>
+
+    " Scratch buffer {{{2
+        function! CreateScratchBuffer( new_buffer_cmd, filetype )
+            let filetype = a:filetype
+            if filetype == ''
+                let filetype = &filetype
+            endif
+            exec a:new_buffer_cmd
+            exec 'setlocal filetype='.filetype
+        endfunction
+        command! -nargs=* -complete=filetype Scratch  call CreateScratchBuffer('new',  <q-args>)
+        command! -nargs=* -complete=filetype VScratch call CreateScratchBuffer('vnew', <q-args>)
+
+    " Toggle background {{{2
+        function! ToggleBackground()
+            if &g:background ==? 'dark'
+                set background=light
+            else
+                set background=dark
+            endif
+        endfunction
+        command! -nargs=0 ToggleBackground call ToggleBackground()
+        nnoremap <silent> <leader>b :call ToggleBackground()<CR>
+
+    " Code sanitizer {{{2
+        function! Sanitize()
+            retab
+            %substitute/\v\s+$//e
+            mark z
+            normal gg=Gg'z<CR>
+            delmarks z
+            echomsg 'Sanitized '.expand('%')
+        endfunction
+        command! Sanitize call Sanitize()
+
 " Clipboard {{{1
-    if has('unnamedplus')
-        set clipboard=unnamedplus,autoselect
-    else
-        set clipboard=unnamed,autoselect
-    endif
+    set clipboard=unnamedplus
 
     " tslime {{{2
         let g:tslime_ensure_trailing_newlines = 2
@@ -240,7 +305,6 @@ set nocompatible
 " Interface {{{1
     set ruler
     set showcmd
-    set number
     set nowrap
     set linebreak
     set scrolloff=3
@@ -254,9 +318,9 @@ set nocompatible
     set laststatus=2
     set list
     set display+=lastline
-    set cursorline " See augroup CSFix
+    set cursorline " See AdaptColorscheme
     set noerrorbells
-    set visualbell " Disables beeping or screen flashing
+    set novisualbell " Disables beeping or screen flashing
     set synmaxcol=500
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set showbreak=>\ 
@@ -266,27 +330,24 @@ set nocompatible
     autocmd InsertEnter * :set colorcolumn=78
     autocmd InsertLeave * :set colorcolumn=0
 
-    augroup CSFix
-        autocmd ColorScheme * highlight clear CursorLine
-        autocmd ColorScheme * highlight Normal ctermbg=none
-        autocmd ColorScheme * highlight LineNr ctermbg=none
-        autocmd ColorScheme * highlight Folded ctermbg=none
-        autocmd ColorScheme * highlight NonText ctermbg=none
-        autocmd ColorScheme * highlight SpecialKey ctermbg=none
-        autocmd ColorScheme * highlight VertSplit ctermbg=none
-        autocmd ColorScheme * highlight SignColumn ctermbg=none
-        "autocmd ColorScheme * highlight clear CursorLineNR cterm=bold
-    augroup END
+    autocmd ColorScheme * call AdaptColorscheme()
+    function! AdaptColorscheme()
+        highlight clear CursorLine
+        highlight Normal ctermbg=none
+        highlight LineNr ctermbg=none
+        highlight Folded ctermbg=none
+        highlight NonText ctermbg=none
+        highlight SpecialKey ctermbg=none
+        highlight VertSplit ctermbg=none
+        highlight SignColumn ctermbg=none
+        "highlight clear CursorLineNR cterm=bold
+    endfunction
 
     syntax on
     if has('gui_running')
         set guioptions=cip
         set guicursor+=a:blinkon0
         colorscheme badwolf4k
-        "highlight clear DiffDelete
-        "highlight DiffDelete guibg=#2c2424 ctermbg=52
-        "highlight DiffAdd    guibg=#272b18 ctermbg=22
-        "highlight DiffCahnge guibg=#2b241b ctermbg=94
         if has('gui_macvim')
             set fuoptions=maxvert,maxhorz,background:Normal
             set guifont=Menlo\ 10
@@ -296,6 +357,16 @@ set nocompatible
     else
         colorscheme badwolf4k
     endif
+
+    " Statusline {{{2
+        set statusline=
+        set statusline+=%f\  " filename
+        set statusline+=%m   " modified flag
+        set statusline+=%r   " readonly flag
+        set statusline+=%=   " left/right separator
+        set statusline+=%a\  " position in argument list
+        set statusline+=%-8.(%l:%c%)\  " line:column with padding
+        set statusline+=%P   " position in file as percent
 
     " C syntax {{{2
         let g:c_space_errors=1
@@ -323,9 +394,6 @@ set nocompatible
         let g:signify_sign_overwrite = 1
         let g:signify_sign_change = '~'
         let g:signify_difftool = '/usr/bin/diff'
-        highlight link SignifySignAdd    diffAdded
-        highlight link SignifySignChange diffSubname
-        highlight link SignifySignDelete diffRemoved
         "if has('gui_running')
             "let g:signify_line_highlight = 1
         "endif
@@ -408,9 +476,6 @@ set nocompatible
     set history=1000
     set undolevels=1000
     set encoding=utf-8
-    set timeoutlen=1000
-    set ttimeout
-    set ttimeoutlen=0
     set backspace=indent,eol,start
     set ttyfast
     set shortmess+=I " hide :intro
@@ -472,6 +537,7 @@ augroup filetype_settings
 
     autocmd FileType markdown
         \   setlocal iskeyword+=-
+        \ | let b:AutoClosePairs = AutoClose#DefaultPairsModified('', '`')
         \ | let g:surround_{char2nr("*")} = "*\r*"
         \ | let g:surround_{char2nr("_")} = "_\r_"
         \ | call SyntaxRange#Include('```c', '```', 'c', 'markdownCodeBlock')
@@ -479,11 +545,17 @@ augroup filetype_settings
         \ | call SyntaxRange#Include('```lua', '```', 'lua', 'markdownCodeBlock')
         \ | call SyntaxRange#Include('```python', '```', 'python', 'markdownCodeBlock')
         \ | setlocal formatoptions+=w
+        \ | nnoremap <buffer> <LocalLeader>= yypVr=
+        \ | nnoremap <buffer> <LocalLeader>- yypVr-
 
-    autocmd FileType xml,html
+    autocmd FileType xml
         \   setlocal iskeyword+=-
-        \ | setlocal equalprg=xmllint\ --format\ - " <- libxml2-utils
+        \ | setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null " <- libxml2-utils
       " \ | setlocal equalprg=xml_pp " <- XML::Twig (Perl)
+
+    autocmd FileType html
+        \   setlocal iskeyword+=-
+        \ | setlocal equalprg=xmllint\ --format\ --recover\ --html\ -\ 2>/dev/null " <- libxml2-utils
 
     autocmd FileType json
         \   setlocal iskeyword+=-

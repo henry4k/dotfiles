@@ -27,8 +27,8 @@ function prompt_custom_precmd ()
     fi
     #local end="%F{green}>"
 
-    local topDir=$(basename $PWD)
-    local parentDir=$(dirname $PWD)
+    local topDir="$(basename $PWD)"
+    local parentDir="$(dirname $PWD)"
 
     if [[ "$topDir" == '/' ]]; then
         local parentDir=''

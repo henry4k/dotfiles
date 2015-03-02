@@ -17,8 +17,10 @@ function GitCloneOrPull()
 }
 
 pushd zsh
-GitCloneOrPull 'antigen' 'https://github.com/zsh-users/antigen.git'
+GitCloneOrPull 'zgen' 'https://github.com/tarjoilija/zgen.git'
 popd
+zsh/install-plugins
+zsh/update-plugins
 
 pushd vim/bundle
 GitCloneOrPull 'vundle' 'https://github.com/gmarik/vundle.git'

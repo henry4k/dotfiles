@@ -1,8 +1,5 @@
-" Integrated reference viewer.
-" Version: 0.4.3
-" Author : thinca <thinca+vim@gmail.com>
-" License: Creative Commons Attribution 2.1 Japan License
-"          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
+" vim-ref source for the dict.cc online dictionary.
+" Version: 0.1
 
 if exists('g:loaded_ref_dictcc')
   finish
