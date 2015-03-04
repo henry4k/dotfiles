@@ -117,10 +117,12 @@ set nocompatible
         Bundle 'vim-display-cursor', {'pinned': 1}
         " Allows opening files at a specific line:
         Bundle 'bogado/file-line'
-        " Edit file regions
+        " Edit file regions:
         Bundle 'chrisbra/NrrwRgn'
         " EditorConfig support:
         Bundle 'editorconfig/editorconfig-vim'
+        " Enhances the netrw plugin:
+        Bundle 'tpope/vim-vinegar'
 
 
     runtime macros/matchit.vim
@@ -161,6 +163,8 @@ set nocompatible
     let g:maplocalleader=','
     nnoremap <Space> :
     nnoremap ; :
+
+    nnoremap q :close<CR>
 
     " A cheap exchange operator
     nnoremap x Pld
@@ -287,6 +291,10 @@ set nocompatible
         endfunction
         command! Sanitize call Sanitize()
 
+    " Vinegar/netrw {{{2
+        nmap - <Plug>VinegarUp
+        nmap = <Plug>VinegarSplitUp
+
 " Clipboard {{{1
     set clipboard=unnamedplus
 
@@ -391,12 +399,6 @@ set nocompatible
         let g:kolor_alternative_matchparen=1
         let g:badwolf_darkgutter=1
         let g:badwolf_tabline=0 " darker background
-
-    " NetRW {{{2
-        let g:netrw_banner = 0
-        let g:netrw_hide = 1
-        let g:netrw_list_hide = '^\.'
-        let g:netrw_liststyle = 3
 
     " Signify {{{2
         let g:signify_vcs_list = ['git']
