@@ -143,14 +143,14 @@ set nocompatible
     set isfname-='
     set isfname-=32
 
-    let g:ycm_filepath_completion_use_working_dir=1
-    " ^- since we sync the workdir ourselves
-    let g:ycm_autoclose_preview_window_after_completion=1
-    let g:ycm_autoclose_preview_window_after_insertion=1
-    nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
-    nnoremap <C-y><c> :YcmForceCompileAndDiagnostics<CR>
-    nnoremap <leader>yd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    nnoremap <C-y><d> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    " YouCompleteMe {{{2
+        let g:ycm_filepath_completion_use_working_dir=1
+        " ^- since we sync the workdir ourselves
+        let g:ycm_autoclose_preview_window_after_completion=1
+        let g:ycm_autoclose_preview_window_after_insertion=1
+        nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
+        nnoremap <C-y><c> :YcmForceCompileAndDiagnostics<CR>
+        nnoremap <leader>yd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
     " SuperTab {{{2
         let g:SuperTabLongestEnhanced = 1
@@ -575,6 +575,9 @@ augroup filetype_settings
     autocmd FileType json
         \   setlocal iskeyword+=-
         \ | setlocal equalprg=json_pp
+
+    autocmd FileType python
+        \   let b:AutoClosePairs = AutoClose#DefaultPairsModified("'\"", "")
 
 augroup END
 
