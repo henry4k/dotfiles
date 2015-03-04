@@ -117,8 +117,12 @@ set nocompatible
         Bundle 'vim-display-cursor', {'pinned': 1}
         " Allows opening files at a specific line:
         Bundle 'bogado/file-line'
-        " Edit file regions
+        " Edit file regions:
         Bundle 'chrisbra/NrrwRgn'
+        " EditorConfig support:
+        Bundle 'editorconfig/editorconfig-vim'
+        " Enhances the netrw plugin:
+        Bundle 'tpope/vim-vinegar'
 
 
     runtime macros/matchit.vim
@@ -139,14 +143,14 @@ set nocompatible
     set isfname-='
     set isfname-=32
 
-    let g:ycm_filepath_completion_use_working_dir=1
-    " ^- since we sync the workdir ourselves
-    let g:ycm_autoclose_preview_window_after_completion=1
-    let g:ycm_autoclose_preview_window_after_insertion=1
-    nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
-    nnoremap <C-y><c> :YcmForceCompileAndDiagnostics<CR>
-    nnoremap <leader>yd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    nnoremap <C-y><d> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    " YouCompleteMe {{{2
+        let g:ycm_filepath_completion_use_working_dir=1
+        " ^- since we sync the workdir ourselves
+        let g:ycm_autoclose_preview_window_after_completion=1
+        let g:ycm_autoclose_preview_window_after_insertion=1
+        nnoremap <leader>yc :YcmForceCompileAndDiagnostics<CR>
+        nnoremap <C-y><c> :YcmForceCompileAndDiagnostics<CR>
+        nnoremap <leader>yd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
     " SuperTab {{{2
         let g:SuperTabLongestEnhanced = 1
@@ -159,6 +163,8 @@ set nocompatible
     let g:maplocalleader=','
     nnoremap <Space> :
     nnoremap ; :
+
+    nnoremap q :close<CR>
 
     " A cheap exchange operator
     nnoremap x Pld
@@ -285,6 +291,10 @@ set nocompatible
         endfunction
         command! Sanitize call Sanitize()
 
+    " Vinegar/netrw {{{2
+        nmap - <Plug>VinegarUp
+        nmap = <Plug>VinegarSplitUp
+
 " Clipboard {{{1
     set clipboard=unnamedplus
 
@@ -327,7 +337,14 @@ set nocompatible
     set fillchars=vert:│
 
     " Show colorcolumn only in insert mode.
-    autocmd InsertEnter * :set colorcolumn=78
+    function! UpdateColorColumn()
+        if &textwidth == 0
+            set colorcolumn=78
+        else
+            exec "setlocal colorcolumn=".(&textwidth+1)
+        endif
+    endfunction
+    autocmd InsertEnter * :call UpdateColorColumn()
     autocmd InsertLeave * :set colorcolumn=0
 
     autocmd ColorScheme * call AdaptColorscheme()
@@ -382,12 +399,6 @@ set nocompatible
         let g:kolor_alternative_matchparen=1
         let g:badwolf_darkgutter=1
         let g:badwolf_tabline=0 " darker background
-
-    " NetRW {{{2
-        let g:netrw_banner = 0
-        let g:netrw_hide = 1
-        let g:netrw_list_hide = '^\.'
-        let g:netrw_liststyle = 3
 
     " Signify {{{2
         let g:signify_vcs_list = ['git']
@@ -505,6 +516,10 @@ set nocompatible
     " Makeshift {{{2
         let g:makeshift_systems = { 'Tupfile.ini': 'tup' }
 
+    " EditorConfig {{{2
+        let g:EditorConfig_max_line_indicator = "none"
+        " ^- As we handle this ourselves anyway.
+
 " Filetypes {{{1
 augroup filetype_settings
     autocmd!
@@ -560,6 +575,9 @@ augroup filetype_settings
     autocmd FileType json
         \   setlocal iskeyword+=-
         \ | setlocal equalprg=json_pp
+
+    autocmd FileType python
+        \   let b:AutoClosePairs = AutoClose#DefaultPairsModified("'\"", "")
 
 augroup END
 
