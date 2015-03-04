@@ -119,6 +119,8 @@ set nocompatible
         Bundle 'bogado/file-line'
         " Edit file regions
         Bundle 'chrisbra/NrrwRgn'
+        " EditorConfig support:
+        Bundle 'editorconfig/editorconfig-vim'
 
 
     runtime macros/matchit.vim
@@ -327,7 +329,14 @@ set nocompatible
     set fillchars=vert:│
 
     " Show colorcolumn only in insert mode.
-    autocmd InsertEnter * :set colorcolumn=78
+    function! UpdateColorColumn()
+        if &textwidth == 0
+            set colorcolumn=78
+        else
+            exec "setlocal colorcolumn=".(&textwidth+1)
+        endif
+    endfunction
+    autocmd InsertEnter * :call UpdateColorColumn()
     autocmd InsertLeave * :set colorcolumn=0
 
     autocmd ColorScheme * call AdaptColorscheme()
@@ -504,6 +513,10 @@ set nocompatible
 
     " Makeshift {{{2
         let g:makeshift_systems = { 'Tupfile.ini': 'tup' }
+
+    " EditorConfig {{{2
+        let g:EditorConfig_max_line_indicator = "none"
+        " ^- As we handle this ourselves anyway.
 
 " Filetypes {{{1
 augroup filetype_settings
