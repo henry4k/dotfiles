@@ -462,8 +462,11 @@ set nocompatible
     inoremap <F7> <C-\><C-O>:setlocal spelllang=en,de spell! spell?<CR>
 
     " Syntastic {{{2
+        let g:syntastic_check_on_open = 1
         "let g:syntastic_text_checkers = ['language_check']
         let g:syntastic_text_language_check_args = '-m en-GB -l de-DE'
+        let g:syntastic_lua_checkers = ['luac', 'luacheck']
+        let g:syntastic_lua_luacheck_args = '--std max --ignore 111'
         " TODO: OCLint?
         " TODO: pyflake/pep8?
 
