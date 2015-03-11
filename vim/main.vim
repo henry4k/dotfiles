@@ -156,6 +156,20 @@ set nocompatible
         let g:SuperTabLongestEnhanced = 1
         let g:SuperTabLongestHighlight = 1
 
+    " German Mode (tm) {{{2
+        function! SetGermanMode( options )
+            for mapping in [ ['ae', 'ä'],
+                           \ ['Ae', 'Ä'],
+                           \ ['oe', 'ö'],
+                           \ ['Oe', 'Ö'],
+                           \ ['ue', 'ü'],
+                           \ ['Ue', 'Ü'],
+                           \ ['SS', 'ß'] ]
+                exec 'inoremap '.a:options.' '.mapping[0].' '.mapping[1]
+            endfor
+        endfunction
+       command! -nargs=* EnableGermanMode call SetGermanMode('<args>')
+
 " Mouse and Handling {{{1
     set mouse=a
     set mousemodel=popup_setpos
