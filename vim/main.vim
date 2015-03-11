@@ -177,8 +177,18 @@ set nocompatible
     let g:maplocalleader=','
     nnoremap <Space> :
     nnoremap ; :
-
     nnoremap q :close<CR>
+
+    " { and } skip over closed folds
+    nnoremap <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
+    nnoremap <expr> { foldclosed(search('^$', 'Wnb')) == -1 ? "{" : "{k{"
+
+    " [S]plit line (sister to [J]oin lines)
+    " cc still substitutes the line like S would
+    nnoremap S i<CR><Esc>^mwgk:silent! s/\v +$//<CR>:noh<CR>
+
+    " Sensible redo
+    nnoremap U <C-R>
 
     " A cheap exchange operator
     nnoremap x Pld
@@ -307,7 +317,7 @@ set nocompatible
 
     " Vinegar/netrw {{{2
         nmap - <Plug>VinegarUp
-        nmap = <Plug>VinegarSplitUp
+        nmap _ <Plug>VinegarSplitUp
 
 " Clipboard {{{1
     set clipboard=unnamedplus
