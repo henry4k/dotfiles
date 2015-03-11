@@ -156,6 +156,20 @@ set nocompatible
         let g:SuperTabLongestEnhanced = 1
         let g:SuperTabLongestHighlight = 1
 
+    " German Mode (tm) {{{2
+        function! SetGermanMode( options )
+            for mapping in [ ['ae', 'ä'],
+                           \ ['Ae', 'Ä'],
+                           \ ['oe', 'ö'],
+                           \ ['Oe', 'Ö'],
+                           \ ['ue', 'ü'],
+                           \ ['Ue', 'Ü'],
+                           \ ['SS', 'ß'] ]
+                exec 'inoremap '.a:options.' '.mapping[0].' '.mapping[1]
+            endfor
+        endfunction
+       command! -nargs=* EnableGermanMode call SetGermanMode('<args>')
+
 " Mouse and Handling {{{1
     set mouse=a
     set mousemodel=popup_setpos
@@ -163,8 +177,18 @@ set nocompatible
     let g:maplocalleader=','
     nnoremap <Space> :
     nnoremap ; :
-
     nnoremap q :close<CR>
+
+    " { and } skip over closed folds
+    nnoremap <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
+    nnoremap <expr> { foldclosed(search('^$', 'Wnb')) == -1 ? "{" : "{k{"
+
+    " [S]plit line (sister to [J]oin lines)
+    " cc still substitutes the line like S would
+    nnoremap S i<CR><Esc>^mwgk:silent! s/\v +$//<CR>:noh<CR>
+
+    " Sensible redo
+    nnoremap U <C-R>
 
     " A cheap exchange operator
     nnoremap x Pld
@@ -293,7 +317,7 @@ set nocompatible
 
     " Vinegar/netrw {{{2
         nmap - <Plug>VinegarUp
-        nmap = <Plug>VinegarSplitUp
+        nmap _ <Plug>VinegarSplitUp
 
 " Clipboard {{{1
     set clipboard=unnamedplus
@@ -438,8 +462,11 @@ set nocompatible
     inoremap <F7> <C-\><C-O>:setlocal spelllang=en,de spell! spell?<CR>
 
     " Syntastic {{{2
+        let g:syntastic_check_on_open = 1
         "let g:syntastic_text_checkers = ['language_check']
         let g:syntastic_text_language_check_args = '-m en-GB -l de-DE'
+        let g:syntastic_lua_checkers = ['luac', 'luacheck']
+        let g:syntastic_lua_luacheck_args = '--std max --ignore 111'
         " TODO: OCLint?
         " TODO: pyflake/pep8?
 
