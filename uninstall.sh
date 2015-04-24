@@ -35,6 +35,7 @@ UninstallDotfile "$HOME/.rep.lua"
 
 rm -f "$HOME/.tupoptions"
 rm -f "$HOME/.proverc"
+rm -f "$HOME/.sqliterc"
 rm -f "$HOME/.gitconfig"
 rm -f "$HOME/.dircolors"
 

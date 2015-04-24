@@ -54,6 +54,7 @@ EOF
 
 ln -s "$Dotfiles/proverc" "$HOME/.proverc"
 ln -s "$Dotfiles/tupoptions" "$HOME/.tupoptions"
+ln -s "$Dotfiles/sqliterc" "$HOME/.sqliterc"
 
 GitConfig='git config --global'
 $GitConfig user.email 'henrykielmann@gmail.com'
