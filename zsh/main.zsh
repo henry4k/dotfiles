@@ -12,7 +12,6 @@ source "$HOME/.profile"
 fpath=("$zshDir/functions" $fpath)
 
 alias tmux='tmux -2'
-alias mv='mv --no-clobber'
 alias info='info --vi-keys'
 alias gdb='gdb --quiet'
 alias t="$zshDir/../bin/t/t.py --task-dir ~/.tasks --list tasks"

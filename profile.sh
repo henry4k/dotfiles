@@ -2,7 +2,11 @@
 
 
 # Misc {{{1
-export EDITOR='vim'
+if which nvim >/dev/null; then
+    export EDITOR='nvim'
+else
+    export EDITOR='vim'
+fi
 export VISUAL="$EDITOR"
 export PAGER='less -isR'
 export MANPAGER="$PAGER"
