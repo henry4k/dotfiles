@@ -81,8 +81,6 @@ set nocompatible
         Bundle 'scrooloose/syntastic'
         " Run directory specific .local.vimrc files:
         Bundle 'thinca/vim-localrc'
-        " Zoom font in GVIM:
-        Bundle 'thinca/vim-fontzoom'
         " Interface to the undo tree:
         Bundle 'mbbill/undotree'
         " Three way merges with vim:
@@ -123,6 +121,8 @@ set nocompatible
         Bundle 'editorconfig/editorconfig-vim'
         " Enhances the netrw plugin:
         Bundle 'tpope/vim-vinegar'
+        " More diff algorithms:
+        Bundle 'chrisbra/vim-diff-enhanced'
 
 
     runtime macros/matchit.vim
@@ -177,7 +177,7 @@ set nocompatible
     let g:maplocalleader=','
     nnoremap <Space> :
     nnoremap ; :
-    nnoremap q :close<CR>
+    nnoremap q :quit<CR>
 
     " { and } skip over closed folds
     nnoremap <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
@@ -205,8 +205,6 @@ set nocompatible
     " In command mode %% will insert the basename with a trailing dot.
     " I.e. 'foobar.cpp' becomes 'foobar.'
     cnoremap %% <C-R>=expand('%:r').'.'<CR>
-
-    cnoremap %f <C-R>=expand('<cfile>')<CR>
 
     " Cause I accidently hit these all the time
     map <f1> <NOP>
@@ -320,7 +318,11 @@ set nocompatible
         nmap _ <Plug>VinegarSplitUp
 
 " Clipboard {{{1
-    set clipboard=unnamedplus
+    if has('unnamedplus')
+        set clipboard=unnamedplus
+    else
+        set clipboard=unnamed
+    endif
 
     " tslime {{{2
         let g:tslime_ensure_trailing_newlines = 2
@@ -373,7 +375,6 @@ set nocompatible
 
     autocmd ColorScheme * call AdaptColorscheme()
     function! AdaptColorscheme()
-        highlight clear CursorLine
         highlight Normal ctermbg=none
         highlight LineNr ctermbg=none
         highlight Folded ctermbg=none
@@ -463,8 +464,8 @@ set nocompatible
 
     " Syntastic {{{2
         let g:syntastic_check_on_open = 1
-        "let g:syntastic_text_checkers = ['language_check']
-        let g:syntastic_text_language_check_args = '-m en-GB -l de-DE'
+        let g:syntastic_text_checkers = ['language_check']
+        let g:syntastic_text_language_check_args = '-m de-DE -l de-DE -d WHITESPACE_RULE'
         let g:syntastic_lua_checkers = ['luac', 'luacheck']
         let g:syntastic_lua_luacheck_args = '--std max --ignore 111'
         " TODO: OCLint?
@@ -586,7 +587,7 @@ augroup filetype_settings
         \ | call SyntaxRange#Include('```cpp', '```', 'cpp', 'markdownCodeBlock')
         \ | call SyntaxRange#Include('```lua', '```', 'lua', 'markdownCodeBlock')
         \ | call SyntaxRange#Include('```python', '```', 'python', 'markdownCodeBlock')
-        \ | setlocal formatoptions+=w
+        \ | call SyntaxRange#Include('```java', '```', 'java', 'markdownCodeBlock')
         \ | nnoremap <buffer> <LocalLeader>= yypVr=
         \ | nnoremap <buffer> <LocalLeader>- yypVr-
 

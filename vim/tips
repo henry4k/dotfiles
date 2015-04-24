@@ -30,3 +30,4 @@ Henry	<leader>u um den Undotree zu öffnen
 Henry	<Space> kann als alternative zu : benutzt werden.
 Henry	:A als Kurzform für :Ack
 Henry	<Leader><Space> aktiviert distractions free writing
+Henry	<C-R><C-?> setzt im Command-Mode Texte vom Puffer ein. (C-F für Datei; C-W für Wort; etc.)
