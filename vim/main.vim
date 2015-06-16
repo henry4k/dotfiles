@@ -2,128 +2,131 @@
 scriptencoding utf-8
 set nocompatible
 
-" Bundle management {{{1
+" Plugin management {{{1
     filetype off
 
-    let s:vimDir=expand('<sfile>:p:h')
-    let &g:runtimepath=printf('%s,%s,%s/bundle/vundle', &g:runtimepath, s:vimDir, s:vimDir)
-    call vundle#rc(s:vimDir.'/bundle')
+    let s:vimDir=substitute(expand('<sfile>:p:h'), '^'.expand('~'), '~', '')
+    "               ^- Replace home directory with ~
+    let &g:runtimepath=printf('%s,%s', &g:runtimepath, s:vimDir)
+    call plug#begin(s:vimDir.'/plugins')
 
-    Bundle 'gmarik/vundle'
+    command! -nargs=* LocalPlug
+        \ execute printf("Plug '%s/plugins/%s'", s:vimDir, <args>)
 
     " Color schemes {{{2
-        Bundle 'tomasr/molokai'
-        Bundle 'fmoralesc/molokayo'
-        Bundle 'github-theme'
-        Bundle 'sjl/badwolf'
-        Bundle 'reedes/vim-colors-pencil'
-        Bundle 'freeo/vim-kalisi'
-        Bundle 'w0ng/vim-hybrid'
+        Plug 'tomasr/molokai'
+        Plug 'fmoralesc/molokayo'
+        Plug 'github-theme'
+        Plug 'sjl/badwolf'
+        Plug 'reedes/vim-colors-pencil'
+        Plug 'freeo/vim-kalisi'
+        Plug 'w0ng/vim-hybrid'
+        Plug 'NLKNguyen/papercolor-theme'
 
     " Libs {{{2
-        Bundle 'tlib'
-        Bundle 'L9'
-        Bundle 'tpope/vim-repeat'
-        Bundle 'kana/vim-textobj-user'
+        Plug 'tlib'
+        Plug 'L9'
+        Plug 'tpope/vim-repeat'
+        Plug 'kana/vim-textobj-user'
 
     " Text objects {{{2
         " ai/ii:
-        Bundle 'kana/vim-textobj-indent'
+        Plug 'kana/vim-textobj-indent'
         " af/if, ac/ic for Python:
-        Bundle 'bps/vim-textobj-python'
+        Plug 'bps/vim-textobj-python'
         " af/if:
-        Bundle 'kana/vim-textobj-function'
+        Plug 'kana/vim-textobj-function'
         " Text objects for comma separated arguments (aa/ia,aA/iA):
-        Bundle 'wellle/targets.vim'
+        Plug 'wellle/targets.vim'
         " Text objects for comma separated arguments (aa/ia,aA/iA):
-        Bundle 'b4winckler/vim-angry'
+        Plug 'b4winckler/vim-angry'
 
     " Integrations {{{2
         " Git:
-        Bundle 'tpope/vim-git'
-        Bundle 'tpope/vim-fugitive'
+        Plug 'tpope/vim-git'
+        Plug 'tpope/vim-fugitive'
         " Markdown:
-        Bundle 'tpope/vim-markdown'
-        Bundle 'nelstrom/vim-markdown-folding'
+        "Plug 'tpope/vim-markdown'
+        "Plug 'plasticboy/vim-markdown'
+        Plug 'nelstrom/vim-markdown-folding'
         " JSON:
-        Bundle 'elzr/vim-json'
+        Plug 'elzr/vim-json'
         " Tup:
-        Bundle 'tup.vim', {'pinned': 1}
+        LocalPlug 'tup.vim'
         " Ack:
-        Bundle 'mileszs/ack.vim'
+        Plug 'mileszs/ack.vim'
         " C:
-        Bundle 'justinmk/vim-syntax-extra'
+        Plug 'NLKNguyen/c-syntax.vim'
         " GLSL:
-        Bundle 'tikhomirov/vim-glsl'
+        Plug 'tikhomirov/vim-glsl'
 
     " Completion {{{2
         " Automatically close braces:
-        Bundle 'Townk/vim-autoclose'
+        Plug 'Townk/vim-autoclose'
         " Same for words:
-        Bundle 'tpope/vim-endwise'
+        Plug 'tpope/vim-endwise'
         " Enhances completion handling:
-        Bundle 'ervandew/supertab'
+        Plug 'ervandew/supertab'
         " Ctrl-n/p completion in the command line:
-        Bundle 'cmdline-completion'
+        Plug 'cmdline-completion'
 
     " Tools {{{2
         " Surround movements/selections with quotes or similar:
-        Bundle 'tpope/vim-surround'
+        Plug 'tpope/vim-surround'
         " Powerful substitution tools:
-        Bundle 'tpope/vim-abolish'
+        Plug 'tpope/vim-abolish'
         " Background task runner:
-        Bundle 'tpope/vim-dispatch'
+        Plug 'tpope/vim-dispatch'
         " Utillity commands for file handling:
-        Bundle 'tpope/vim-eunuch'
-        " Perl regex for vim:
-        Bundle 'othree/eregex.vim'
+        Plug 'tpope/vim-eunuch'
         " Check files for syntax errors:
-        Bundle 'scrooloose/syntastic'
+        Plug 'scrooloose/syntastic'
         " Run directory specific .local.vimrc files:
-        Bundle 'thinca/vim-localrc'
+        Plug 'thinca/vim-localrc'
         " Interface to the undo tree:
-        Bundle 'mbbill/undotree'
+        Plug 'mbbill/undotree'
         " Three way merges with vim:
-        Bundle 'sjl/splice.vim'
-        " Send code to a terminal:
-        Bundle 'sjl/tslime.vim'
+        Plug 'sjl/splice.vim'
         " Mark modified lines of VCS controlled files:
-        Bundle 'mhinz/vim-signify'
+        Plug 'mhinz/vim-signify'
         " Mark words:
-        Bundle 'Mark--Karkat'
+        Plug 'Mark--Karkat'
         " Inject syntax definitions to range:
-        Bundle 'SyntaxRange'
+        Plug 'SyntaxRange'
         " Highlight word misusages:
-        Bundle 'reedes/vim-wordy'
+        Plug 'reedes/vim-wordy'
         " Distraction free editing:
-        Bundle 'junegunn/limelight.vim'
-        Bundle 'junegunn/goyo.vim'
+        Plug 'junegunn/limelight.vim'
+        Plug 'junegunn/goyo.vim'
         " Unified interface to documentation sources:
-        Bundle 'thinca/vim-ref'
-        Bundle 'vim-ref-dictcc', {'pinned': 1}
+        Plug 'thinca/vim-ref'
+        LocalPlug 'vim-ref-dictcc'
         " Fixes word movement:
-        Bundle 'ap/vim-you-keep-using-that-word'
-        " Shows tips at startup:
-        Bundle 'glts/vim-cottidie'
+        Plug 'ap/vim-you-keep-using-that-word'
         " Detect project build system:
-        Bundle 'johnsyweb/vim-makeshift'
+        Plug 'johnsyweb/vim-makeshift'
         " Move over camel and snake case word parts:
-        Bundle 'camelcasemotion'
+        Plug 'camelcasemotion'
         " I and A for linewise visual selections:
-        Bundle 'kana/vim-niceblock'
+        Plug 'kana/vim-niceblock'
         " Sane cursor movement in wrapped lines:
-        Bundle 'vim-display-cursor', {'pinned': 1}
+        LocalPlug 'vim-display-cursor'
         " Allows opening files at a specific line:
-        Bundle 'bogado/file-line'
+        Plug 'bogado/file-line'
         " Edit file regions:
-        Bundle 'chrisbra/NrrwRgn'
+        Plug 'chrisbra/NrrwRgn'
         " EditorConfig support:
-        Bundle 'editorconfig/editorconfig-vim'
+        Plug 'editorconfig/editorconfig-vim'
         " Enhances the netrw plugin:
-        Bundle 'tpope/vim-vinegar'
+        Plug 'tpope/vim-vinegar'
         " More diff algorithms:
-        Bundle 'chrisbra/vim-diff-enhanced'
+        Plug 'chrisbra/vim-diff-enhanced'
+        " Preview colors in text:
+        Plug 'ap/vim-css-color'
+        " Color picker:
+        Plug 'KabbAmine/vCoolor.vim'
 
+    call plug#end()
 
     runtime macros/matchit.vim
 
@@ -168,7 +171,7 @@ set nocompatible
                 exec 'inoremap '.a:options.' '.mapping[0].' '.mapping[1]
             endfor
         endfunction
-       command! -nargs=* EnableGermanMode call SetGermanMode('<args>')
+        command! -nargs=* EnableGermanMode call SetGermanMode('<args>')
 
 " Mouse and Handling {{{1
     set mouse=a
@@ -233,6 +236,11 @@ set nocompatible
     " Signify {{{2
         nmap <leader>gh <plug>(signify-next-hunk)
         nmap <leader>gH <plug>(signify-prev-hunk)
+
+        omap ih <plug>(signify-motion-inner-pending)
+        xmap ih <plug>(signify-motion-inner-visual)
+        omap ah <plug>(signify-motion-outer-pending)
+        xmap ah <plug>(signify-motion-outer-visual)
 
     " Surround {{{2
         let g:surround_indent = 1
@@ -317,6 +325,9 @@ set nocompatible
         nmap - <Plug>VinegarUp
         nmap _ <Plug>VinegarSplitUp
 
+    " Sign column {{{2
+        nnoremap <leader>s :SignifyToggle<CR>:SyntasticToggleMode<CR>
+
 " Clipboard {{{1
     if has('unnamedplus')
         set clipboard=unnamedplus
@@ -356,7 +367,8 @@ set nocompatible
     set display+=lastline
     set cursorline " See AdaptColorscheme
     set noerrorbells
-    set novisualbell " Disables beeping or screen flashing
+    set visualbell " Use visual bell instead of beep
+    set t_vb= " Disables beeping or screen flashing
     set synmaxcol=500
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set showbreak=>\ 
@@ -467,7 +479,7 @@ set nocompatible
         let g:syntastic_text_checkers = ['language_check']
         let g:syntastic_text_language_check_args = '-m de-DE -l de-DE -d WHITESPACE_RULE'
         let g:syntastic_lua_checkers = ['luac', 'luacheck']
-        let g:syntastic_lua_luacheck_args = '--std max --ignore 111'
+        let g:syntastic_lua_luacheck_args = '--std max --allow_defined_top'
         " TODO: OCLint?
         " TODO: pyflake/pep8?
 
@@ -485,21 +497,29 @@ set nocompatible
 
 " Search and replace {{{1
     set incsearch
-    noremap <silent> <nowait> <C-H> :set hlsearch!<CR>:Mark<CR>
-    " noremap <silent> <leader><space> :nohlsearch<cr>:MarkClear<cr>
-    set grepprg=grep\ -nrI\ --exclude-dir=.git\ --exclude-dir=.hg\ --exclude-dir=.svn\ $*\ /dev/null
+    set hlsearch
+    noremap <silent> <leader>h :set hlsearch!<CR>:Mark<CR>
+    " noremap <silent> <leader>h :nohlsearch<cr>:MarkClear<cr>
+
+    if executable('ag')
+        set grepprg=ag\ --nogroup\ --nocolor
+    else
+        set grepprg=grep\ -nrI\ --exclude-dir=.git\ --exclude-dir=.hg\ --exclude-dir=.svn\ $*\ /dev/null
+    endif
 
     " Ack {{{2
         cnoremap A<Space> Ack<Space>
-        let g:ackprg = "ag"
         let g:ackhighlight = 1
         let g:ackpreview = 1
         let g:ack_use_dispatch = 1
+        if executable('ag')
+            let g:ackprg = 'ag'
+        endif
 
 " System {{{1
 
     " set autochdir
-    autocmd BufEnter * silent! lcd %:p:h
+    "autocmd BufEnter * silent! lcd %:p:h
     "command lcdf :lcd %:p:h<CR>
 
     set autoread
@@ -519,6 +539,7 @@ set nocompatible
     set ttyfast
     set shortmess+=I " hide :intro
     set nobackup
+    set nowritebackup
     set noswapfile
     set nostartofline
     set sessionoptions-=options
@@ -535,11 +556,6 @@ set nocompatible
     " Easy Tags {{{2
         "let g:easytags_async = 1
         let g:easytags_file = printf('%s/tmp/tags', s:vimDir)
-
-    " Cottidie {{{2
-        autocmd VimEnter * CottidieTip
-        let g:cottidie_no_default_tips = 1
-        let g:cottidie_tips_files = [ printf('%s/tips', s:vimDir) ]
 
     " Makeshift {{{2
         let g:makeshift_systems = { 'Tupfile.ini': 'tup' }
@@ -608,110 +624,3 @@ augroup filetype_settings
         \   let b:AutoClosePairs = AutoClose#DefaultPairsModified("'\"", "")
 
 augroup END
-
-" Tipps {{{1
-"
-"  :args *.c
-"  :tab all
-"
-"  :args *.c | tab all
-"
-" CTRL-V (block selection)
-" => d
-" => I<text>ESC
-" ^- And you still need sublime?
-"
-" CTRL-A
-" CTRL-X
-" Increment/Decrement numbers!
-"
-" :vimgrep <pattern> <file patterns>
-"
-" c-t [<^v>] <- Tab wechseln
-" c-w [<^v>] <- Fenster wechseln
-"
-" <>= bzw == um Code automatisch zu formatieren
-" :only[!] um alle anderen fenster zu schliessen
-"
-" http://www.cs.swarthmore.edu/help/vim/reformatting.html
-"
-" m<a-z> - set mark
-" '<a-z> - jump to mark
-" a-z is local
-" A-Z is global
-"
-" d$ - Löscht bis Zeilenende.
-" dw - Löscht Wort.
-" d/) - Löscht bis zum Klammerende.
-"
-" % um zwischen (){}[]<> Paaren zu springen.
-" Da es eine Bewegung ist, kann es auch mit c/d/y/etc benutzt werden.
-" Praktisch um Funktionsaufrufe zu extrahieren.
-"
-" :cn um zum nächsten fehler zu springen (bzw zum nächsten eintrag in der quick-list)
-"
-"
-" { + }
-" [ + ]
-"
-" <\bla\> - whole word search
-"
-" text-objects! use 'em! >:)
-" V/v a/i <object>
-"  a -> komplettes objekt wählen
-"  i -> inhalt (inneres) wählen
-" Text-Objekte:
-"   (w)ord separated by punctuation and whitespace
-"   (W)ord separated by whitespace
-"   (s)entence
-"   (p)aragraph
-"   []
-"   ()
-"   {}
-"   ''
-"   ""
-"   <>
-"   (t)ag (xml tags)
-"   l/x (single character)
-"
-" im Command Mode: % => aktuelle datei
-"
-" (c)hange Operator ist wie eine kombinierte d und i operation
-"
-"
-" \c in regex patterns to enable ignore-case
-"
-" J um Zeilen zusammenzufassen. Z.B. um aus 'Foo\n{' 'Foo {' zu machen
-"
-" H - Cursor oben im Bildschirm plazieren.
-" M - Cursor mittig plazieren.
-" L - Cursor unten plazieren.
-"
-" zt(op)    - Aktuelle Zeile nach Oben.
-" zz(enter) - Aktuelle Zeile in die Mitte.
-" zb(ottom) - Aktuelle Zeile ans Ende.
-"
-" [[ - Vorherige Funktion
-" ]] - Nächste Funktion
-"
-" Ctrl-n - (n)ext completion (für Wortvervollständigung)
-" Ctrl-p - (p)revious completion
-"
-" gf => goto file z.B. #include <fo|o.h>
-" gF => goto file line z.B.  Syntax error at f|oo.h:42
-" <C-W>f goto file in new window
-" <C-W>gf goto file in new tab
-"
-" cr[cm_uU] <- Schreibweise eines Wortes ändern.
-" c = camelCase
-" m = MixedCase
-" _ = snake_case
-" usw.
-" Benötigt abolish.vim
-"
-" Mit ** kann bei Pfadnamen rekursiv geglobbt werden.
-" Z.B. :e **/mai<Tab> => foo/bar/main.cpp
-"
-" [( springt vom Cursor zum Anfang des ()-Blocks
-" ]) springt von Cursor zum Ende des ()-Blocks
-" ]p und ]P zum automatischen Einrücken vom gepastetem Text.

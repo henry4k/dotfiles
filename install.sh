@@ -44,16 +44,9 @@ source $Dotfiles/gdbinit
 # DOTFILES END
 EOF
 
-cat >> "$HOME/.rep.lua" << EOF
--- DOTFILES BEGIN
-local chunk = loadfile('$Dotfiles/rep.lua')
-require('repl.utils').setfenv(chunk, _G)
-chunk()
--- DOTFILES END
-EOF
-
 ln -s "$Dotfiles/proverc" "$HOME/.proverc"
 ln -s "$Dotfiles/tupoptions" "$HOME/.tupoptions"
+ln -s "$Dotfiles/rep.lua" "$HOME/.rep.lua"
 ln -s "$Dotfiles/sqliterc" "$HOME/.sqliterc"
 
 GitConfig='git config --global'
@@ -64,7 +57,7 @@ $GitConfig credential.helper 'cache --timeout=3600'
 #$GitConfig init.templatedir "$Dotfiles/git/template"
 $GitConfig push.default 'current'
 $GitConfig color.ui true
-$GitConfig core.editor '/usr/bin/env vim'
+$GitConfig core.editor '/usr/bin/env nvim'
 $GitConfig core.autocrlf 'input'
 $GitConfig diff.tool 'vimdiff'
 $GitConfig difftool.prompt false

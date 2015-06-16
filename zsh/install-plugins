@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
+cd "$(dirname "$0")"
+
 source zgen/zgen.zsh
+
+zgen selfupdate
+zgen update
 
 zgen load zsh-users/zsh-syntax-highlighting
 #zgen load zsh-users/zsh-completions src

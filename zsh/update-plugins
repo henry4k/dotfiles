@@ -1,6 +1,0 @@
-#!/usr/bin/env zsh
-source zgen/zgen.zsh
-
-zgen selfupdate
-zgen update
-zgen save

@@ -19,3 +19,6 @@ xargs -n 1 -E x youtube-dl
 
 # Dateien eines Baums der größe nach sortiert anzeigen
 find . -printf '%s %p\n' | sort -n | less
+
+# Alle Beamer-Farbtypen auflisten:
+find . -type f -name '*.sty' -exec cat {} + | grep -oE 'setbeamercolor{.+?}' | sed -E 's/setbeamercolor{(.+)}/\1/' | uniq | less

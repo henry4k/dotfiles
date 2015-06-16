@@ -18,12 +18,8 @@ function GitCloneOrPull()
 
 pushd zsh
 GitCloneOrPull 'zgen' 'https://github.com/tarjoilija/zgen.git'
-popd
-zsh/install-plugins
-zsh/update-plugins
-
-pushd vim/bundle
-GitCloneOrPull 'vundle' 'https://github.com/gmarik/vundle.git'
+./install-plugins
+./update-plugins
 popd
 
 pushd bin
@@ -31,24 +27,23 @@ GitCloneOrPull 't' 'https://github.com/sjl/t.git'
 popd
 mkdir -p "$HOME/.tasks"
 
-
-function DownloadAndExtractZip()
+function Download()
 {
-    local dir="$1"
+    local file="$1"
     local url="$2"
 
-    if [[ -e "$dir" ]]; then
-        echo "$dir has already been downloaded"
+    if [[ -e "$file" ]]; then
+        echo "$file has already been downloaded"
     else
-        mkdir -p "$dir"
-        local tmp="${RANDOM}.zip"
-        curl --progress-bar "$url" -o "$tmp"
-        unzip -d "$dir" "$tmp"
-        rm "$tmp"
+        curl --progress-bar "$url" -o "$file"
     fi
 }
 
-function DownloadAndExtractZipFile()
+pushd vim/autoload
+Download 'plug.vim' 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+popd
+
+function DownloadAndExtractZip()
 {
     local file="$1"
     local url="$2"
@@ -65,7 +60,7 @@ function DownloadAndExtractZipFile()
 
 mkdir -p vim/dictionaries
 pushd vim/dictionaries
-DownloadAndExtractZipFile 'mthesaur.txt' 'http://www.gutenberg.org/dirs/etext02/mthes10.zip'
+DownloadAndExtractZip 'mthesaur.txt' 'http://www.gutenberg.org/dirs/etext02/mthes10.zip'
 popd
 
 pip3 install --user --upgrade pep8
