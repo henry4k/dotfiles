@@ -8,6 +8,8 @@ git status -s
 
 # Stashed changes:
 StashCount=$(git stash list | wc -l)
-if [ "$StashCount" -ne 0 ]; then
+if [ "$StashCount" -eq 1 ]; then
+    echo "1 stash"
+elif [ "$StashCount" -gt 1 ]; then
     echo "$StashCount stashes"
 fi
