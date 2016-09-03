@@ -37,19 +37,19 @@ cat << EOF
 RESET 0 # reset to "normal" color
 DIR $bold;$blue_fg # directory
 LINK $bold;$cyan_fg # symbolic link. (If you set this to 'target' instead of a
-MULTIHARDLINK $none # regular file with more than one link
+MULTIHARDLINK $bold;$cyan_fg # regular file with more than one link
 FIFO $black_bg;$yellow_fg # pipe
 SOCK $bold;$magenta_fg # socket
 DOOR $bold;$magenta_fg # door
 BLK $black_bg;$yellow_fg;$bold # block device driver
 CHR $black_bg;$yellow_fg;$bold # character device driver
-ORPHAN $black_bg;$red_fg;$bold # symlink to nonexistent file, or non-stat'able file
-SETUID $white_fg;$red_bg # file that is setuid (u+s)
-SETGID $black_fg;$yellow_bg # file that is setgid (g+s)
-CAPABILITY $black_fg;$red_bg # file with capability
-STICKY_OTHER_WRITABLE $black_fg;$green_bg # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE $blue_fg;$green_bg # dir that is other-writable (o+w) and not sticky
-STICKY $white_fg;$blue_bg # dir with the sticky bit set (+t) and not other-writable
+ORPHAN $red_bg;$cyan_fg;$bold # symlink to nonexistent file, or non-stat'able file
+SETUID $red_bg;$black_fg;$bold # file that is setuid (u+s)
+SETGID $yellow_bg;$black_fg;$bold # file that is setgid (g+s)
+CAPABILITY $red_bg;$black_fg;$bold # file with capability
+STICKY_OTHER_WRITABLE $green_bg;$black_fg # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE $green_bg;$black_fg # dir that is other-writable (o+w) and not sticky
+STICKY $black_bg;$blue_fg # dir with the sticky bit set (+t) and not other-writable
 EXEC $bold;$green_fg # Files with execute permission
 EOF
 
@@ -63,13 +63,13 @@ function PrintColors()
 }
 
 # Archives / compressed
-PrintColors "$bold;$red_fg" \
+PrintColors "$red_fg" \
     .tar .tgz .arj .taz .lzh .lzma .tlz .txz .zip .z .Z \
     .dz .gz .lz .xz .bz2 .bz .tbz .tbz2 .tz .deb .rpm \
     .jar .war .ear .sar .rar .ace .zoo .cpio .7z .rz
 
 # Images
-PrintColors "$bold;$magenta_fg" \
+PrintColors "$magenta_fg" \
     .jpg .jpeg .gif .bmp .pbm .pgm .ppm .tga .xbm .xpm \
     .tif .tiff .png .svg .svgz .xcf .psd .ora
 
