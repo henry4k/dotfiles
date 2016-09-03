@@ -5,8 +5,9 @@ set nocompatible
 " Plugin management {{{1
     filetype off
 
-    let s:vimDir=substitute(expand('<sfile>:p:h'), '^'.expand('~'), '~', '')
+    " let s:vimDir=substitute(expand('<sfile>:p:h'), '^'.expand('~'), '~', '')
     "               ^- Replace home directory with ~
+    let s:vimDir=expand('<sfile>:p:h')
     let &g:runtimepath=printf('%s,%s', &g:runtimepath, s:vimDir)
     call plug#begin(s:vimDir.'/plugins')
 
@@ -62,7 +63,7 @@ set nocompatible
 
     " Completion {{{2
         " Automatically close braces:
-        Plug 'Townk/vim-autoclose'
+        "Plug 'Townk/vim-autoclose'
         " Same for words:
         Plug 'tpope/vim-endwise'
         " Enhances completion handling:
@@ -125,6 +126,8 @@ set nocompatible
         Plug 'ap/vim-css-color'
         " Color picker:
         Plug 'KabbAmine/vCoolor.vim'
+        " Semantic highlighting:
+        Plug 'jaxbot/semantic-highlight.vim'
 
     call plug#end()
 
@@ -157,7 +160,6 @@ set nocompatible
 
     " SuperTab {{{2
         let g:SuperTabLongestEnhanced = 1
-        let g:SuperTabLongestHighlight = 1
 
     " German Mode (tm) {{{2
         function! SetGermanMode( options )
@@ -325,8 +327,11 @@ set nocompatible
         nmap - <Plug>VinegarUp
         nmap _ <Plug>VinegarSplitUp
 
-    " Sign column {{{2
-        nnoremap <leader>s :SignifyToggle<CR>:SyntasticToggleMode<CR>
+    " vCoolor {{{2
+        let g:vcoolor_disable_mappings = 1
+
+    " Toggle clutter {{{2
+        nnoremap <silent> <leader>s :SyntasticToggleMode<CR>:bufdo :SignifyToggle<CR>
 
 " Clipboard {{{1
     if has('unnamedplus')
@@ -356,7 +361,7 @@ set nocompatible
     set linebreak
     set scrolloff=3
     set wildmenu
-    set wildignore+=*.o,*.swp,*.bak,*.pyc,*.t
+    set wildignore+=*.o,*.swp,*.bak,*.pyc
     set wildmode=longest,list,full
     set winminheight=0
     set noequalalways
@@ -365,7 +370,6 @@ set nocompatible
     set laststatus=2
     set list
     set display+=lastline
-    set cursorline " See AdaptColorscheme
     set noerrorbells
     set visualbell " Use visual bell instead of beep
     set t_vb= " Disables beeping or screen flashing
@@ -373,6 +377,9 @@ set nocompatible
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set showbreak=>\ 
     set fillchars=vert:│
+
+    " Preserve equal sized split views in diff mode:
+    autocmd VimResized * if &diff | wincmd = | endif
 
     " Show colorcolumn only in insert mode.
     function! UpdateColorColumn()
@@ -450,6 +457,10 @@ set nocompatible
         let g:undotree_TreeNodeShape = 'o'
         let g:undotree_WindowLayout = 2
 
+    " Limelight {{{2
+        let g:limelight_conceal_ctermfg = 'DarkGray'
+        let g:limelight_conceal_guifg   = 'DarkGray'
+
     " Goyo {{{2
         function! GoyoBefore()
             Limelight
@@ -463,6 +474,10 @@ set nocompatible
 
     " Pencil {{{2
         let g:pencil_terminal_italics = 1
+
+    " Semantic Highlighting {{{2
+        let g:semanticGUIColors = ['#FF9999', '#FFFF99', '#99FF99', '#99FFFF', '#9999FF', '#FF99FF', '#FFA399', '#F4FF99', '#99FFA3', '#99F4FF', '#A399FF', '#FF99F4', '#FFAD99', '#EAFF99', '#99FFAD', '#99EAFF', '#AD99FF', '#FF99EA', '#FFB799', '#E0FF99', '#99FFB7', '#99E0FF', '#B799FF', '#FF99E0', '#FFC199', '#D6FF99', '#99FFC1', '#99D6FF', '#C199FF', '#FF99D6', '#FFCC99', '#CCFF99', '#99FFCC', '#99CCFF', '#CC99FF', '#FF99CC', '#FFD699', '#C1FF99', '#99FFD6', '#99C1FF', '#D699FF', '#FF99C1', '#FFE099', '#B7FF99', '#99FFE0', '#99B7FF', '#E099FF', '#FF99B7', '#FFEA99', '#ADFF99', '#99FFEA', '#99ADFF', '#EA99FF', '#FF99AD', '#FFF499', '#A3FF99', '#99FFF4', '#99A3FF', '#F499FF', '#FF99A3']
+        let g:semanticBlacklistOverride = { 'lua': ['and', 'break', 'do', 'else', 'elseif', 'end', 'false', 'for', 'function', 'goto', 'if', 'in', 'local', 'nil', 'not', 'or', 'repeat', 'return', 'then', 'true', 'until', 'while'] }
 
 " Spell Check {{{1
     set dictionary+=/usr/share/dict/words
@@ -520,7 +535,7 @@ set nocompatible
 
     " set autochdir
     "autocmd BufEnter * silent! lcd %:p:h
-    "command lcdf :lcd %:p:h<CR>
+    command Cdf :cd %:h
 
     set autoread
     autocmd CursorHold * checktime
@@ -543,8 +558,8 @@ set nocompatible
     set noswapfile
     set nostartofline
     set sessionoptions-=options
+    set diffopt+=vertical
     set shell=bash
-    set makeprg=tup " Since I use tup way more often, than make
     set tags+=tag;/ " upward search till filesystem root for 'tags' files
     set path+=/usr/local/include,/opt/local/include
     let $PAGER='' " use vim to read man pages
@@ -553,16 +568,21 @@ set nocompatible
     let &undodir=s:vimDir.'/tmp/undo'
     set undofile
 
-    " Easy Tags {{{2
-        "let g:easytags_async = 1
-        let g:easytags_file = printf('%s/tmp/tags', s:vimDir)
+    " GutenTags {{{2
+        let g:gutentags_cache_dir = printf('%s/tmp/tags', s:vimDir)
 
     " Makeshift {{{2
-        let g:makeshift_systems = { 'Tupfile.ini': 'tup' }
+        let g:makeshift_systems = { 'Tupfile.ini': 'tup',
+                                  \ 'build/Makefile': 'make -C build' }
 
     " EditorConfig {{{2
         let g:EditorConfig_max_line_indicator = "none"
         " ^- As we handle this ourselves anyway.
+
+    " Netrw {{{2
+        if executable('xdg-open') == 1
+            let g:netrw_browsex_viewer = 'xdg-open'
+        endif
 
 " Filetypes {{{1
 augroup filetype_settings
@@ -577,9 +597,11 @@ augroup filetype_settings
     autocmd BufNewFile,BufRead *.rockspec
         \   setfiletype lua
 
+    autocmd FileType lua
+        \   setlocal errorformat=%.%#[string\ \"%f\"]:%l:\ %m
+
     autocmd FileType vim
         \   setlocal foldmethod=marker
-        \ | let b:AutoClosePairs = AutoClose#DefaultPairsModified('', '"')
 
     autocmd FileType sh,bash,zsh
         \   setlocal iskeyword+=-
@@ -596,7 +618,6 @@ augroup filetype_settings
 
     autocmd FileType markdown
         \   setlocal iskeyword+=-
-        \ | let b:AutoClosePairs = AutoClose#DefaultPairsModified('', '`')
         \ | let g:surround_{char2nr("*")} = "*\r*"
         \ | let g:surround_{char2nr("_")} = "_\r_"
         \ | call SyntaxRange#Include('```c', '```', 'c', 'markdownCodeBlock')
@@ -619,8 +640,5 @@ augroup filetype_settings
     autocmd FileType json
         \   setlocal iskeyword+=-
         \ | setlocal equalprg=json_pp
-
-    autocmd FileType python
-        \   let b:AutoClosePairs = AutoClose#DefaultPairsModified("'\"", "")
 
 augroup END

@@ -22,3 +22,6 @@ find . -printf '%s %p\n' | sort -n | less
 
 # Alle Beamer-Farbtypen auflisten:
 find . -type f -name '*.sty' -exec cat {} + | grep -oE 'setbeamercolor{.+?}' | sed -E 's/setbeamercolor{(.+)}/\1/' | uniq | less
+
+# Dateiendungen von MP3 nach aac umbenennen:
+find . -name '*.MP3' -print0 | sed 's/MP3//g' | xargs -0 -I '{}' -n 1 mv {}MP3 {}aac

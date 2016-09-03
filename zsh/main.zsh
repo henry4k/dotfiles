@@ -20,9 +20,9 @@ if which 'xdg-open' > /dev/null; then
     alias open='xdg-open'
 fi
 
-if which 'nvim' > /dev/null; then
-    alias vim='nvim'
-fi
+#if which 'nvim' > /dev/null; then
+#    alias vim='nvim'
+#fi
 
 
 # Colors {{{1
