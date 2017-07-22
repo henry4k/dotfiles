@@ -25,7 +25,6 @@ function prompt_custom_precmd ()
     else
         local end="%F{cyan}I>"
     fi
-    #local end="%F{green}>"
 
     local topDir="$(basename $PWD)"
     local parentDir="$(dirname $PWD)"
@@ -44,7 +43,7 @@ function prompt_custom_precmd ()
     PROMPT="\
 %F{blue}%n\
 %B%F{black}@%m $parentDir%b\
-%F{white}$topDir \
+%F{white}$topDir
 $end %f"
 
     RPS1=''

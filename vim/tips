@@ -35,3 +35,4 @@ Henry	<C-R><C-?> setzt im Command-Mode Texte vom Puffer ein. (C-F für Datei; C-
 Henry	[I listet alle Vorkommnisse eines Wortes im aktuellen Puffer auf.
 Henry	Die Jump-list kann man :bn/:bp bzw mit Ctrl-I/Ctrl-O navigiert werden.
 Henry	gx lässt das Betriebssystem eine URL oder Datei unter dem Cursor öffnen.
+Henry	[I listet alle Vorkommnisse eines Wortes im aktuellen Puffer auf.

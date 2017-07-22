@@ -15,18 +15,15 @@ set nocompatible
         \ execute printf("Plug '%s/plugins/%s'", s:vimDir, <args>)
 
     " Color schemes {{{2
+        Plug 'sjl/badwolf'
+        Plug 'freeo/vim-kalisi'
         Plug 'tomasr/molokai'
         Plug 'fmoralesc/molokayo'
-        Plug 'github-theme'
-        Plug 'sjl/badwolf'
-        Plug 'reedes/vim-colors-pencil'
-        Plug 'freeo/vim-kalisi'
-        Plug 'w0ng/vim-hybrid'
-        Plug 'NLKNguyen/papercolor-theme'
+        Plug 'Reewr/vim-monokai-phoenix'
 
     " Libs {{{2
-        Plug 'tlib'
-        Plug 'L9'
+        Plug 'vim-scripts/tlib'
+        Plug 'vim-scripts/L9'
         Plug 'tpope/vim-repeat'
         Plug 'kana/vim-textobj-user'
 
@@ -69,7 +66,7 @@ set nocompatible
         " Enhances completion handling:
         Plug 'ervandew/supertab'
         " Ctrl-n/p completion in the command line:
-        Plug 'cmdline-completion'
+        Plug 'vim-scripts/cmdline-completion'
 
     " Tools {{{2
         " Surround movements/selections with quotes or similar:
@@ -91,9 +88,9 @@ set nocompatible
         " Mark modified lines of VCS controlled files:
         Plug 'mhinz/vim-signify'
         " Mark words:
-        Plug 'Mark--Karkat'
+        Plug 'vim-scripts/Mark--Karkat'
         " Inject syntax definitions to range:
-        Plug 'SyntaxRange'
+        Plug 'vim-scripts/SyntaxRange'
         " Highlight word misusages:
         Plug 'reedes/vim-wordy'
         " Distraction free editing:
@@ -107,7 +104,7 @@ set nocompatible
         " Detect project build system:
         Plug 'johnsyweb/vim-makeshift'
         " Move over camel and snake case word parts:
-        Plug 'camelcasemotion'
+        Plug 'vim-scripts/camelcasemotion'
         " I and A for linewise visual selections:
         Plug 'kana/vim-niceblock'
         " Sane cursor movement in wrapped lines:
@@ -128,6 +125,8 @@ set nocompatible
         Plug 'KabbAmine/vCoolor.vim'
         " Semantic highlighting:
         Plug 'jaxbot/semantic-highlight.vim'
+        " Tipps:
+        Plug 'glts/vim-cottidie'
 
     call plug#end()
 
@@ -210,6 +209,10 @@ set nocompatible
     " In command mode %% will insert the basename with a trailing dot.
     " I.e. 'foobar.cpp' becomes 'foobar.'
     cnoremap %% <C-R>=expand('%:r').'.'<CR>
+
+    " In command mode %$ will insert the directory with a trailing directory
+    " separator. I.e. 'aaa/bbb' becomes 'aaa/'.
+    cnoremap %$ <C-R>=expand('%:h').'/'<CR>
 
     " Cause I accidently hit these all the time
     map <f1> <NOP>
@@ -449,6 +452,7 @@ set nocompatible
         let g:signify_sign_overwrite = 1
         let g:signify_sign_change = '~'
         let g:signify_difftool = '/usr/bin/diff'
+        let g:signify_disable_by_default = 1
         "if has('gui_running')
             "let g:signify_line_highlight = 1
         "endif
@@ -494,7 +498,7 @@ set nocompatible
         let g:syntastic_text_checkers = ['language_check']
         let g:syntastic_text_language_check_args = '-m de-DE -l de-DE -d WHITESPACE_RULE'
         let g:syntastic_lua_checkers = ['luac', 'luacheck']
-        let g:syntastic_lua_luacheck_args = '--std max --allow_defined_top'
+        let g:syntastic_lua_luacheck_args = '--std max --allow-defined-top'
         " TODO: OCLint?
         " TODO: pyflake/pep8?
 
@@ -570,6 +574,11 @@ set nocompatible
 
     " GutenTags {{{2
         let g:gutentags_cache_dir = printf('%s/tmp/tags', s:vimDir)
+
+    " Cottidie {{{2
+        autocmd VimEnter * CottidieTip
+        let g:cottidie_no_default_tips = 1
+        let g:cottidie_tips_files = [ printf('%s/tips', s:vimDir) ]
 
     " Makeshift {{{2
         let g:makeshift_systems = { 'Tupfile.ini': 'tup',

@@ -32,9 +32,9 @@ export GROFF_NO_SGR=1
 
 
 # Colors {{{1
-export TERM='xterm-256color'
-export COLORTERM='yes'
-export CLICOLOR=1
+#export TERM='xterm-256color'
+#export COLORTERM='yes'
+#export CLICOLOR=1
 
 export LESS_TERMCAP_mb=$(printf '\e[1;31m')
 export LESS_TERMCAP_md=$(printf '\e[1;31m')
