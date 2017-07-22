@@ -4,7 +4,6 @@ cd "$(dirname "$0")"
 source zgen/zgen.zsh
 
 zgen selfupdate
-zgen update
 
 zgen load zsh-users/zsh-syntax-highlighting
 #zgen load zsh-users/zsh-completions src
@@ -12,5 +11,7 @@ zgen load zsh-users/zsh-history-substring-search
 #zgen load tarruda/zsh-autosuggestions
 zgen load sharat87/zsh-vim-mode
 zgen load marzocchi/zsh-notify
+
+zgen update
 
 zgen save

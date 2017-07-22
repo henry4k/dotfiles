@@ -17,7 +17,11 @@ alias gdb='gdb --quiet'
 alias t="$zshDir/../bin/t/t.py --task-dir ~/.tasks --list tasks"
 
 if which 'xdg-open' > /dev/null; then
-    alias open='xdg-open'
+    if which 'daemonize' > /dev/null; then
+        alias open='daemonize -c "$PWD" `which xdg-open`'
+    else
+        alias open='xdg-open'
+    fi
 fi
 
 #if which 'nvim' > /dev/null; then
