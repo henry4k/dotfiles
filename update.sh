@@ -19,13 +19,8 @@ function GitCloneOrPull()
 pushd zsh
 GitCloneOrPull 'zgen' 'https://github.com/tarjoilija/zgen.git'
 ./install-plugins
-./update-plugins
+#./update-plugins
 popd
-
-pushd bin
-GitCloneOrPull 't' 'https://github.com/sjl/t.git'
-popd
-mkdir -p "$HOME/.tasks"
 
 function Download()
 {

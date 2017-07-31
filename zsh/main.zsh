@@ -118,6 +118,7 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $zshDir/cache/ # TODO
 zstyle ':completion:*' menu select
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 if autoload promptinit && promptinit 2>/dev/null; then
     source "$zshDir/prompt.zsh"

@@ -21,9 +21,9 @@ function prompt_custom_setup ()
 function prompt_custom_precmd ()
 {
     if [[ "$ZKEYMAP" == 'vicmd' ]]; then
-        local end="%F{green}N>"
+        local end="%F{cyan}N>"
     else
-        local end="%F{cyan}I>"
+        local end="%F{green}I>"
     fi
 
     local topDir="$(basename $PWD)"
@@ -41,10 +41,10 @@ function prompt_custom_precmd ()
     fi
 
     PROMPT="\
-%F{blue}%n\
-%B%F{black}@%m $parentDir%b\
-%F{white}$topDir
-$end %f"
+%n\
+%F{blue}@%m $parentDir%f\
+%B$topDir%b
+$end"
 
     RPS1=''
 }
