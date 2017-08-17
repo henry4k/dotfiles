@@ -20,6 +20,8 @@ set nocompatible
         Plug 'tomasr/molokai'
         Plug 'fmoralesc/molokayo'
         Plug 'Reewr/vim-monokai-phoenix'
+        Plug 'mkarmona/materialbox'
+        Plug 'morhetz/gruvbox'
 
     " Libs {{{2
         Plug 'vim-scripts/tlib'
@@ -446,6 +448,8 @@ set nocompatible
         let g:kolor_alternative_matchparen=1
         let g:badwolf_darkgutter=1
         let g:badwolf_tabline=0 " darker background
+        "let g:gruvbox_improved_warnings=1 " TODO
+        let g:gruvbox_italic=1 " always enable italic font
 
     " Signify {{{2
         let g:signify_vcs_list = ['git']
@@ -562,6 +566,7 @@ set nocompatible
     set noswapfile
     set nostartofline
     set sessionoptions-=options
+    set sessionoptions+=localoptions,tabpages
     set diffopt+=vertical
     set shell=bash
     set tags+=tag;/ " upward search till filesystem root for 'tags' files
