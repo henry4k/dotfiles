@@ -36,7 +36,8 @@ set nocompatible
         Plug 'bps/vim-textobj-python'
         " af/if:
         Plug 'kana/vim-textobj-function'
-        " Text objects for comma separated arguments (aa/ia,aA/iA):
+        " Various text objects ((,{,[,<,,):
+        " See: https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
         Plug 'wellle/targets.vim'
         " Text objects for comma separated arguments (aa/ia,aA/iA):
         Plug 'b4winckler/vim-angry'
@@ -59,6 +60,8 @@ set nocompatible
         Plug 'NLKNguyen/c-syntax.vim'
         " GLSL:
         Plug 'tikhomirov/vim-glsl'
+        " Lua:
+        Plug 'tbastos/vim-lua'
 
     " Completion {{{2
         " Automatically close braces:
@@ -129,6 +132,8 @@ set nocompatible
         Plug 'jaxbot/semantic-highlight.vim'
         " Tipps:
         Plug 'glts/vim-cottidie'
+        " Show syntax highlighting attributes of character under cursor:
+        "Plug 'vim-scripts/SyntaxAttr.vim'
 
     call plug#end()
 
@@ -403,6 +408,7 @@ set nocompatible
         highlight LineNr ctermbg=none
         highlight Folded ctermbg=none
         highlight NonText ctermbg=none
+        highlight EndOfBuffer ctermbg=none ctermfg=none guifg=bg
         highlight SpecialKey ctermbg=none
         highlight VertSplit ctermbg=none
         highlight SignColumn ctermbg=none
