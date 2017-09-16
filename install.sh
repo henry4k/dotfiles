@@ -22,13 +22,14 @@ EOF
 
 cat >> "$HOME/.vimrc" << EOF
 " DOTFILES BEGIN
-source $Dotfiles/vim/main.vim
+source $Dotfiles/vim/init.vim
 " DOTFILES END
 EOF
 
-cat >> "$HOME/.nvimrc" << EOF
+mkdir -p "$HOME/.config/nvim"
+cat >> "$HOME/.config/nvim/init.vim" << EOF
 " DOTFILES BEGIN
-source $Dotfiles/vim/main.vim
+source $Dotfiles/vim/init.vim
 " DOTFILES END
 EOF
 

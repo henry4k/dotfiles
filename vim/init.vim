@@ -134,6 +134,8 @@ set nocompatible
         Plug 'glts/vim-cottidie'
         " Show syntax highlighting attributes of character under cursor:
         "Plug 'vim-scripts/SyntaxAttr.vim'
+        " Show exact differences instead of lines:
+        "Plug 'rickhowe/diffchar.vim'
 
     call plug#end()
 
@@ -386,7 +388,8 @@ set nocompatible
     set synmaxcol=500
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
     set showbreak=>\ 
-    set fillchars=vert:│
+    set fillchars=vert:│ ",eob:\ 
+    set guicursor+=a:blinkon9999 " blinkon0 does not disable blinking at all, but any other value does - super weird
 
     " Preserve equal sized split views in diff mode:
     autocmd VimResized * if &diff | wincmd = | endif
@@ -402,33 +405,24 @@ set nocompatible
     autocmd InsertEnter * :call UpdateColorColumn()
     autocmd InsertLeave * :set colorcolumn=0
 
-    autocmd ColorScheme * call AdaptColorscheme()
-    function! AdaptColorscheme()
-        highlight Normal ctermbg=none
-        highlight LineNr ctermbg=none
-        highlight Folded ctermbg=none
-        highlight NonText ctermbg=none
-        highlight EndOfBuffer ctermbg=none ctermfg=none guifg=bg
-        highlight SpecialKey ctermbg=none
-        highlight VertSplit ctermbg=none
-        highlight SignColumn ctermbg=none
-        "highlight clear CursorLineNR cterm=bold
-    endfunction
+    " remove background colors in terminals
+    augroup NoBackground
+        autocmd!
+        autocmd ColorScheme *
+            \   highlight Normal     ctermbg=none
+            \ | highlight LineNr     ctermbg=none
+            \ | highlight Folded     ctermbg=none
+            \ | highlight NonText    ctermbg=none
+            \ | highlight SpecialKey ctermbg=none
+            \ | highlight VertSplit  ctermbg=none
+            \ | highlight SignColumn ctermbg=none
+    augroup END
+
+    autocmd ColorScheme *
+        \ highlight EndOfBuffer ctermfg=none guifg=bg
 
     syntax on
-    if has('gui_running')
-        set guioptions=cip
-        set guicursor+=a:blinkon0
-        colorscheme badwolf4k
-        if has('gui_macvim')
-            set fuoptions=maxvert,maxhorz,background:Normal
-            set guifont=Menlo\ 10
-        else
-            set guifont=Monospace\ 10
-        endif
-    else
-        colorscheme badwolf4k
-    endif
+    colorscheme badwolf4k
 
     " Statusline {{{2
         set statusline=
@@ -454,8 +448,9 @@ set nocompatible
         let g:kolor_alternative_matchparen=1
         let g:badwolf_darkgutter=1
         let g:badwolf_tabline=0 " darker background
-        "let g:gruvbox_improved_warnings=1 " TODO
         let g:gruvbox_italic=1 " always enable italic font
+        let g:gruvbox_sign_column='bg0'
+        "let g:gruvbox_improved_warnings=1
 
     " Signify {{{2
         let g:signify_vcs_list = ['git']
@@ -498,8 +493,6 @@ set nocompatible
     let &thesaurus=printf('%s/dictionaries/mthesaur.txt', s:vimDir)
     let &spellfile=printf('%s/tmp/spell.en.utf-8.add', s:vimDir)
 
-    hi clear SpellBad
-    hi SpellBad cterm=underline gui=undercurl
     map <F7> :setlocal spelllang=en,de spell! spell?<CR>
     inoremap <F7> <C-\><C-O>:setlocal spelllang=en,de spell! spell?<CR>
 
