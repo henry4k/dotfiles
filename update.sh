@@ -38,24 +38,16 @@ pushd vim/autoload
 Download 'plug.vim' 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 popd
 
-function DownloadAndExtractZip()
-{
-    local file="$1"
-    local url="$2"
-
-    if [[ -e "$file" ]]; then
-        echo "$file has already been downloaded"
-    else
-        local tmp="${RANDOM}.zip"
-        curl --progress-bar "$url" -o "$tmp"
-        unzip "$tmp" "$file"
-        rm "$tmp"
-    fi
-}
+# Install vim plugins:
+if which nvim >/dev/null; then
+    nvim --headless +PlugInstall +qa
+else
+    vim -E -c PlugInstall -c qa >/dev/null
+fi
 
 mkdir -p vim/dictionaries
 pushd vim/dictionaries
-DownloadAndExtractZip 'mthesaur.txt' 'http://www.gutenberg.org/dirs/etext02/mthes10.zip'
+curl --progress-bar 'https://www.gutenberg.org/files/3202/files/mthesaur.txt' -o 'mthesaur.txt'
 popd
 
 pip3 install --user --upgrade pep8
