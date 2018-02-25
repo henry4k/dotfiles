@@ -62,6 +62,8 @@ set nocompatible
         Plug 'tikhomirov/vim-glsl'
         " Lua:
         Plug 'tbastos/vim-lua'
+        " Javascript:
+        Plug 'jelera/vim-javascript-syntax'
 
     " Completion {{{2
         " Automatically close braces:
@@ -340,7 +342,7 @@ set nocompatible
         nmap _ <Plug>VinegarSplitUp
 
     " vCoolor {{{2
-        let g:vcoolor_disable_mappings = 1
+        "let g:vcoolor_disable_mappings = 1
 
     " Toggle clutter {{{2
         nnoremap <silent> <leader>s :SyntasticToggleMode<CR>:bufdo :SignifyToggle<CR>
@@ -440,6 +442,9 @@ set nocompatible
         let g:c_comment_strings=1
         let g:c_ansi_constants=1
         let g:c_gnu=1
+
+    " SQL syntax {{{2
+        let g:sql_type_default = 'mysql'
 
     " Colorscheme {{{2
         let g:molokai_original=1
@@ -586,7 +591,9 @@ set nocompatible
 
     " Makeshift {{{2
         let g:makeshift_systems = { 'Tupfile.ini': 'tup',
-                                  \ 'build/Makefile': 'make -C build' }
+                                  \ 'build/Makefile': 'make -C build',
+                                  \ 'build/build.ninja': 'ninja -C build'}
+        let g:makeshift_find_bundled = 0
 
     " EditorConfig {{{2
         let g:EditorConfig_max_line_indicator = "none"

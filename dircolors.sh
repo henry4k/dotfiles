@@ -93,7 +93,7 @@ PrintColors "$green_fg" \
     .c .cpp .h .hpp .inl \
     .sh .bash .csh .zsh .bat .com .tup .cmake \
     .nut .py .py3 .rb .js .pl .lua .vim .php \
-    .glsl .vert .frag
+    .glsl .vert .frag .build
 
 # Makefiles
 PrintColors "$bold;$blue_fg" \
