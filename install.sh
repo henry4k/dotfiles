@@ -49,6 +49,7 @@ ln -s "$Dotfiles/proverc" "$HOME/.proverc"
 ln -s "$Dotfiles/tupoptions" "$HOME/.tupoptions"
 ln -s "$Dotfiles/rep.lua" "$HOME/.rep.lua"
 ln -s "$Dotfiles/sqliterc" "$HOME/.sqliterc"
+ln -s "$Dotfiles/agignore" "$HOME/.agignore"
 
 GitConfig='git config --global'
 $GitConfig user.email 'henrykielmann@gmail.com'

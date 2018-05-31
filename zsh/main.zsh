@@ -14,10 +14,31 @@ fpath=("$zshDir/functions" $fpath)
 alias tmux='tmux -2'
 alias info='info --vi-keys'
 alias gdb='gdb --quiet'
-alias t="$zshDir/../bin/t/t.py --task-dir ~/.tasks --list tasks"
 
-if which 'xdg-open' > /dev/null; then
-    if which 'daemonize' > /dev/null; then
+function has_program
+{
+    local program="$1"
+    if which "$program" >/dev/null 2>&1; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if has_program 'nvim'; then
+    alias vim='nvim'
+fi
+
+if has_program 'luarocks'; then
+    alias luarocks='luarocks --local'
+fi
+
+if has_program 'rep.lua'; then
+    alias lua='rep.lua'
+fi
+
+if has_program 'xdg-open'; then
+    if has_program 'daemonize'; then
         alias open='daemonize -c "$PWD" `which xdg-open`'
     else
         alias open='xdg-open'
@@ -30,9 +51,9 @@ fi
 
 
 # Colors {{{1
-if which 'dircolors' > /dev/null; then
+if has_program 'dircolors'; then
     lsColor='--color=auto'
-    if [[ -e "$HOME/.dircolors" ]]; then
+    if [ -e "$HOME/.dircolors" ]; then
         eval "$(dircolors "$HOME/.dircolors")"
     fi
 else
@@ -63,13 +84,13 @@ bindkey '\e[B' history-beginning-search-forward
 # by Neitanod
 function fancy-ctrl-z
 {
-  if [[ $#BUFFER -eq 0 ]]; then
-    fg
-    zle redisplay
-  else
-    zle push-input
-    zle clear-screen
-  fi
+    if [[ $#BUFFER -eq 0 ]]; then
+        fg
+        zle redisplay
+    else
+        zle push-input
+        zle clear-screen
+    fi
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
