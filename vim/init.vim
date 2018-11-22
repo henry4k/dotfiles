@@ -79,12 +79,16 @@ set nocompatible
         Plug 'lnl7/vim-nix'
         " TOML:
         Plug 'cespare/vim-toml'
+        " Powershell:
+        Plug 'pprovost/vim-ps1'
 
     " Completion {{{2
         " Automatically close braces:
         "Plug 'Townk/vim-autoclose'
         " Same for words:
         Plug 'tpope/vim-endwise'
+        " Better searchpath integration for non-C languages:
+        Plug 'tpope/vim-apathy'
         " Enhances completion handling:
         Plug 'ervandew/supertab'
         " Ctrl-n/p completion in the command line:
@@ -98,8 +102,10 @@ set nocompatible
         Plug 'tpope/vim-abolish'
         " Background task runner:
         Plug 'tpope/vim-dispatch'
-        " Utillity commands for file handling:
+        " Utility commands for file handling:
         Plug 'tpope/vim-eunuch'
+        " Temporary fix while eunuchs SudoWrite is broken in Neovim:
+        Plug 'lambdalisue/suda.vim'
         " Check files for syntax errors:
         Plug 'scrooloose/syntastic'
         " Run directory specific .local.vimrc files:
@@ -156,7 +162,6 @@ set nocompatible
         "Plug 'rickhowe/diffchar.vim'
         if has('nvim')
             " original author: aurieh
-            let g:discord_log_debug = 1
             Plug 'henry4k/discord.nvim', { 'do': ':UpdateRemotePlugins'}
         endif
         " Colorscheme Scroller/Chooser/Browser:
@@ -382,7 +387,7 @@ set nocompatible
 
 " Indent {{{1
     set tabstop=4
-    set shiftwidth=4
+    set shiftwidth=0 " 0 means: use tabstop instead
     set shiftround
     set expandtab
     set autoindent
@@ -634,13 +639,22 @@ set nocompatible
 " System {{{1
 
     " set autochdir
+    " let g:netrw_keepdir=0 " <- like autochdir, but for directory browsing
     "autocmd BufEnter * silent! lcd %:p:h
     command Cdf :cd %:h
 
     set autoread
-    autocmd CursorHold * checktime
+    augroup AutoReload
+        autocmd!
+        autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+            \ if mode() != 'c' | checktime | endif
+        autocmd FileChangedShellPost *
+            \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+    augroup END
+    " See https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+
     " ^- autoread files every time the CursorHold event is fired.
-    " This should happen every 4 seconds.
+    " This should happen every <updatetime> seconds.
 
     set formatoptions=tcroqnj
     set cpo+=J " A sentence has to end with two spaces after punctuation.
@@ -708,6 +722,7 @@ augroup filetype_settings
 
     autocmd FileType lua
         \   setlocal errorformat=%.%#[string\ \"%f\"]:%l:\ %m
+        \ | call css_color#init('css', 'extended', 'luaComment,luaCommentLong,luaString,luaStringLong')
 
     autocmd FileType vim
         \   setlocal foldmethod=marker
@@ -745,7 +760,7 @@ augroup filetype_settings
 
     autocmd FileType html
         \   setlocal iskeyword+=-
-        \ | setlocal equalprg=xmllint\ --format\ --recover\ --html\ --htmlout -\ 2>/dev/null " <- libxml2-utils
+        \ | setlocal equalprg=xmllint\ --format\ --recover\ --html\ --htmlout\ -\ 2>/dev/null " <- libxml2-utils
         "\ | setlocal equalprg=tidy\ 2>/dev/null
 
     autocmd FileType json

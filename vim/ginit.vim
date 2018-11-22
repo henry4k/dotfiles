@@ -4,7 +4,8 @@ augroup END
 set background=dark
 colorscheme gruvbox
 if exists('g:GuiLoaded') " neovim
-    GuiFont Monospace:h10
+    " GuiFont Monospace:h10
+    GuiFont Source\ Code\ Pro:h10
 else " gvim
     set guioptions=cip
     if has('gui_macvim')

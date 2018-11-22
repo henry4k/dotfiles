@@ -54,6 +54,7 @@ ln -s "$Dotfiles/agignore" "$HOME/.agignore"
 GitConfig='git config --global'
 $GitConfig user.email 'henrykielmann@gmail.com'
 $GitConfig user.name 'Henry Kielmann'
+$GitConfig user.signkey 'C3426158093942C7'
 $GitConfig credential.username 'henry4k'
 $GitConfig credential.helper 'cache --timeout=3600'
 #$GitConfig init.templatedir "$Dotfiles/git/template"
@@ -70,7 +71,7 @@ $GitConfig mergetool.prompt false
 $GitConfig mergetool.splice.cmd "vim -f \"\$BASE \$LOCAL \$REMOTE \$MERGED -c 'SpliceInit'\""
 $GitConfig mergetool.splice.trustexitcode true
 $GitConfig mergetool.fugitive.cmd "vim -f -c 'Gdiff' \$MERGED"
-$GitConfig alias.wdiff 'diff --word-diff=color'
+$GitConfig alias.wdiff 'diff --color-words --color-moved'
 $GitConfig alias.d 'difftool'
 $GitConfig alias.s "!$Dotfiles/git/bin/s"
 $GitConfig alias.ctags '!.git/hooks/ctags'

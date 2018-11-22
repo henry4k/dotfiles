@@ -30,21 +30,21 @@ function prompt_custom_precmd ()
     local parentDir="$(dirname $PWD)"
 
     if [[ "$topDir" == '/' ]]; then
-        local parentDir=''
+        parentDir=''
     elif [ "$parentDir" != '/' ]; then
         # Truncuate parentDir to 2 directories.
         local tmp="$(echo -n "$parentDir" | sed 's_^.*\(\(/[^/]*\)\{2\}\)$_\1_')"
         if [[ "$tmp" != "$parentDir" ]]; then
-            local tmp="$(echo -n "$tmp" | sed 's_^/__')"
+            tmp="$(echo -n "$tmp" | sed 's_^/__')"
         fi
-        local parentDir="$tmp/"
+        parentDir="$tmp/"
     fi
 
     PROMPT="\
 %n\
 %F{blue}@%m $parentDir%f\
 %B$topDir%b
-$end"
+$end "
 
     RPS1=''
 }
