@@ -22,6 +22,7 @@ set nocompatible
         Plug 'Reewr/vim-monokai-phoenix'
         Plug 'mkarmona/materialbox'
         Plug 'morhetz/gruvbox'
+        Plug 'rakr/vim-one'
 
     " Libs {{{2
         Plug 'vim-scripts/tlib'
@@ -451,6 +452,15 @@ set nocompatible
         let g:gruvbox_italic=1 " always enable italic font
         let g:gruvbox_sign_column='bg0'
         "let g:gruvbox_improved_warnings=1
+        " one:
+        let g:one_allow_italics = 1
+        augroup OneColorScheme
+            autocmd!
+            autocmd ColorScheme 'one'
+                \   highlight! link Folded Comment
+                \ | highlight clear Folded
+            " display folds as comments
+        augroup END
 
     " Signify {{{2
         let g:signify_vcs_list = ['git']
