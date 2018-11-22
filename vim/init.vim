@@ -22,6 +22,14 @@ set nocompatible
         Plug 'Reewr/vim-monokai-phoenix'
         Plug 'mkarmona/materialbox'
         Plug 'morhetz/gruvbox'
+        Plug 'nlknguyen/papercolor-theme'
+        Plug 'chriskempson/base16-vim'
+        Plug 'ajh17/spacegray.vim'
+        Plug 'keitanakamura/neodark.vim'
+        Plug 'jacoborus/tender.vim'
+        Plug 'notpratheek/vim-luna'
+        Plug 'tyrannicaltoucan/vim-deep-space'
+        Plug 'sindresorhus/focus'
         Plug 'rakr/vim-one'
 
     " Libs {{{2
@@ -63,6 +71,14 @@ set nocompatible
         Plug 'tikhomirov/vim-glsl'
         " Lua:
         Plug 'tbastos/vim-lua'
+        " Javascript:
+        Plug 'jelera/vim-javascript-syntax'
+        " Ansible:
+        Plug 'pearofducks/ansible-vim'
+        " Nix:
+        Plug 'lnl7/vim-nix'
+        " TOML:
+        Plug 'cespare/vim-toml'
 
     " Completion {{{2
         " Automatically close braces:
@@ -73,6 +89,7 @@ set nocompatible
         Plug 'ervandew/supertab'
         " Ctrl-n/p completion in the command line:
         Plug 'vim-scripts/cmdline-completion'
+        "Plug 'roxma/nvim-completion-manager'
 
     " Tools {{{2
         " Surround movements/selections with quotes or similar:
@@ -100,7 +117,7 @@ set nocompatible
         " Highlight word misusages:
         Plug 'reedes/vim-wordy'
         " Distraction free editing:
-        Plug 'junegunn/limelight.vim'
+        Plug 'henry4k/limelight.vim'
         Plug 'junegunn/goyo.vim'
         " Unified interface to documentation sources:
         Plug 'thinca/vim-ref'
@@ -134,9 +151,16 @@ set nocompatible
         " Tipps:
         Plug 'glts/vim-cottidie'
         " Show syntax highlighting attributes of character under cursor:
-        "Plug 'vim-scripts/SyntaxAttr.vim'
+        Plug 'vim-scripts/SyntaxAttr.vim'
         " Show exact differences instead of lines:
         "Plug 'rickhowe/diffchar.vim'
+        if has('nvim')
+            " original author: aurieh
+            let g:discord_log_debug = 1
+            Plug 'henry4k/discord.nvim', { 'do': ':UpdateRemotePlugins'}
+        endif
+        " Colorscheme Scroller/Chooser/Browser:
+        Plug 'vim-scripts/ScrollColors'
 
     call plug#end()
 
@@ -341,7 +365,7 @@ set nocompatible
         nmap _ <Plug>VinegarSplitUp
 
     " vCoolor {{{2
-        let g:vcoolor_disable_mappings = 1
+        "let g:vcoolor_disable_mappings = 1
 
     " Toggle clutter {{{2
         nnoremap <silent> <leader>s :SyntasticToggleMode<CR>:bufdo :SignifyToggle<CR>
@@ -388,9 +412,11 @@ set nocompatible
     set t_vb= " Disables beeping or screen flashing
     set synmaxcol=500
     set listchars=tab:>-,trail:-,extends:>,nbsp:-,precedes:<
-    set showbreak=>\ 
-    set fillchars=vert:│ ",eob:\ 
+    set showbreak=↪\ 
+    set fillchars=vert:│,fold:\ ",eob:\ 
     set guicursor+=a:blinkon9999 " blinkon0 does not disable blinking at all, but any other value does - super weird
+    set termguicolors
+    set conceallevel=2
 
     " Preserve equal sized split views in diff mode:
     autocmd VimResized * if &diff | wincmd = | endif
@@ -407,17 +433,19 @@ set nocompatible
     autocmd InsertLeave * :set colorcolumn=0
 
     " remove background colors in terminals
-    augroup NoBackground
-        autocmd!
-        autocmd ColorScheme *
-            \   highlight Normal     ctermbg=none
-            \ | highlight LineNr     ctermbg=none
-            \ | highlight Folded     ctermbg=none
-            \ | highlight NonText    ctermbg=none
-            \ | highlight SpecialKey ctermbg=none
-            \ | highlight VertSplit  ctermbg=none
-            \ | highlight SignColumn ctermbg=none
-    augroup END
+    if !has('gui_running')
+        augroup NoBackground
+            autocmd!
+            autocmd ColorScheme *
+                \   highlight Normal     ctermbg=none guibg=none
+                \ | highlight LineNr     ctermbg=none guibg=none
+                \ | highlight Folded     ctermbg=none guibg=none
+                \ | highlight NonText    ctermbg=none guibg=none
+                \ | highlight SpecialKey ctermbg=none guibg=none
+                \ | highlight VertSplit  ctermbg=none guibg=none
+                \ | highlight SignColumn ctermbg=none guibg=none
+        augroup END
+    endif
 
     autocmd ColorScheme *
         \ highlight EndOfBuffer ctermfg=none guifg=bg
@@ -442,9 +470,13 @@ set nocompatible
         let g:c_ansi_constants=1
         let g:c_gnu=1
 
+    " SQL syntax {{{2
+        let g:sql_type_default = 'mysql'
+
     " Colorscheme {{{2
         let g:molokai_original=1
         let g:rehash256=1 " better molokai terminal colors
+        "let g:base16colorspace=256
         let g:kolor_underlined=1
         let g:kolor_alternative_matchparen=1
         let g:badwolf_darkgutter=1
@@ -452,6 +484,11 @@ set nocompatible
         let g:gruvbox_italic=1 " always enable italic font
         let g:gruvbox_sign_column='bg0'
         "let g:gruvbox_improved_warnings=1
+        let g:deepspace_italics = 1
+        let g:neodark#background = '#202020'
+        let g:neodark#use_256color = 1
+        let g:neodark#terminal_transparent = 1
+        "let g:neodark#solid_vertsplit = 1
         " one:
         let g:one_allow_italics = 1
         augroup OneColorScheme
@@ -471,6 +508,14 @@ set nocompatible
         "if has('gui_running')
             "let g:signify_line_highlight = 1
         "endif
+
+    " Markdown {{{2
+        "let g:vim_markdown_folding_style_pythonic = 1
+        "let g:vim_markdown_override_foldtext = 1
+        let g:vim_markdown_toc_autofit = 1
+        let g:vim_markdown_follow_anchor = 1
+        let g:vim_markdown_no_extensions_in_markdown = 1
+        "let g:vim_markdown_fenced_languages = ['c=c', 'c++=cpp', 'bash=sh', 'ini=dosini', 'lua=lua', 'html=html']
 
     " Undotree {{{2
         let g:undotree_TreeNodeShape = 'o'
@@ -526,6 +571,44 @@ set nocompatible
 
     " markdown-folding {{{2
         let g:markdown_fold_style = 'nested'
+
+    " Source: https://coderwall.com/p/usd_cw/a-pretty-vim-foldtext-function
+    function! FoldText()
+        "let l:lpadding = &fdc
+        "redir => l:signs
+        "execute 'silent sign place buffer='.bufnr('%')
+        "redir End
+        "let l:lpadding += l:signs =~ 'id=' ? 2 : 0
+
+        "if exists("+relativenumber")
+        "    if (&number)
+        "        let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+        "    elseif (&relativenumber)
+        "        let l:lpadding += max([&numberwidth, strlen(v:foldstart - line('w0')), strlen(line('w$') - v:foldstart), strlen(v:foldstart)]) + 1
+        "    endif
+        "else
+        "    if (&number)
+        "        let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+        "    endif
+        "endif
+
+        " expand tabs
+        let l:start = substitute(getline(v:foldstart), '\t', repeat(' ', &tabstop), 'g')
+        let l:end = substitute(substitute(getline(v:foldend), '\t', repeat(' ', &tabstop), 'g'), '^\s*', '', 'g')
+
+        "let l:info = ' (' . (v:foldend - v:foldstart) . ')'
+        "let l:infolen = strlen(substitute(l:info, '.', 'x', 'g'))
+        "let l:width = winwidth(0) - l:lpadding - l:infolen
+
+        let l:separator = ' … '
+        let l:separatorlen = strlen(substitute(l:separator, '.', 'x', 'g'))
+        let l:start = strpart(l:start , 0, l:width - strlen(substitute(l:end, '.', 'x', 'g')) - l:separatorlen)
+        let l:text = l:start . ' … ' . l:end
+
+        return l:text
+        ". repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
+    endfunction
+    set foldtext=FoldText()
 
 " Search and replace {{{1
     set incsearch
@@ -596,7 +679,10 @@ set nocompatible
 
     " Makeshift {{{2
         let g:makeshift_systems = { 'Tupfile.ini': 'tup',
-                                  \ 'build/Makefile': 'make -C build' }
+                                  \ 'build/Makefile': 'make -C build',
+                                  \ 'build/build.ninja': 'ninja -C build',
+                                  \ 'package.json': 'npm run build'}
+        let g:makeshift_find_bundled = 0
 
     " EditorConfig {{{2
         let g:EditorConfig_max_line_indicator = "none"
@@ -643,6 +729,7 @@ augroup filetype_settings
         \   setlocal iskeyword+=-
         \ | let g:surround_{char2nr("*")} = "*\r*"
         \ | let g:surround_{char2nr("_")} = "_\r_"
+        \ | let g:surround_{char2nr("`")} = "`\r`"
         \ | call SyntaxRange#Include('```c', '```', 'c', 'markdownCodeBlock')
         \ | call SyntaxRange#Include('```cpp', '```', 'cpp', 'markdownCodeBlock')
         \ | call SyntaxRange#Include('```lua', '```', 'lua', 'markdownCodeBlock')
@@ -658,10 +745,16 @@ augroup filetype_settings
 
     autocmd FileType html
         \   setlocal iskeyword+=-
-        \ | setlocal equalprg=xmllint\ --format\ --recover\ --html\ -\ 2>/dev/null " <- libxml2-utils
+        \ | setlocal equalprg=xmllint\ --format\ --recover\ --html\ --htmlout -\ 2>/dev/null " <- libxml2-utils
+        "\ | setlocal equalprg=tidy\ 2>/dev/null
 
     autocmd FileType json
         \   setlocal iskeyword+=-
         \ | setlocal equalprg=json_pp
+
+    autocmd FileType meson
+        \   let b:endwise_addition = '\=submatch(0)=="if" ? "endif" : "endforeach"'
+        \ | let b:endwise_words = 'if,foreach'
+        \ | let b:endwise_syngroups = 'mesonConditional,mesonRepeat'
 
 augroup END

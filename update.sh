@@ -53,3 +53,5 @@ popd
 pip3 install --user --upgrade pep8
 pip3 install --user --upgrade pylint
 pip3 install --user --upgrade language-check
+pip3 install --user --upgrade cmakelint
+pip3 install --user --upgrade yamllint

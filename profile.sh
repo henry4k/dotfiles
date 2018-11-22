@@ -1,6 +1,5 @@
 # vim: set foldmethod=marker:
 
-
 # Misc {{{1
 if which nvim >/dev/null; then
     export EDITOR='nvim'

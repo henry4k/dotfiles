@@ -38,5 +38,6 @@ rm -f "$HOME/.rep.lua"
 rm -f "$HOME/.sqliterc"
 rm -f "$HOME/.gitconfig"
 rm -f "$HOME/.dircolors"
+rm -f "$HOME/.agignore"
 
 echo 'Uninstalled dotfiles!'
