@@ -517,12 +517,29 @@ set nocompatible
         "let g:neodark#solid_vertsplit = 1
         " one:
         let g:one_allow_italics = 1
+        function! SetupOneColorScheme()
+            " display folds as comments:
+            highlight! link Folded Comment
+            highlight clear Folded
+
+            " more modest colors:
+            if &background ==# 'dark'
+                let l:syntax_cursor = '2c323c'
+                let l:visual_grey  = '3e4452'
+            else
+                let l:syntax_cursor = 'f0f0f0'
+                let l:visual_grey  = 'd0d0d0'
+            endif
+            highlight clear StatusLine
+            highlight clear StatusLineNC
+            highlight clear TabLineFill
+            call one#highlight('StatusLine', '', l:visual_grey, '')
+            call one#highlight('StatusLineNC', '', l:syntax_cursor, '')
+            call one#highlight('TabLineFill', '', l:syntax_cursor, '')
+        endfunction
         augroup OneColorScheme
             autocmd!
-            autocmd ColorScheme 'one'
-                \   highlight! link Folded Comment
-                \ | highlight clear Folded
-            " display folds as comments
+            autocmd ColorScheme one call SetupOneColorScheme()
         augroup END
 
     " Signify {{{2
