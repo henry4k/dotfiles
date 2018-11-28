@@ -31,6 +31,9 @@ set nocompatible
         Plug 'tyrannicaltoucan/vim-deep-space'
         Plug 'sindresorhus/focus'
         Plug 'rakr/vim-one'
+        Plug 'cseelus/vim-colors-lucid'
+        Plug 'ayu-theme/ayu-vim'
+        Plug 'whatyouhide/vim-gotham'
 
     " Libs {{{2
         Plug 'vim-scripts/tlib'
@@ -56,9 +59,8 @@ set nocompatible
         Plug 'tpope/vim-git'
         Plug 'tpope/vim-fugitive'
         " Markdown:
-        "Plug 'tpope/vim-markdown'
+        Plug 'tpope/vim-markdown'
         "Plug 'plasticboy/vim-markdown'
-        Plug 'nelstrom/vim-markdown-folding'
         " JSON:
         Plug 'elzr/vim-json'
         " Tup:
@@ -107,7 +109,8 @@ set nocompatible
         " Temporary fix while eunuchs SudoWrite is broken in Neovim:
         Plug 'lambdalisue/suda.vim'
         " Check files for syntax errors:
-        Plug 'scrooloose/syntastic'
+        "Plug 'scrooloose/syntastic'
+        Plug 'w0rp/ale'
         " Run directory specific .local.vimrc files:
         Plug 'thinca/vim-localrc'
         " Interface to the undo tree:
@@ -166,6 +169,8 @@ set nocompatible
         endif
         " Colorscheme Scroller/Chooser/Browser:
         Plug 'vim-scripts/ScrollColors'
+        " Fancy status bar:
+        Plug 'vim-airline/vim-airline'
 
     call plug#end()
 
@@ -468,6 +473,22 @@ set nocompatible
         set statusline+=%-8.(%l:%c%)\  " line:column with padding
         set statusline+=%P   " position in file as percent
 
+        " When using airline {{{3
+        "let g:airline_detect_modified = 0
+        let g:airline_detect_paste = 0
+        let g:airline_detect_crypt = 0
+        let g:airline_detect_spell = 0
+        let g:airline_powerline_fonts = 1
+        let g:airline_skip_empty_sections = 1
+        let g:airline_section_b = airline#section#create_left(['file'])
+        let g:airline_section_c = airline#section#create_left(['readonly'])
+        let g:airline_section_x = airline#section#create_right(['%a'])
+        let g:airline_section_y = airline#section#create_right(['%l:%c'])
+        let g:airline_section_z = airline#section#create_right(['%P'])
+        let g:airline#extensions#disable_rtp_load = 1 " disable autoloading
+        let g:airline_extensions = ['neomake', 'ale', 'languageclient']
+        let g:airline#extensions#tabline#show_splits = 0
+
     " C syntax {{{2
         let g:c_space_errors=1
         let g:c_curly_error=1
@@ -515,12 +536,13 @@ set nocompatible
         "endif
 
     " Markdown {{{2
-        "let g:vim_markdown_folding_style_pythonic = 1
-        "let g:vim_markdown_override_foldtext = 1
-        let g:vim_markdown_toc_autofit = 1
-        let g:vim_markdown_follow_anchor = 1
-        let g:vim_markdown_no_extensions_in_markdown = 1
-        "let g:vim_markdown_fenced_languages = ['c=c', 'c++=cpp', 'bash=sh', 'ini=dosini', 'lua=lua', 'html=html']
+        let g:markdown_syntax_conceal = 1
+        let g:markdown_fenced_languages = [
+            \ 'c', "c++=cpp", 'bash=sh', 'ini=dosini', 'json', 'xml', 'html',
+            \ 'diff', 'java', 'javascript', 'lua' ]
+        "let g:vim_markdown_toc_autofit = 1
+        "let g:vim_markdown_follow_anchor = 1
+        "let g:vim_markdown_no_extensions_in_markdown = 1
 
     " Undotree {{{2
         let g:undotree_TreeNodeShape = 'o'
@@ -575,7 +597,8 @@ set nocompatible
     set foldenable
 
     " markdown-folding {{{2
-        let g:markdown_fold_style = 'nested'
+        let g:markdown_folding = 1 " for tpope/vim-markdown
+        let g:markdown_fold_style = 'nested' " for plasticboy/vim-markdown
 
     " Source: https://coderwall.com/p/usd_cw/a-pretty-vim-foldtext-function
     function! FoldText()
@@ -745,11 +768,6 @@ augroup filetype_settings
         \ | let g:surround_{char2nr("*")} = "*\r*"
         \ | let g:surround_{char2nr("_")} = "_\r_"
         \ | let g:surround_{char2nr("`")} = "`\r`"
-        \ | call SyntaxRange#Include('```c', '```', 'c', 'markdownCodeBlock')
-        \ | call SyntaxRange#Include('```cpp', '```', 'cpp', 'markdownCodeBlock')
-        \ | call SyntaxRange#Include('```lua', '```', 'lua', 'markdownCodeBlock')
-        \ | call SyntaxRange#Include('```python', '```', 'python', 'markdownCodeBlock')
-        \ | call SyntaxRange#Include('```java', '```', 'java', 'markdownCodeBlock')
         \ | nnoremap <buffer> <LocalLeader>= yypVr=
         \ | nnoremap <buffer> <LocalLeader>- yypVr-
 

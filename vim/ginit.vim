@@ -2,10 +2,11 @@ augroup NoBackground
     autocmd!
 augroup END
 set background=dark
-colorscheme gruvbox
+"colorscheme gruvbox
 if exists('g:GuiLoaded') " neovim
     " GuiFont Monospace:h10
     GuiFont Source\ Code\ Pro:h10
+    GuiTabline 0
 else " gvim
     set guioptions=cip
     if has('gui_macvim')
