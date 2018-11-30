@@ -171,6 +171,7 @@ set nocompatible
         Plug 'vim-scripts/ScrollColors'
         " Fancy status bar:
         Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
 
     call plug#end()
 
@@ -378,7 +379,8 @@ set nocompatible
         "let g:vcoolor_disable_mappings = 1
 
     " Toggle clutter {{{2
-        nnoremap <silent> <leader>s :SyntasticToggleMode<CR>:bufdo :SignifyToggle<CR>
+        "nnoremap <silent> <leader>s :SyntasticToggleMode<CR>:bufdo :SignifyToggle<CR>
+        "TODO
 
 " Clipboard {{{1
     if has('unnamedplus')
@@ -480,14 +482,18 @@ set nocompatible
         let g:airline_detect_spell = 0
         let g:airline_powerline_fonts = 1
         let g:airline_skip_empty_sections = 1
-        let g:airline_section_b = airline#section#create_left(['file'])
-        let g:airline_section_c = airline#section#create_left(['readonly'])
-        let g:airline_section_x = airline#section#create_right(['%a'])
-        let g:airline_section_y = airline#section#create_right(['%l:%c'])
-        let g:airline_section_z = airline#section#create_right(['%P'])
+        function! AirlineInit()
+            let g:airline_section_a = airline#section#create_left(['mode'])
+            let g:airline_section_b = airline#section#create_left(['file'])
+            let g:airline_section_c = airline#section#create_left(['readonly'])
+            let g:airline_section_x = airline#section#create_right(['%a'])
+            let g:airline_section_y = airline#section#create_right(['%P'])
+            let g:airline_section_z = airline#section#create_right(['%l:%c'])
+        endfunction
+        autocmd User AirlineAfterInit call AirlineInit()
         let g:airline#extensions#disable_rtp_load = 1 " disable autoloading
-        let g:airline_extensions = ['neomake', 'ale', 'languageclient']
-        let g:airline#extensions#tabline#show_splits = 0
+        let g:airline_extensions = [] "'neomake', 'ale', 'languageclient']
+        "let g:airline#extensions#tabline#show_splits = 0
 
     " C syntax {{{2
         let g:c_space_errors=1
@@ -544,10 +550,9 @@ set nocompatible
 
     " Signify {{{2
         let g:signify_vcs_list = ['git']
-        let g:signify_sign_overwrite = 1
         let g:signify_sign_change = '~'
-        let g:signify_difftool = '/usr/bin/diff'
-        let g:signify_disable_by_default = 1
+        let g:signify_sign_show_count = 0
+        "let g:signify_disable_by_default = 1
         "if has('gui_running')
             "let g:signify_line_highlight = 1
         "endif
@@ -566,8 +571,9 @@ set nocompatible
         let g:undotree_WindowLayout = 2
 
     " Limelight {{{2
-        let g:limelight_conceal_ctermfg = 'DarkGray'
-        let g:limelight_conceal_guifg   = 'DarkGray'
+        "let g:limelight_conceal_ctermfg = 'DarkGray'
+        "let g:limelight_conceal_guifg   = 'DarkGray'
+        let g:limelight_default_coefficient = 0
 
     " Goyo {{{2
         function! GoyoBefore()
@@ -595,6 +601,17 @@ set nocompatible
     map <F7> :setlocal spelllang=en,de spell! spell?<CR>
     inoremap <F7> <C-\><C-O>:setlocal spelllang=en,de spell! spell?<CR>
 
+    " Cause most defaults look stupid:
+    augroup OverrideSpellHighlighting
+        autocmd!
+        "autocmd ColorScheme *
+        "    \   highlight link SpellBad Error
+        "    \ | highlight link SpellCap Todo
+        autocmd ColorScheme *
+            \   highlight SpellBad gui=underline cterm=underline
+            \ | highlight SpellCap gui=underline cterm=underline
+    augroup END
+
     " Syntastic {{{2
         let g:syntastic_check_on_open = 1
         let g:syntastic_text_checkers = ['language_check']
@@ -603,6 +620,36 @@ set nocompatible
         let g:syntastic_lua_luacheck_args = '--std max --allow-defined-top'
         " TODO: OCLint?
         " TODO: pyflake/pep8?
+
+    " ALE {{{2
+        let g:ale_completion_enabled = 1
+        let g:ale_sign_column_always = 1
+        "let g:ale_echo_delay = 100
+        "let g:ale_virtualtext_delay = 100
+        let g:ale_lint_on_text_changed = 'normal'
+        let g:ale_lint_on_insert_leave = 1
+        if has('nvim-0.3.2')
+            let g:ale_echo_cursor = 0
+            let g:ale_virtualtext_cursor = 1 " requires nvim >= 0.3.2
+            let g:ale_virtualtext_prefix = '| '
+            highlight! link ALEVirtualTextError CursorLine
+            highlight! link ALEVirtualTextWarning CursorLine
+        endif
+        "let g:ale_lint_delay = 2000
+        "let g:ale_cursor_detail = 1
+        "let g:ale_completion_delay = 2000
+        "let g:ale_completion_max_suggestions = 20
+        let g:ale_command_wrapper = 'nice -n5' " raise niceness
+        "let g:ale_sign_error = '‼'
+        "let g:ale_sign_warning = '!'
+        "let g:ale_sign_info = 'ℹ'
+        let g:ale_sign_error = '✗'
+        "let g:ale_sign_error = '✘'
+        "let g:ale_sign_warning = '♦'
+        let g:ale_sign_warning = '•'
+        let g:ale_sign_info = '·'
+
+        let g:ale_lua_luacheck_options = '--std max --allow-defined-top'
 
 " Folding {{{1
     let g:xml_syntax_folding = 1
