@@ -632,8 +632,11 @@ set nocompatible
             let g:ale_echo_cursor = 0
             let g:ale_virtualtext_cursor = 1 " requires nvim >= 0.3.2
             let g:ale_virtualtext_prefix = '| '
-            highlight! link ALEVirtualTextError CursorLine
-            highlight! link ALEVirtualTextWarning CursorLine
+            highlight! link ALEVirtualTextError Comment
+            highlight! link ALEVirtualTextWarning Comment
+            " MoreMsg
+            " Question
+            " Title
         endif
         "let g:ale_lint_delay = 2000
         "let g:ale_cursor_detail = 1
