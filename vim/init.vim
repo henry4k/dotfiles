@@ -96,6 +96,9 @@ set nocompatible
         " Ctrl-n/p completion in the command line:
         Plug 'vim-scripts/cmdline-completion'
         "Plug 'roxma/nvim-completion-manager'
+        " Fuzzy finder:
+        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+        Plug 'junegunn/fzf.vim'
 
     " Tools {{{2
         " Surround movements/selections with quotes or similar:
@@ -172,6 +175,8 @@ set nocompatible
         " Fancy status bar:
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
+        " Change font size:
+        Plug 'henry4k/vim-fontzoom'
 
     call plug#end()
 
