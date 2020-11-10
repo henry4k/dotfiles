@@ -3,11 +3,12 @@ augroup NoBackground
 augroup END
 set background=dark
 
-"colorscheme gruvbox
+colorscheme gruvbox
 if exists('g:GuiLoaded') " neovim
     let g:fontzoom_pattern = ':h\zs\d\+'
-    set guifont=Source\ Code\ Pro:h10
     GuiTabline 0
+    GuiPopupmenu 0
+    "GuiLinespace 0
 else " gvim
     set guioptions=cip
     if has('gui_macvim')
@@ -17,3 +18,13 @@ else " gvim
         set guifont=Monospace\ 10
     endif
 end
+
+function! GoyoBefore()
+    Limelight 0.8
+endfunction
+
+function! GoyoAfter()
+    Limelight!
+endfunction
+
+let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]

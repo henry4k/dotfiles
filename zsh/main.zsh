@@ -14,6 +14,8 @@ fpath=("$zshDir/functions" $fpath)
 alias tmux='tmux -2'
 alias info='info --vi-keys'
 alias gdb='gdb --quiet'
+alias ffmpeg='ffmpeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
 
 function has_program
 {

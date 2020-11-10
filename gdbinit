@@ -28,3 +28,40 @@ end
 define lb
     info breakpoints
 end
+
+define lw
+    info watchpoints
+end
+
+define fin
+    finish
+end
+
+
+# Reverse:
+
+set record stop-at-limit off
+
+define rs
+    reverse-step
+end
+
+define rn
+    reverse-next
+end
+
+#define rc
+#    reverse-continue
+#end
+
+define rfin
+    reverse-finish
+end
+
+define forward
+    set exec-direction forward
+end
+
+define reverse
+    set exec-direction reverse
+end
